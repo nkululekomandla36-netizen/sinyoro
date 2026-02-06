@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sinyoro.trading">
 
     <application
         android:allowBackup="true"
-        android:icon="@android:drawable/sym_def_app_icon"
+        android:icon="@mipmap/sinyoro_logo"
+        android:roundIcon="@mipmap/sinyoro_logo"
         android:label="Sinyoro"
         android:theme="@style/Theme.AppCompat.Light">
-        
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -15,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
     </application>
 
 </manifest>
