@@ -1,0 +1,40 @@
+// Sinyoro App JS
+console.log("Sinyoro App loaded");
+
+// ======= Button Greetings =======
+const welcomeAlertBtn = document.getElementById('welcomeAlertBtn');
+welcomeAlertBtn.addEventListener('click', () => {
+    alert("Welcome to Sinyoro!");
+});
+
+const consoleTestBtn = document.getElementById('consoleTestBtn');
+consoleTestBtn.addEventListener('click', () => {
+    console.log("Console test successful ✅");
+});
+
+// ======= Tip of the Day =======
+const tipContent = document.getElementById('tipContent');
+const tipCategory = document.getElementById('tipCategory');
+const tipDate = document.getElementById('tipDate');
+const refreshTipBtn = document.getElementById('refreshTipBtn');
+
+const tips = [
+    { text: "Always check asset trends before trading.", category: "Trading" },
+    { text: "Start small, grow your portfolio gradually.", category: "Portfolio" },
+    { text: "Diversify your investments to reduce risk.", category: "Trading" },
+    { text: "Use alerts to stay updated on market changes.", category: "Alerts" },
+];
+
+function loadRandomTip() {
+    const tip = tips[Math.floor(Math.random() * tips.length)];
+    tipContent.textContent = tip.text;
+    tipCategory.textContent = tip.category;
+    tipDate.textContent = new Date().toLocaleDateString();
+}
+
+refreshTipBtn.addEventListener('click', loadRandomTip);
+
+// Load a tip on page load
+loadRandomTip();
+
+// ======= Save Display Name
