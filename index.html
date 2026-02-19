@@ -2,12 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sinyoro App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinyoro App - Modern Trading Platform</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Welcome to Sinyoro</h1>
-    <button id="greetBtn">Click me!</button>
+    <!-- ===================== -->
+    <!-- Navbar               -->
+    <!-- ===================== -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="assets/sinyoro_logo.png" alt="Sinyoro Logo" class="logo-img">
+            <div class="logo">Sinyoro</div>
+            <div class="brand-name">Trading Platform</div>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#hero" class="nav-link active">Home</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#market" class="nav-link">Market</a></li>
+            <li><a href="#trading" class="nav-link">Trading</a></li>
+            <li><a href="#tips" class="nav-link">Tips</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn btn-primary" id="signInBtn">Sign In</button>
+            <button class="btn btn-secondary" id="signUpBtn">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- ===================== -->
+    <!-- Hero Section         -->
+    <!-- ===================== -->
+    <section id="hero" class="glass-card" style="margin: 6rem auto 2rem auto; max-width: 900px; padding: 3rem; text-align: center;">
+        <h1>Welcome to Sinyoro</h1>
+        <p>Your modern glassmorphic trading platform with smart insights and tools.</p>
+        <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Portfolio Section     -->
+    <!-- ===================== -->
+    <section id="portfolio" class="section">
+        <div class="glass-card">
+            <h3>Portfolio 1</h3>
+            <p>Example portfolio card with glassmorphism design.</p>
+        </div>
+        <div class="glass-card">
+            <h3>Portfolio 2</h3>
+            <p>Example portfolio card with glassmorphism design.</p>
+        </div>
+        <div class="glass-card">
+            <h3>Portfolio 3</h3>
+            <p>Example portfolio card with glassmorphism design.</p>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Market Section        -->
+    <!-- ===================== -->
+    <section id="market" class="section">
+        <div class="glass-card" style="text-align: center;">
+            <h2>Market Overview</h2>
+            <p>Keep track of market trends, prices, and trading opportunities.</p>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Trading Section       -->
+    <!-- ===================== -->
+    <section id="trading" class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+        <div class="glass-card" style="width: 300px;">
+            <h3>Trade BTC</h3>
+            <p>Quick buy/sell interface for Bitcoin.</p>
+            <button class="btn btn-primary">Trade Now</button>
+        </div>
+        <div class="glass-card" style="width: 300px;">
+            <h3>Trade ETH</h3>
+            <p>Quick buy/sell interface for Ethereum.</p>
+            <button class="btn btn-primary">Trade Now</button>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Tips Section          -->
+    <!-- ===================== -->
+    <section id="tips" class="section" style="text-align: center;">
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+            <h2>Trading Tips</h2>
+            <p>Expert insights and advice to improve your trading strategy.</p>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Footer                -->
+    <!-- ===================== -->
+    <footer class="glass-card" style="padding: 2rem; text-align: center; margin-top: 3rem;">
+        <p>&copy; 2026 Sinyoro App. All rights reserved.</p>
+    </footer>
+
     <script src="js/app.js"></script>
 </body>
 </html>
