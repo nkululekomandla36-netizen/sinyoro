@@ -1,78 +1,46 @@
-/* Sinyoro App - Modern Trading Platform Styles */
-/* Glassmorphism Design System 2024 */
+Perfect! Let me extract just the CSS and create a proper `style.css` file for you! 📝Perfect! Now let me move it to outputs:## ✅ **Perfect! Your `style.css` is Ready!**
 
-:root {
-    --primary: #6366f1;
-    --primary-dark: #4f46e5;
-    --primary-light: #818cf8;
-    --secondary: #06b6d4;
-    --accent: #f59e0b;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    
-    --bg-dark: #0f172a;
-    --bg-card: rgba(30, 41, 59, 0.7);
-    --bg-glass: rgba(255, 255, 255, 0.05);
-    --bg-glass-hover: rgba(255, 255, 255, 0.1);
-    
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    
-    --border-glass: rgba(255, 255, 255, 0.1);
-    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+I've extracted the pure CSS and created a proper stylesheet with:
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+✅ **Modern Glassmorphism Design**
+- Beautiful glass/blur effects
+- Dark theme with gradients
+- Smooth animations
 
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-    background-attachment: fixed;
-    color: var(--text-primary);
-    min-height: 100vh;
-    line-height: 1.6;
-}
+✅ **Complete Styling For:**
+- Navigation bar
+- Buttons (primary & secondary)
+- Glass cards
+- Logo and branding
+- Sections
+- Responsive design (mobile, tablet, desktop)
 
-/* Glassmorphism Utilities */
-.glass {
-    background: var(--bg-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-glass);
-    box-shadow: var(--shadow-glass);
-}
+✅ **CSS Variables**
+- Easy to customize colors
+- Consistent spacing and borders
+- Smooth transitions
 
-.glass-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
+---
 
-/* Navigation */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: rgba(15, 23, 42, 0.8);
+## 📝 **How To Use:**
+
+### **1. Upload to GitHub:**
+```bash
+cd ~/your-sinyoro-repo
+# Copy the style.css to your css/ folder
+cp ~/Downloads/style.css css/
+
+git add css/style.css
+git commit -m "Add glassmorphism CSS styling"
+git push origin main
+```
+
+### **2. Link it in your HTML:**
+Add this to the `<head>` section of your `index.html`:
+```html
+<link rel="stylesheet" href="css/style.css">
+```
+
+---
+
+**Kulungile!** (It's good!) Your CSS file is clean, organized, and ready to use! 🎨✨
