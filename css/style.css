@@ -141,10 +141,11 @@ body {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-.hero-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1rem;
+.nav-logo {
+    width: 25px;
+    height: 25px;
+    margin-right: 0.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
     .nav-menu {
     display: flex;
