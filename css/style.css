@@ -106,7 +106,7 @@ body {
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 800;
     background: linear-gradient(135deg, var(--primary-light), var(--secondary));
     -webkit-background-clip: text;
@@ -129,17 +129,13 @@ body {
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary-light), var(--secondary));
     -webkit-background-clip: text;
-    -webkit
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .logo-img {
     width: 25px;
     height: 25px;
-}
-
-    .nav-logo {
-    width: 25px;
-    height: 25px;
-    margin-right: 0.5rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .nav-logo {
@@ -148,7 +144,8 @@ body {
     margin-right: 0.5rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
-    .nav-menu {
+
+.nav-menu {
     display: flex;
     list-style: none;
     gap: 1rem;
@@ -158,4 +155,93 @@ body {
 
 .nav-menu li {
     list-style: none;
+}
+
+.nav-menu a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-menu a:hover {
+    color: var(--text-primary);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ===================== */
+/* Buttons               */
+/* ===================== */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-glass-hover);
+}
+
+/* ===================== */
+/* Sections              */
+/* ===================== */
+.section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===================== */
+/* Hero Section          */
+/* ===================== */
+#hero {
+    margin-top: 6rem;
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#hero p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* ===================== */
+/* Footer               */
+/* ===================== */
+footer {
+    margin-top: 4rem;
+    text-align: center;
+    color: var(--text-muted);
 }
