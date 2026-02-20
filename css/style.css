@@ -139,10 +139,11 @@ body {
 }
 
 .nav-logo {
-    width: 25px;
-    height: 25px;
+    width: 40px;  /* Back to original but not too big */
+    height: 40px;
     margin-right: 0.5rem;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
 }
 
 .nav-menu {
