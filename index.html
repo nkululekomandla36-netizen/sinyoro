@@ -1,557 +1,533 @@
-<!-- Replace your current market-grid section with this expanded version -->
-
-<div class="market-grid" id="marketGrid" role="list">
-    <!-- ===================== FOOD ITEMS ===================== -->
-    
-    <!-- Item 1: Maize -->
-    <article class="glass-card market-card" data-category="food" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🌽</div>
-            <span class="category-tag">Food</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Maize - 50kg Bag</h3>
-            <p class="item-description">Grade A, dried and ready. Harvested this season. Perfect for grinding.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$25 or barter</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">2km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Mama Sarah</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sinyoro - Offline-first marketplace for rural African communities. Buy, sell, and barter essential goods without internet.">
+    <meta name="theme-color" content="#0f172a">
+    <title>Sinyoro - Rural Community Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/style.css" as="style">
+</head>
+<body>
+    <!-- ===================== -->
+    <!-- Navbar               -->
+    <!-- ===================== -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-brand">
+            <img src="assets/sinyoro_logo_glowing.svg" alt="Sinyoro Logo" class="nav-logo" width="40" height="40">
+            <div class="brand-text">
+                <div class="logo">Sinyoro</div>
+                <div class="brand-name">Community Marketplace</div>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="maize" data-seller="mama-sarah" type="button">
-                Contact Seller
-            </button>
-        </div>
-    </article>
+        
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-    <!-- Item 2: Beans -->
-    <article class="glass-card market-card" data-category="food" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🫘</div>
-            <span class="category-tag">Food</span>
+        <ul class="nav-menu" role="menubar">
+            <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
+            <li role="none"><a href="#market" class="nav-link" role="menuitem">Market</a></li>
+            <li role="none"><a href="#myitems" class="nav-link" role="menuitem">My Items</a></li>
+            <li role="none"><a href="#community" class="nav-link" role="menuitem">Community</a></li>
+            <li role="none"><a href="#help" class="nav-link" role="menuitem">Help</a></li>
+        </ul>
+        
+        <div class="nav-actions">
+            <button class="btn btn-primary" id="postItemBtn" aria-label="Post new item" type="button">
+                <span class="btn-icon">+</span>
+                <span class="btn-text">Post Item</span>
+            </button>
+            <button class="btn btn-secondary" id="profileBtn" type="button">Profile</button>
         </div>
-        <div class="card-body">
-            <h3 class="item-title">Beans - 20kg Sack</h3>
-            <p class="item-description">Red kidney beans, organically grown. Clean and ready to cook.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$18</span>
-                    </span>
-                    <span class="distance-tag nearby">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">1km away</span>
-                    </span>
+    </nav>
+
+    <!-- ===================== -->
+    <!-- Hero Section         -->
+    <!-- ===================== -->
+    <section id="home" class="hero-section" aria-labelledby="hero-heading">
+        <div class="glass-card hero-card">
+            <h1 id="hero-heading">Trade Without Internet</h1>
+            <p class="hero-description">Buy, sell, and barter essential goods with your nearby community. Works completely offline.</p>
+            
+            <div class="hero-features">
+                <div class="feature-badge">
+                    <span class="feature-icon">📍</span>
+                    <span class="feature-text">Local Only</span>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Grace N.</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
+                <div class="feature-badge">
+                    <span class="feature-icon">🔒</span>
+                    <span class="feature-text">Secure</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">🌾</span>
+                    <span class="feature-text">Essential Goods</span>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="beans" data-seller="grace-n" type="button">
-                Contact Seller
-            </button>
-        </div>
-    </article>
 
-    <!-- Item 3: Vegetables -->
-    <article class="glass-card market-card" data-category="food" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🥬</div>
-            <span class="category-tag">Food</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Fresh Vegetables Bundle</h3>
-            <p class="item-description">Spinach, kale, tomatoes, onions. Picked fresh this morning.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$5/bundle</span>
-                    </span>
-                    <span class="distance-tag nearby">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">500m away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Auntie Rose</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-large" id="browseMarketBtn" type="button">
+                    Browse Market
+                </button>
+                <button class="btn btn-secondary btn-large" id="learnMoreBtn" type="button">
+                    How It Works
+                </button>
+            </div>
+
+            <div class="offline-indicator">
+                <span class="status-dot" id="connectionStatus"></span>
+                <span id="statusText">Checking connection...</span>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="vegetables" data-seller="auntie-rose" type="button">
-                Contact Seller
+    </section>
+
+    <!-- ===================== -->
+    <!-- Market Section        -->
+    <!-- ===================== -->
+    <section id="market" class="section" aria-labelledby="market-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="market-heading">🛒 Local Market</h2>
+            <p class="section-subtitle">Essential goods from your community</p>
+        </div>
+
+        <div class="filter-bar" role="group" aria-label="Filter items by category">
+            <button class="filter-btn active" data-category="all" aria-pressed="true" type="button">All Items</button>
+            <button class="filter-btn" data-category="food" aria-pressed="false" type="button">
+                <span class="filter-icon">🌾</span>
+                <span class="filter-text">Food</span>
+            </button>
+            <button class="filter-btn" data-category="livestock" aria-pressed="false" type="button">
+                <span class="filter-icon">🐐</span>
+                <span class="filter-text">Livestock</span>
+            </button>
+            <button class="filter-btn" data-category="tools" aria-pressed="false" type="button">
+                <span class="filter-icon">🛠️</span>
+                <span class="filter-text">Tools</span>
+            </button>
+            <button class="filter-btn" data-category="services" aria-pressed="false" type="button">
+                <span class="filter-icon">💼</span>
+                <span class="filter-text">Services</span>
             </button>
         </div>
-    </article>
-
-    <!-- Item 4: Rice -->
-    <article class="glass-card market-card" data-category="food" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🍚</div>
-            <span class="category-tag">Food</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Rice - 25kg Bag</h3>
-            <p class="item-description">Long grain white rice. Imported quality, affordable price.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$30</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">4km away</span>
-                    </span>
+        
+        <div class="market-grid" id="marketGrid" role="list">
+            <!-- Item 1: Food -->
+            <article class="glass-card market-card" data-category="food" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🌽</div>
+                    <span class="category-tag">Food</span>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Shopkeeper Tom</span>
+                <div class="card-body">
+                    <h3 class="item-title">Maize - 50kg Bag</h3>
+                    <p class="item-description">Grade A, dried and ready. Harvested this season.</p>
+                    
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$25 or barter</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">2km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Mama Sarah</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
                     </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="maize" data-seller="mama-sarah" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 2: Livestock -->
+            <article class="glass-card market-card" data-category="livestock" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🐐</div>
+                    <span class="category-tag">Livestock</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Goats - 3 Available</h3>
+                    <p class="item-description">Healthy, vaccinated. 2 years old. Good for breeding or meat.</p>
+                    
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag barter">
+                                <span class="meta-icon">🔄</span>
+                                <span class="price-amount">Barter for tools</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">5km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Baba John</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="goats" data-seller="baba-john" type="button">
+                        Make Offer
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 3: Tools -->
+            <article class="glass-card market-card" data-category="tools" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">⛏️</div>
+                    <span class="category-tag">Tools</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Farming Tools Set</h3>
+                    <p class="item-description">Hoe, rake, and shovel. Good condition, barely used.</p>
+                    
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$15</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">1km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Peter M.</span>
+                            </div>
+                            <span class="trust-badge new">
+                                <span class="badge-icon">🆕</span>
+                                <span class="badge-text">New Seller</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="tools" data-seller="peter-m" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 4: Services -->
+            <article class="glass-card market-card" data-category="services" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🚜</div>
+                    <span class="category-tag">Services</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Ploughing Service</h3>
+                    <p class="item-description">Tractor ploughing available. Per acre pricing. Reliable and fast.</p>
+                    
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$10/acre</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">3km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Tractor Co-op</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button">
+                        Book Service
+                    </button>
+                </div>
+            </article>
+        </div>
+
+        <div class="load-more">
+            <button class="btn btn-secondary" id="loadMoreBtn" type="button">Load More Items</button>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- My Items Section      -->
+    <!-- ===================== -->
+    <section id="myitems" class="section" aria-labelledby="myitems-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="myitems-heading">📦 My Listings</h2>
+            <p class="section-subtitle">Manage your items and trades</p>
+        </div>
+        
+        <div class="glass-card empty-state" id="emptyState">
+            <div class="empty-icon">📭</div>
+            <h3>No Listings Yet</h3>
+            <p>You haven't posted any items. Start selling or bartering with your community!</p>
+            <button class="btn btn-primary btn-large" id="postFirstItemBtn" type="button">
+                <span class="btn-icon">+</span>
+                Post Your First Item
+            </button>
+        </div>
+
+        <!-- Hidden by default - shown when user has items -->
+        <div class="my-items-list" id="myItemsList" style="display: none;">
+            <!-- User's items will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Community Section     -->
+    <!-- ===================== -->
+    <section id="community" class="section" aria-labelledby="community-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="community-heading">🤝 Community</h2>
+            <p class="section-subtitle">Connect with nearby traders</p>
+        </div>
+
+        <div class="community-grid">
+            <div class="glass-card community-card stats-card">
+                <h3>Market Activity</h3>
+                <div class="community-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">📦</span>
+                        <span class="stat-number" id="itemsCount">45</span>
+                        <span class="stat-label">Items Listed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🤝</span>
+                        <span class="stat-number" id="tradesCount">23</span>
+                        <span class="stat-label">Trades This Week</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-number" id="sellersCount">8</span>
+                        <span class="stat-label">Trusted Sellers</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="rice" data-seller="shopkeeper-tom" type="button">
-                Contact Seller
-            </button>
-        </div>
-    </article>
 
-    <!-- ===================== LIVESTOCK ITEMS ===================== -->
-
-    <!-- Item 5: Goats -->
-    <article class="glass-card market-card" data-category="livestock" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🐐</div>
-            <span class="category-tag">Livestock</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Goats - 3 Available</h3>
-            <p class="item-description">Healthy, vaccinated. 2 years old. Good for breeding or meat.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag barter">
-                        <span class="meta-icon">🔄</span>
-                        <span class="price-amount">Barter for tools</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">5km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Baba John</span>
+            <div class="glass-card community-card nearby-card">
+                <h3>Nearby Traders</h3>
+                <p class="nearby-summary">12 active sellers within 10km of your location</p>
+                <div class="nearby-list">
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Mama Sarah</span>
+                            <span class="nearby-distance">2km away • 5 items</span>
+                        </div>
                     </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Baba John</span>
+                            <span class="nearby-distance">5km away • 3 items</span>
+                        </div>
+                    </div>
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Peter M.</span>
+                            <span class="nearby-distance">1km away • 2 items</span>
+                        </div>
+                    </div>
                 </div>
+                <button class="btn btn-secondary btn-full" type="button">View All Traders</button>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="goats" data-seller="baba-john" type="button">
-                Make Offer
-            </button>
-        </div>
-    </article>
+    </section>
 
-    <!-- Item 6: Chickens -->
-    <article class="glass-card market-card" data-category="livestock" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🐔</div>
-            <span class="category-tag">Livestock</span>
+    <!-- ===================== -->
+    <!-- Help Section          -->
+    <!-- ===================== -->
+    <section id="help" class="section" aria-labelledby="help-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="help-heading">❓ How It Works</h2>
+            <p class="section-subtitle">Simple steps to start trading</p>
         </div>
-        <div class="card-body">
-            <h3 class="item-title">Chickens - 12 Layers</h3>
-            <p class="item-description">Mature laying hens. Producing 10+ eggs daily. Healthy stock.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$8 each</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">3km away</span>
-                    </span>
+
+        <div class="help-grid">
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📱</div>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Mary K.</span>
-                    </div>
-                    <span class="trust-badge new">
-                        <span class="badge-icon">🆕</span>
-                        <span class="badge-text">New Seller</span>
-                    </span>
+                <h3>Browse Offline</h3>
+                <p>View all local items without internet. All data is stored securely on your phone using advanced offline technology.</p>
+                <ul class="feature-list">
+                    <li>✓ No data charges</li>
+                    <li>✓ Works in remote areas</li>
+                    <li>✓ Instant loading</li>
+                </ul>
+            </div>
+
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📞</div>
                 </div>
+                <h3>Connect Directly</h3>
+                <p>Contact sellers via SMS or phone call. Arrange to meet in person at a safe, public location.</p>
+                <ul class="feature-list">
+                    <li>✓ Direct communication</li>
+                    <li>✓ No middlemen fees</li>
+                    <li>✓ Build relationships</li>
+                </ul>
+            </div>
+
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🤝</div>
+                </div>
+                <h3>Trade Safely</h3>
+                <p>Pay with cash or barter goods. Rate your experience to help build a trusted community marketplace.</p>
+                <ul class="feature-list">
+                    <li>✓ Cash or barter</li>
+                    <li>✓ Meet safely</li>
+                    <li>✓ Build trust scores</li>
+                </ul>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="chickens" data-seller="mary-k" type="button">
-                Contact Seller
-            </button>
-        </div>
-    </article>
 
-    <!-- Item 7: Cows -->
-    <article class="glass-card market-card" data-category="livestock" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🐄</div>
-            <span class="category-tag">Livestock</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Dairy Cow - 1 Available</h3>
-            <p class="item-description">Fresian cow, 5 years old. Producing 15L milk daily. Calved 3 months ago.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$400 or best offer</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">8km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Elder Mwangi</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
+        <div class="help-cta">
+            <div class="glass-card cta-card">
+                <h3>Ready to Start Trading?</h3>
+                <p>Join your local community marketplace today. No internet required!</p>
+                <button class="btn btn-primary btn-large" id="getStartedBtn" type="button">Get Started Now</button>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="cow" data-seller="elder-mwangi" type="button">
-                Make Offer
-            </button>
-        </div>
-    </article>
+    </section>
 
-    <!-- ===================== TOOLS ITEMS ===================== -->
-
-    <!-- Item 8: Farming Tools -->
-    <article class="glass-card market-card" data-category="tools" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">⛏️</div>
-            <span class="category-tag">Tools</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Farming Tools Set</h3>
-            <p class="item-description">Hoe, rake, and shovel. Good condition, barely used. Wooden handles.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$15</span>
-                    </span>
-                    <span class="distance-tag nearby">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">1km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Peter M.</span>
-                    </div>
-                    <span class="trust-badge new">
-                        <span class="badge-icon">🆕</span>
-                        <span class="badge-text">New Seller</span>
-                    </span>
+    <!-- ===================== -->
+    <!-- Footer                -->
+    <!-- ===================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">🌍</span>
+                <div>
+                    <strong>Sinyoro</strong>
+                    <p>Empowering Rural Communities</p>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="tools" data-seller="peter-m" type="button">
-                Contact Seller
-            </button>
-        </div>
-    </article>
-
-    <!-- Item 9: Wheelbarrow -->
-    <article class="glass-card market-card" data-category="tools" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🛒</div>
-            <span class="category-tag">Tools</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Heavy Duty Wheelbarrow</h3>
-            <p class="item-description">Metal tray, pneumatic tire. Perfect for construction or farm work.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$35</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">6km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Builder Sam</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
+            <div class="footer-features">
+                <span class="footer-badge">📱 Works Offline</span>
+                <span class="footer-badge">🔒 Secure</span>
+                <span class="footer-badge">🌾 Local First</span>
             </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="wheelbarrow" data-seller="builder-sam" type="button">
-                Contact Seller
-            </button>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sinyoro App. Built for rural Africa. All rights reserved.</p>
         </div>
-    </article>
+    </footer>
 
-    <!-- Item 10: Water Pump -->
-    <article class="glass-card market-card" data-category="tools" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🔧</div>
-            <span class="category-tag">Tools</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Manual Water Pump</h3>
-            <p class="item-description">Hand pump for well or borehole. Cast iron, very durable. Includes fittings.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag barter">
-                        <span class="meta-icon">🔄</span>
-                        <span class="price-amount">Barter for livestock</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">4km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Mechanic Joe</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
+    <!-- ===================== -->
+    <!-- Post Item Modal       -->
+    <!-- ===================== -->
+    <div id="postItemModal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" hidden>
+        <div class="modal-overlay"></div>
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Post New Item</h2>
+                <button class="close-btn" aria-label="Close modal" type="button">&times;</button>
             </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="water-pump" data-seller="mechanic-joe" type="button">
-                Make Offer
-            </button>
-        </div>
-    </article>
-
-    <!-- ===================== SERVICES ITEMS ===================== -->
-
-    <!-- Item 11: Ploughing -->
-    <article class="glass-card market-card" data-category="services" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🚜</div>
-            <span class="category-tag">Services</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Ploughing Service</h3>
-            <p class="item-description">Tractor ploughing available. Per acre pricing. Reliable and fast. Book early!</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$10/acre</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">3km away</span>
-                    </span>
+            
+            <form id="postItemForm" class="post-form">
+                <div class="form-group">
+                    <label for="itemName">Item Name *</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="e.g., Fresh Maize, Healthy Goats" required>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Tractor Co-op</span>
+
+                <div class="form-group">
+                    <label for="itemCategory">Category *</label>
+                    <select id="itemCategory" name="itemCategory" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="food">🌾 Food & Crops</option>
+                        <option value="livestock">🐐 Livestock</option>
+                        <option value="tools">🛠️ Tools & Equipment</option>
+                        <option value="services">💼 Services</option>
+                        <option value="other">📦 Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemDescription">Description *</label>
+                    <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Describe your item, condition, quantity..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="itemPrice">Price or Barter Terms *</label>
+                        <input type="text" id="itemPrice" name="itemPrice" placeholder="e.g., $25, 2 chickens, or negotiable" required>
                     </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button">
-                Book Service
-            </button>
-        </div>
-    </article>
-
-    <!-- Item 12: Transport -->
-    <article class="glass-card market-card" data-category="services" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🛻</div>
-            <span class="category-tag">Services</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Pickup Truck Transport</h3>
-            <p class="item-description">Move goods to market. 1-ton capacity. Available weekends. Call to book.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$20/trip</span>
-                    </span>
-                    <span class="distance-tag nearby">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">2km away</span>
-                    </span>
-                </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Driver Charles</span>
+                    
+                    <div class="form-group">
+                        <label for="itemLocation">Your Location</label>
+                        <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Near the school">
                     </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
                 </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="transport" data-seller="driver-charles" type="button">
-                Book Transport
-            </button>
-        </div>
-    </article>
 
-    <!-- Item 13: Repair -->
-    <article class="glass-card market-card" data-category="services" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">🔨</div>
-            <span class="category-tag">Services</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Phone & Radio Repair</h3>
-            <p class="item-description">Fix broken phones, solar radios, small electronics. Fair prices. Guaranteed work.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag">
-                        <span class="meta-icon">💰</span>
-                        <span class="price-amount">$5-20 (depends)</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">5km away</span>
-                    </span>
+                <div class="form-group">
+                    <label for="sellerName">Your Name *</label>
+                    <input type="text" id="sellerName" name="sellerName" placeholder="How should people call you?" required>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Tech Wanjiku</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="repair" data-seller="tech-wanjiku" type="button">
-                Get Quote
-            </button>
-        </div>
-    </article>
 
-    <!-- Item 14: Teaching -->
-    <article class="glass-card market-card" data-category="services" role="listitem">
-        <div class="card-header">
-            <div class="item-image" aria-hidden="true">📚</div>
-            <span class="category-tag">Services</span>
-        </div>
-        <div class="card-body">
-            <h3 class="item-title">Adult Literacy Classes</h3>
-            <p class="item-description">Learn to read, write, and do basic math. Evening classes. All ages welcome.</p>
-            <div class="item-meta">
-                <div class="meta-row">
-                    <span class="price-tag barter">
-                        <span class="meta-icon">🔄</span>
-                        <span class="price-amount">Barter (food/tools)</span>
-                    </span>
-                    <span class="distance-tag">
-                        <span class="meta-icon">📍</span>
-                        <span class="distance-value">1km away</span>
-                    </span>
+                <div class="form-group">
+                    <label for="contactMethod">Contact Method *</label>
+                    <select id="contactMethod" name="contactMethod" required>
+                        <option value="phone">📞 Phone Call</option>
+                        <option value="sms">💬 SMS/Text</option>
+                        <option value="both">📞💬 Both</option>
+                    </select>
                 </div>
-                <div class="seller-row">
-                    <div class="seller-info">
-                        <span class="seller-avatar" aria-hidden="true">👤</span>
-                        <span class="seller-name">Teacher Amina</span>
-                    </div>
-                    <span class="trust-badge trusted">
-                        <span class="badge-icon">⭐</span>
-                        <span class="badge-text">Trusted</span>
-                    </span>
+
+                <div class="form-notice">
+                    <p>ℹ️ This item will be saved on your phone and shared with nearby users when you're online.</p>
                 </div>
-            </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelPostBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Post Item</button>
+                </div>
+            </form>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-primary contact-btn" data-item="classes" data-seller="teacher-amina" type="button">
-                Enroll Now
-            </button>
-        </div>
-    </article>
-</div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
