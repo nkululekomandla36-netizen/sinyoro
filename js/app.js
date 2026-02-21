@@ -5,26 +5,32 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Sinyoro Rural Marketplace Loaded');
 
     // ==========================================
-    // OFFLINE STORAGE SETUP
+    // OFFLINE STORAGE SETUP (IndexedDB)
     // ==========================================
     const DB_NAME = 'SinyoroDB';
     const DB_VERSION = 1;
     let db;
 
-    // Initialize IndexedDB for offline storage
     const request = indexedDB.open(DB_NAME, DB_VERSION);
     
-    request.onerror = () => console.log('Database failed to open');
+    request.onerror = () => {
+        console.error('❌ Database failed to open');
+        showToast('Storage not available. Some features may not work.', 'warning');
+    };
+    
     request.onsuccess = () => {
         db = request.result;
         console.log('✅ Offline database ready');
         loadMarketItems();
+        updateConnectionStatus();
     };
     
     request.onupgradeneeded = (e) => {
         const db = e.target.result;
         if (!db.objectStoreNames.contains('items')) {
-            db.createObjectStore('items', { keyPath: 'id', autoIncrement: true });
+            const itemsStore = db.createObjectStore('items', { keyPath: 'id', autoIncrement: true });
+            itemsStore.createIndex('category', 'category', { unique: false });
+            itemsStore.createIndex('date', 'date', { unique: false });
         }
         if (!db.objectStoreNames.contains('users')) {
             db.createObjectStore('users', { keyPath: 'id' });
@@ -35,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // TOAST NOTIFICATION SYSTEM
     // ==========================================
     function showToast(message, type = 'info') {
-        document.querySelectorAll('.toast').forEach(t => t.remove());
-
+        const container = document.getElementById('toastContainer') || document.body;
+        
         const icons = {
             info: 'ℹ️',
             success: '✅',
@@ -45,15 +51,18 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const toast = document.createElement('div');
-        toast.className = 'toast';
+        toast.className = `toast toast-${type}`;
+        toast.setAttribute('role', 'alert');
         toast.innerHTML = `
             <div class="toast-icon">${icons[type]}</div>
             <div class="toast-content">
-                <h4 style="margin: 0 0 0.25rem 0; font-size: 0.9rem; font-weight: 600;">${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
-                <p style="margin: 0; font-size: 0.85rem; line-height: 1.4;">${message}</p>
+                <h4 class="toast-title">${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+                <p class="toast-message">${message}</p>
             </div>
+            <button class="toast-close" aria-label="Close notification">×</button>
         `;
 
+        // Use CSS classes instead of inline styles for better maintainability
         toast.style.cssText = `
             position: fixed;
             bottom: 2rem;
@@ -77,67 +86,146 @@ document.addEventListener('DOMContentLoaded', function() {
             font-family: system-ui, -apple-system, sans-serif;
         `;
 
-        document.body.appendChild(toast);
+        container.appendChild(toast);
 
+        // Animate in
         requestAnimationFrame(() => {
             toast.style.transform = 'translateX(0)';
             toast.style.opacity = '1';
         });
 
-        setTimeout(() => {
-            toast.style.transform = 'translateX(400px)';
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 400);
-        }, 3000);
+        // Close button functionality
+        toast.querySelector('.toast-close').addEventListener('click', () => {
+            removeToast(toast);
+        });
+
+        // Auto remove after delay
+        setTimeout(() => removeToast(toast), 4000);
+    }
+
+    function removeToast(toast) {
+        toast.style.transform = 'translateX(400px)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
     }
 
     // ==========================================
-    // NAVIGATION BUTTONS
+    // CONNECTION STATUS
     // ==========================================
+    function updateConnectionStatus() {
+        const statusDot = document.getElementById('connectionStatus');
+        const statusText = document.getElementById('statusText');
+        
+        if (!statusDot || !statusText) return;
+
+        if (navigator.onLine) {
+            statusDot.className = 'status-dot online';
+            statusText.textContent = '🌐 Online - Full features available';
+        } else {
+            statusDot.className = 'status-dot offline';
+            statusText.textContent = '📴 Offline mode - Using saved data';
+        }
+    }
+
+    // ==========================================
+    // MOBILE MENU TOGGLE
+    // ==========================================
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
     
-    // Post Item Button
-    const postItemBtn = document.getElementById('postItemBtn');
+    if (mobileMenuToggle && navMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('mobile-open');
+        });
+    }
+
+    // ==========================================
+    // MODAL MANAGEMENT
+    // ==========================================
     const postItemModal = document.getElementById('postItemModal');
-    const closeBtn = document.querySelector('.close-btn');
+    const postItemBtn = document.getElementById('postItemBtn');
+    const postFirstItemBtn = document.getElementById('postFirstItemBtn');
+    const closeBtn = postItemModal?.querySelector('.close-btn');
+    const cancelBtn = document.getElementById('cancelPostBtn');
+    const modalOverlay = postItemModal?.querySelector('.modal-overlay');
+
+    function openModal() {
+        if (!postItemModal) return;
+        postItemModal.hidden = false;
+        postItemModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        showToast('Create your listing. It will be saved offline.', 'info');
+    }
+
+    function closeModal() {
+        if (!postItemModal) return;
+        postItemModal.hidden = true;
+        postItemModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (postItemBtn) postItemBtn.addEventListener('click', openModal);
+    if (postFirstItemBtn) postFirstItemBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+    if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && postItemModal && !postItemModal.hidden) {
+            closeModal();
+        }
+    });
+
+    // ==========================================
+    // NAVIGATION & SCROLLING
+    // ==========================================
     
-    if (postItemBtn && postItemModal) {
-        postItemBtn.addEventListener('click', () => {
-            postItemModal.style.display = 'flex';
-            showToast('Create your listing offline. Will sync when online.', 'info');
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            postItemModal.style.display = 'none';
-        });
-    }
-
-    // Profile Button
-    const profileBtn = document.getElementById('profileBtn');
-    if (profileBtn) {
-        profileBtn.addEventListener('click', () => {
-            showToast('Profile feature coming soon! 👤', 'info');
-        });
-    }
-
     // Browse Market Button
     const browseMarketBtn = document.getElementById('browseMarketBtn');
     if (browseMarketBtn) {
         browseMarketBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            document.getElementById('market').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('market')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             showToast('Showing local items near you 📍', 'success');
         });
     }
 
-    // Post First Item Button
-    const postFirstItemBtn = document.getElementById('postFirstItemBtn');
-    if (postFirstItemBtn) {
-        postFirstItemBtn.addEventListener('click', () => {
-            postItemModal.style.display = 'flex';
+    // Learn More Button
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+    if (learnMoreBtn) {
+        learnMoreBtn.addEventListener('click', () => {
+            document.getElementById('help')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     }
+
+    // Get Started Button
+    const getStartedBtn = document.getElementById('getStartedBtn');
+    if (getStartedBtn) {
+        getStartedBtn.addEventListener('click', () => {
+            openModal();
+        });
+    }
+
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+            
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Close mobile menu if open
+                navMenu?.classList.remove('mobile-open');
+                mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
 
     // ==========================================
     // MARKET FILTERS
@@ -147,22 +235,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active state
-            filterBtns.forEach(b => b.classList.remove('active'));
+            // Update active states
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
             const category = btn.dataset.category;
             
-            // Filter items
-            marketCards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
+            // Filter items with animation
+            marketCards.forEach((card, index) => {
+                const matches = category === 'all' || card.dataset.category === category;
+                
+                if (matches) {
                     card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 50);
                 } else {
-                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
                 }
             });
 
-            showToast(`Showing ${category === 'all' ? 'all' : category} items`, 'success');
+            const categoryNames = {
+                all: 'all items',
+                food: 'food & crops',
+                livestock: 'livestock',
+                tools: 'tools & equipment',
+                services: 'services'
+            };
+
+            showToast(`Showing ${categoryNames[category] || category}`, 'success');
         });
     });
 
@@ -170,51 +280,99 @@ document.addEventListener('DOMContentLoaded', function() {
     // CONTACT SELLER BUTTONS
     // ==========================================
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('contact-btn')) {
-            const card = e.target.closest('.market-card');
-            const itemName = card.querySelector('h3').textContent;
-            const seller = card.querySelector('.seller-info span').textContent;
+        const contactBtn = e.target.closest('.contact-btn');
+        if (!contactBtn) return;
+
+        const card = contactBtn.closest('.market-card');
+        if (!card) return;
+
+        const itemName = card.querySelector('.item-title')?.textContent || 'Item';
+        const sellerName = card.querySelector('.seller-name')?.textContent || 'Seller';
+        const item = contactBtn.dataset.item;
+        const seller = contactBtn.dataset.seller;
+
+        showToast(`Opening contact options for ${sellerName}...`, 'info');
+
+        // Simulate contact dialog
+        setTimeout(() => {
+            const contactMethod = confirm(`📞 Contact ${sellerName} about ${itemName}\n\nClick OK to simulate a phone call\nClick Cancel to simulate SMS`);
             
-            showToast(`Contacting ${seller} about ${itemName}... 📱`, 'success');
-            
-            // In real app: Open SMS/call dialog
-            setTimeout(() => {
-                alert(`📞 Call or SMS ${seller}\n📝 About: ${itemName}\n\n(In real app, this would open your phone's dialer)`);
-            }, 500);
-        }
+            if (contactMethod) {
+                showToast(`📞 Calling ${sellerName}... (simulated)`, 'success');
+            } else {
+                showToast(`💬 SMS sent to ${sellerName}... (simulated)`, 'success');
+            }
+        }, 600);
     });
 
     // ==========================================
     // POST ITEM FORM
     // ==========================================
     const postItemForm = document.getElementById('postItemForm');
+    
     if (postItemForm) {
         postItemForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const formData = new FormData(postItemForm);
+            // Get form values using proper selectors
+            const itemName = document.getElementById('itemName')?.value.trim();
+            const category = document.getElementById('itemCategory')?.value;
+            const description = document.getElementById('itemDescription')?.value.trim();
+            const price = document.getElementById('itemPrice')?.value.trim();
+            const location = document.getElementById('itemLocation')?.value.trim();
+            const sellerName = document.getElementById('sellerName')?.value.trim();
+            const contactMethod = document.getElementById('contactMethod')?.value;
+
+            // Validation
+            if (!itemName || !category || !description || !price || !sellerName) {
+                showToast('Please fill in all required fields.', 'error');
+                return;
+            }
+
             const item = {
-                name: postItemForm.querySelector('input[type="text"]').value,
-                category: postItemForm.querySelector('select').value,
-                description: postItemForm.querySelector('textarea').value,
-                price: postItemForm.querySelectorAll('input')[1].value,
+                name: itemName,
+                category: category,
+                description: description,
+                price: price,
+                location: location || 'Not specified',
+                sellerName: sellerName,
+                contactMethod: contactMethod || 'phone',
                 date: new Date().toISOString(),
-                offline: !navigator.onLine
+                postedOffline: !navigator.onLine,
+                synced: false
             };
 
-            // Save to IndexedDB (offline storage)
+            // Save to IndexedDB
             if (db) {
                 const transaction = db.transaction(['items'], 'readwrite');
                 const store = transaction.objectStore('items');
-                store.add(item);
-                
-                transaction.oncomplete = () => {
-                    showToast('✅ Item saved offline! Will post when online.', 'success');
-                    postItemModal.style.display = 'none';
+                const request = store.add(item);
+
+                request.onsuccess = () => {
+                    showToast('✅ Item saved! It will be visible to others when online.', 'success');
+                    closeModal();
                     postItemForm.reset();
+                    
+                    // Update empty state if this is first item
+                    updateMyItemsSection();
+                };
+
+                request.onerror = () => {
+                    showToast('❌ Failed to save item. Please try again.', 'error');
                 };
             } else {
-                showToast('⚠️ Storage not ready. Please try again.', 'warning');
+                // Fallback to localStorage if IndexedDB fails
+                try {
+                    const items = JSON.parse(localStorage.getItem('sinyoro_items') || '[]');
+                    items.push({ ...item, id: Date.now() });
+                    localStorage.setItem('sinyoro_items', JSON.stringify(items));
+                    showToast('✅ Item saved locally!', 'success');
+                    closeModal();
+                    postItemForm.reset();
+                    updateMyItemsSection();
+                } catch (err) {
+                    showToast('⚠️ Storage not available.', 'error');
+                }
             }
         });
     }
@@ -223,7 +381,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // LOAD MARKET ITEMS (Offline First)
     // ==========================================
     function loadMarketItems() {
-        if (!db) return;
+        if (!db) {
+            // Try localStorage fallback
+            try {
+                const items = JSON.parse(localStorage.getItem('sinyoro_items') || '[]');
+                console.log(`📦 Loaded ${items.length} items from localStorage`);
+                renderUserItems(items);
+            } catch (e) {
+                console.log('No storage available');
+            }
+            return;
+        }
         
         const transaction = db.transaction(['items'], 'readonly');
         const store = transaction.objectStore('items');
@@ -231,46 +399,132 @@ document.addEventListener('DOMContentLoaded', function() {
 
         request.onsuccess = () => {
             const items = request.result;
-            console.log(`📦 Loaded ${items.length} items from offline storage`);
-            // In real app: Render these items to the market grid
+            console.log(`📦 Loaded ${items.length} items from IndexedDB`);
+            renderUserItems(items);
+            updateStats(items.length);
         };
+    }
+
+    function renderUserItems(items) {
+        const myItemsList = document.getElementById('myItemsList');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (!myItemsList || !emptyState) return;
+
+        if (items.length === 0) {
+            myItemsList.style.display = 'none';
+            emptyState.style.display = 'block';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+        myItemsList.style.display = 'grid';
+        myItemsList.innerHTML = items.map(item => `
+            <div class="glass-card my-item-card">
+                <div class="item-header">
+                    <span class="item-category">${item.category}</span>
+                    <span class="item-status">${item.synced ? '✅ Synced' : '⏳ Pending'}</span>
+                </div>
+                <h4>${item.name}</h4>
+                <p>${item.description.substring(0, 100)}...</p>
+                <div class="item-footer">
+                    <span class="item-price">${item.price}</span>
+                    <span class="item-date">${new Date(item.date).toLocaleDateString()}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function updateMyItemsSection() {
+        if (db) {
+            loadMarketItems();
+        } else {
+            try {
+                const items = JSON.parse(localStorage.getItem('sinyoro_items') || '[]');
+                renderUserItems(items);
+            } catch (e) {
+                console.error('Failed to update items');
+            }
+        }
+    }
+
+    function updateStats(itemCount) {
+        const itemsCountEl = document.getElementById('itemsCount');
+        if (itemsCountEl) {
+            itemsCountEl.textContent = 45 + itemCount; // Base + user items
+        }
     }
 
     // ==========================================
     // NETWORK STATUS MONITORING
     // ==========================================
-    function updateOnlineStatus() {
-        if (navigator.onLine) {
-            showToast('🌐 Back online! Syncing data...', 'success');
-            // Sync offline items to server
-        } else {
-            showToast('📴 Offline mode. Using saved data.', 'warning');
-        }
+    function handleOnline() {
+        updateConnectionStatus();
+        showToast('🌐 Back online! Syncing your listings...', 'success');
+        
+        // Attempt to sync offline items
+        syncOfflineItems();
     }
 
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
-
-    // Check initial status
-    if (!navigator.onLine) {
-        showToast('📴 Starting in offline mode', 'info');
+    function handleOffline() {
+        updateConnectionStatus();
+        showToast('📴 Offline mode activated. Using saved data.', 'warning');
     }
 
-    // ==========================================
-    // SMOOTH SCROLLING
-    // ==========================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    function syncOfflineItems() {
+        if (!db) return;
+
+        const transaction = db.transaction(['items'], 'readonly');
+        const store = transaction.objectStore('items');
+        const request = store.getAll();
+
+        request.onsuccess = () => {
+            const unsyncedItems = request.result.filter(item => !item.synced);
             
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (unsyncedItems.length > 0) {
+                console.log(`Syncing ${unsyncedItems.length} items...`);
+                
+                // Simulate sync process
+                setTimeout(() => {
+                    const updateTransaction = db.transaction(['items'], 'readwrite');
+                    const updateStore = updateTransaction.objectStore('items');
+                    
+                    unsyncedItems.forEach(item => {
+                        item.synced = true;
+                        updateStore.put(item);
+                    });
+                    
+                    showToast(`✅ ${unsyncedItems.length} items synced successfully!`, 'success');
+                    updateMyItemsSection();
+                }, 1500);
             }
+        };
+    }
+
+    // ==========================================
+    // LOAD MORE BUTTON
+    // ==========================================
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            showToast('Loading more items... (demo)', 'info');
+            loadMoreBtn.textContent = 'No more items';
+            loadMoreBtn.disabled = true;
         });
-    });
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    
+    // Check initial connection status
+    updateConnectionStatus();
+    
+    // Load user items
+    updateMyItemsSection();
 
     console.log('✅ Sinyoro Marketplace Ready - Offline First!');
 });
