@@ -1,24 +1,32 @@
-// Sinyoro App JS
-console.log("Sinyoro App loaded");
+// app.js - Sinyoro App JS
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("✅ Sinyoro App loaded");
+
+    // ==========================================
+    // BUTTON GREETINGS
+    // ==========================================
     
-    // ======= Button Greetings (if these buttons exist) =======
     const welcomeAlertBtn = document.getElementById('welcomeAlertBtn');
     if (welcomeAlertBtn) {
-        welcomeAlertBtn.addEventListener('click', () => {
+        welcomeAlertBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             alert("Welcome to Sinyoro!");
         });
     }
 
     const consoleTestBtn = document.getElementById('consoleTestBtn');
     if (consoleTestBtn) {
-        consoleTestBtn.addEventListener('click', () => {
+        consoleTestBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             console.log("Console test successful ✅");
         });
     }
 
-    // ======= Tip of the Day (if these elements exist) =======
+    // ==========================================
+    // TIP OF THE DAY
+    // ==========================================
+    
     const tipContent = document.getElementById('tipContent');
     const tipCategory = document.getElementById('tipCategory');
     const tipDate = document.getElementById('tipDate');
@@ -32,27 +40,35 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     function loadRandomTip() {
-        if (tipContent && tipCategory && tipDate) {
+        if (tipContent && tipCategory) {
             const tip = tips[Math.floor(Math.random() * tips.length)];
             tipContent.textContent = tip.text;
             tipCategory.textContent = tip.category;
-            tipDate.textContent = new Date().toLocaleDateString();
+            if (tipDate) tipDate.textContent = new Date().toLocaleDateString();
         }
     }
 
     if (refreshTipBtn) {
-        refreshTipBtn.addEventListener('click', loadRandomTip);
+        refreshTipBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loadRandomTip();
+            showToast('New tip loaded! 💡');
+        });
     }
 
-    // Load a tip on page load (if elements exist)
     loadRandomTip();
 
-    // ======= Main App Buttons (from your HTML) =======
+    // ==========================================
+    // MAIN APP BUTTONS (FIXED)
+    // ==========================================
     
     // Sign In Button
     const signInBtn = document.getElementById('signInBtn');
     if (signInBtn) {
-        signInBtn.addEventListener('click', function() {
+        signInBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🔐 Sign In clicked (app.js)');
             showToast('Sign In - Coming Soon! 🚀');
         });
     }
@@ -60,7 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sign Up Button
     const signUpBtn = document.getElementById('signUpBtn');
     if (signUpBtn) {
-        signUpBtn.addEventListener('click', function() {
+        signUpBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('📝 Sign Up clicked (app.js)');
             showToast('Sign Up - Coming Soon! 🎉');
         });
     }
@@ -68,47 +87,72 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get Started Button
     const getStartedBtn = document.getElementById('getStartedBtn');
     if (getStartedBtn) {
-        getStartedBtn.addEventListener('click', function() {
+        getStartedBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🚀 Get Started clicked (app.js)');
             showToast('Welcome to Sinyoro! Let\'s get started! 🚀');
-            document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+            const portfolio = document.getElementById('portfolio');
+            if (portfolio) {
+                portfolio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         });
     }
 
-    // Trade Now Buttons
-    const tradeBtns = document.querySelectorAll('.trade-btn');
-    tradeBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const card = this.closest('.trading-card');
-            const title = card.querySelector('h3').textContent;
-            showToast(`Starting ${title}... 💰`);
-        });
+    // ==========================================
+    // TRADE NOW BUTTONS (FIXED - Event Delegation)
+    // ==========================================
+    
+    document.addEventListener('click', function(e) {
+        const tradeBtn = e.target.closest('.trade-btn');
+        if (tradeBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const card = tradeBtn.closest('.trading-card');
+            if (card) {
+                const titleEl = card.querySelector('h3');
+                const title = titleEl ? titleEl.textContent : 'Trading';
+                showToast(`Starting ${title}... 💰`);
+            }
+        }
     });
 
-    // Smooth scroll for nav links
+    // ==========================================
+    // SMOOTH SCROLL (FIXED - excludes sign in/up)
+    // ==========================================
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        // Skip sign in/up buttons to prevent conflict with main.js
+        if (anchor.id === 'signInBtn' || anchor.id === 'signUpBtn') return;
+        if (anchor.closest('#signInBtn') || anchor.closest('#signUpBtn')) return;
+        
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (!href || href === '#' || href === '#signin' || href === '#signup') return;
+            
+            const target = document.querySelector(href);
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
-    // ======= Toast Notification Function =======
+    // ==========================================
+    // TOAST NOTIFICATION FUNCTION (ENHANCED)
+    // ==========================================
+    
     function showToast(message) {
-        const existingToast = document.querySelector('.toast');
-        if (existingToast) {
-            existingToast.remove();
-        }
+        // Remove all existing toasts
+        document.querySelectorAll('.toast').forEach(t => t.remove());
 
         const toast = document.createElement('div');
         toast.className = 'toast';
         toast.innerHTML = `
             <div class="toast-icon">ℹ️</div>
             <div class="toast-content">
-                <h4>Notification</h4>
-                <p>${message}</p>
+                <h4 style="margin: 0 0 0.25rem 0; font-size: 0.9rem; font-weight: 600;">Notification</h4>
+                <p style="margin: 0; font-size: 0.85rem; line-height: 1.4;">${message}</p>
             </div>
         `;
 
@@ -116,35 +160,44 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: rgba(30, 41, 59, 0.95);
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            z-index: 9999;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            align-items: flex-start;
+            gap: 0.75rem;
+            z-index: 99999;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             transform: translateX(400px);
             opacity: 0;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             color: white;
+            min-width: 280px;
+            max-width: 350px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            pointer-events: none;
         `;
 
         document.body.appendChild(toast);
 
-        setTimeout(() => {
+        // Animate in
+        requestAnimationFrame(() => {
             toast.style.transform = 'translateX(0)';
             toast.style.opacity = '1';
-        }, 100);
+        });
 
+        // Remove after delay
         setTimeout(() => {
             toast.style.transform = 'translateX(400px)';
             toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 400);
+            setTimeout(() => {
+                if (toast.parentNode) toast.remove();
+            }, 400);
         }, 3000);
     }
 
-    console.log('Sinyoro App Loaded Successfully! 🚀');
+    console.log('✅ Sinyoro App.js Fully Loaded');
 });
