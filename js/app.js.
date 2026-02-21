@@ -1,44 +1,53 @@
 // Sinyoro App JS
 console.log("Sinyoro App loaded");
 
-// ======= Button Greetings =======
-const welcomeAlertBtn = document.getElementById('welcomeAlertBtn');
-welcomeAlertBtn.addEventListener('click', () => {
-    alert("Welcome to Sinyoro!");
-});
-
-const consoleTestBtn = document.getElementById('consoleTestBtn');
-consoleTestBtn.addEventListener('click', () => {
-    console.log("Console test successful ✅");
-});
-
-// ======= Tip of the Day =======
-const tipContent = document.getElementById('tipContent');
-const tipCategory = document.getElementById('tipCategory');
-const tipDate = document.getElementById('tipDate');
-const refreshTipBtn = document.getElementById('refreshTipBtn');
-
-const tips = [
-    { text: "Always check asset trends before trading.", category: "Trading" },
-    { text: "Start small, grow your portfolio gradually.", category: "Portfolio" },
-    { text: "Diversify your investments to reduce risk.", category: "Trading" },
-    { text: "Use alerts to stay updated on market changes.", category: "Alerts" },
-];
-
-function loadRandomTip() {
-    const tip = tips[Math.floor(Math.random() * tips.length)];
-    tipContent.textContent = tip.text;
-    tipCategory.textContent = tip.category;
-    tipDate.textContent = new Date().toLocaleDateString();
-}
-
-refreshTipBtn.addEventListener('click', loadRandomTip);
-
-// Load a tip on page load
-loadRandomTip();
-
-// ======= Save Display Name
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // ======= Button Greetings (if these buttons exist) =======
+    const welcomeAlertBtn = document.getElementById('welcomeAlertBtn');
+    if (welcomeAlertBtn) {
+        welcomeAlertBtn.addEventListener('click', () => {
+            alert("Welcome to Sinyoro!");
+        });
+    }
+
+    const consoleTestBtn = document.getElementById('consoleTestBtn');
+    if (consoleTestBtn) {
+        consoleTestBtn.addEventListener('click', () => {
+            console.log("Console test successful ✅");
+        });
+    }
+
+    // ======= Tip of the Day (if these elements exist) =======
+    const tipContent = document.getElementById('tipContent');
+    const tipCategory = document.getElementById('tipCategory');
+    const tipDate = document.getElementById('tipDate');
+    const refreshTipBtn = document.getElementById('refreshTipBtn');
+
+    const tips = [
+        { text: "Always check asset trends before trading.", category: "Trading" },
+        { text: "Start small, grow your portfolio gradually.", category: "Portfolio" },
+        { text: "Diversify your investments to reduce risk.", category: "Trading" },
+        { text: "Use alerts to stay updated on market changes.", category: "Alerts" },
+    ];
+
+    function loadRandomTip() {
+        if (tipContent && tipCategory && tipDate) {
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            tipContent.textContent = tip.text;
+            tipCategory.textContent = tip.category;
+            tipDate.textContent = new Date().toLocaleDateString();
+        }
+    }
+
+    if (refreshTipBtn) {
+        refreshTipBtn.addEventListener('click', loadRandomTip);
+    }
+
+    // Load a tip on page load (if elements exist)
+    loadRandomTip();
+
+    // ======= Main App Buttons (from your HTML) =======
     
     // Sign In Button
     const signInBtn = document.getElementById('signInBtn');
@@ -86,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Toast Notification Function
+    // ======= Toast Notification Function =======
     function showToast(message) {
         const existingToast = document.querySelector('.toast');
         if (existingToast) {
