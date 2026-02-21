@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinyoro App - Modern Trading Platform</title>
+    <title>Sinyoro - Rural Community Marketplace</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,50 +14,34 @@
         <div class="nav-brand">
             <img src="assets/sinyoro_logo_glowing.svg" alt="Sinyoro Logo" class="nav-logo">
             <div class="logo">Sinyoro</div>
-            <div class="brand-name">Trading Platform</div>
+            <div class="brand-name">Community Marketplace</div>
         </div>
         <ul class="nav-menu">
-            <li><a href="#hero" class="nav-link active">Home</a></li>
-            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#home" class="nav-link active">Home</a></li>
             <li><a href="#market" class="nav-link">Market</a></li>
-            <li><a href="#trading" class="nav-link">Trading</a></li>
-            <li><a href="#tips" class="nav-link">Tips</a></li>
+            <li><a href="#myitems" class="nav-link">My Items</a></li>
+            <li><a href="#community" class="nav-link">Community</a></li>
+            <li><a href="#help" class="nav-link">Help</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="btn btn-primary" id="signInBtn">Sign In</button>
-            <button class="btn btn-secondary" id="signUpBtn">Sign Up</button>
+            <button class="btn btn-primary" id="postItemBtn">+ Post Item</button>
+            <button class="btn btn-secondary" id="profileBtn">Profile</button>
         </div>
     </nav>
 
     <!-- ===================== -->
     <!-- Hero Section         -->
     <!-- ===================== -->
-    <section id="hero" class="hero-section">
+    <section id="home" class="hero-section">
         <div class="glass-card hero-card">
-            <h1>Welcome to Sinyoro</h1>
-            <p>Your modern glassmorphic trading platform with smart insights and tools.</p>
-            <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Portfolio Section     -->
-    <!-- ===================== -->
-    <section id="portfolio" class="section">
-        <h2 class="section-title">Your Portfolio</h2>
-        <div class="portfolio-grid">
-            <div class="glass-card portfolio-card">
-                <h3>Portfolio 1</h3>
-                <p>Example portfolio card with glassmorphism design.</p>
+            <h1>Trade Without Internet</h1>
+            <p>Buy, sell, and barter essential goods with your nearby community. Works completely offline.</p>
+            <div class="hero-stats">
+                <span>📍 Local Only</span>
+                <span>🔒 Secure</span>
+                <span>🌾 Essential Goods</span>
             </div>
-            <div class="glass-card portfolio-card">
-                <h3>Portfolio 2</h3>
-                <p>Example portfolio card with glassmorphism design.</p>
-            </div>
-            <div class="glass-card portfolio-card">
-                <h3>Portfolio 3</h3>
-                <p>Example portfolio card with glassmorphism design.</p>
-            </div>
+            <button class="btn btn-primary" id="browseMarketBtn">Browse Market</button>
         </div>
     </section>
 
@@ -65,38 +49,136 @@
     <!-- Market Section        -->
     <!-- ===================== -->
     <section id="market" class="section">
-        <div class="glass-card market-card">
-            <h2>Market Overview</h2>
-            <p>Keep track of market trends, prices, and trading opportunities.</p>
+        <h2 class="section-title">🛒 Local Market</h2>
+        <div class="filter-bar">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="food">🌾 Food</button>
+            <button class="filter-btn" data-category="livestock">🐐 Livestock</button>
+            <button class="filter-btn" data-category="tools">🛠️ Tools</button>
+            <button class="filter-btn" data-category="services">💼 Services</button>
+        </div>
+        
+        <div class="market-grid" id="marketGrid">
+            <!-- Sample Items -->
+            <div class="glass-card market-card" data-category="food">
+                <div class="item-image">🌽</div>
+                <h3>Maize - 50kg Bag</h3>
+                <p>Grade A, dried and ready. Harvested this season.</p>
+                <div class="item-details">
+                    <span class="price">💰 $25 or barter</span>
+                    <span class="distance">📍 2km away</span>
+                </div>
+                <div class="seller-info">
+                    <span>👤 Mama Sarah</span>
+                    <span>⭐ Trusted Seller</span>
+                </div>
+                <button class="btn btn-primary contact-btn">Contact Seller</button>
+            </div>
+
+            <div class="glass-card market-card" data-category="livestock">
+                <div class="item-image">🐐</div>
+                <h3>Goats - 3 Available</h3>
+                <p>Healthy, vaccinated. 2 years old.</p>
+                <div class="item-details">
+                    <span class="price">🔄 Barter for tools</span>
+                    <span class="distance">📍 5km away</span>
+                </div>
+                <div class="seller-info">
+                    <span>👤 Baba John</span>
+                    <span>⭐ Trusted Seller</span>
+                </div>
+                <button class="btn btn-primary contact-btn">Make Offer</button>
+            </div>
+
+            <div class="glass-card market-card" data-category="tools">
+                <div class="item-image">⛏️</div>
+                <h3>Farming Tools Set</h3>
+                <p>Hoe, rake, and shovel. Good condition.</p>
+                <div class="item-details">
+                    <span class="price">💰 $15</span>
+                    <span class="distance">📍 1km away</span>
+                </div>
+                <div class="seller-info">
+                    <span>👤 Peter M.</span>
+                    <span>🆕 New Seller</span>
+                </div>
+                <button class="btn btn-primary contact-btn">Contact Seller</button>
+            </div>
+
+            <div class="glass-card market-card" data-category="services">
+                <div class="item-image">🚜</div>
+                <h3>Ploughing Service</h3>
+                <p>Tractor ploughing available. Per acre pricing.</p>
+                <div class="item-details">
+                    <span class="price">💰 $10/acre</span>
+                    <span class="distance">📍 3km away</span>
+                </div>
+                <div class="seller-info">
+                    <span>👤 Tractor Co-op</span>
+                    <span>⭐ Trusted Seller</span>
+                </div>
+                <button class="btn btn-primary contact-btn">Book Service</button>
+            </div>
         </div>
     </section>
 
     <!-- ===================== -->
-    <!-- Trading Section       -->
+    <!-- My Items Section      -->
     <!-- ===================== -->
-    <section id="trading" class="section">
-        <h2 class="section-title">Start Trading</h2>
-        <div class="trading-grid">
-            <div class="glass-card trading-card">
-                <h3>Trade BTC</h3>
-                <p>Quick buy/sell interface for Bitcoin.</p>
-                <button class="btn btn-primary trade-btn">Trade Now</button>
-            </div>
-            <div class="glass-card trading-card">
-                <h3>Trade ETH</h3>
-                <p>Quick buy/sell interface for Ethereum.</p>
-                <button class="btn btn-primary trade-btn">Trade Now</button>
+    <section id="myitems" class="section">
+        <h2 class="section-title">📦 My Listings</h2>
+        <div class="glass-card empty-state">
+            <p>You haven't posted any items yet.</p>
+            <button class="btn btn-primary" id="postFirstItemBtn">Post Your First Item</button>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Community Section     -->
+    <!-- ===================== -->
+    <section id="community" class="section">
+        <h2 class="section-title">🤝 Community</h2>
+        <div class="glass-card community-card">
+            <h3>Nearby Traders</h3>
+            <p>12 active sellers in your area</p>
+            <div class="community-stats">
+                <div class="stat">
+                    <span class="stat-number">45</span>
+                    <span class="stat-label">Items Listed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">23</span>
+                    <span class="stat-label">Trades This Week</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Trusted Sellers</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ===================== -->
-    <!-- Tips Section          -->
+    <!-- Help Section          -->
     <!-- ===================== -->
-    <section id="tips" class="section">
-        <div class="glass-card tips-card">
-            <h2>Trading Tips</h2>
-            <p>Expert insights and advice to improve your trading strategy.</p>
+    <section id="help" class="section">
+        <h2 class="section-title">❓ How It Works</h2>
+        <div class="help-grid">
+            <div class="glass-card help-card">
+                <div class="step-number">1</div>
+                <h3>Browse Offline</h3>
+                <p>View all local items without internet. Data is stored on your phone.</p>
+            </div>
+            <div class="glass-card help-card">
+                <div class="step-number">2</div>
+                <h3>Connect</h3>
+                <p>Contact sellers via SMS or call. Meet in person to trade.</p>
+            </div>
+            <div class="glass-card help-card">
+                <div class="step-number">3</div>
+                <h3>Trade Safely</h3>
+                <p>Pay cash or barter. Rate your experience to build trust.</p>
+            </div>
         </div>
     </section>
 
@@ -104,8 +186,30 @@
     <!-- Footer                -->
     <!-- ===================== -->
     <footer class="footer">
+        <p>🌍 Empowering Rural Communities | 📱 Works Offline</p>
         <p>&copy; 2026 Sinyoro App. All rights reserved.</p>
     </footer>
+
+    <!-- Post Item Modal -->
+    <div id="postItemModal" class="modal">
+        <div class="glass-card modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Post New Item</h2>
+            <form id="postItemForm">
+                <input type="text" placeholder="Item Name" required>
+                <select required>
+                    <option value="">Select Category</option>
+                    <option value="food">🌾 Food</option>
+                    <option value="livestock">🐐 Livestock</option>
+                    <option value="tools">🛠️ Tools</option>
+                    <option value="services">💼 Services</option>
+                </select>
+                <textarea placeholder="Description" required></textarea>
+                <input type="text" placeholder="Price or Barter terms">
+                <button type="submit" class="btn btn-primary">Post Item</button>
+            </form>
+        </div>
+    </div>
 
     <script src="js/app.js"></script>
 </body>
