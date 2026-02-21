@@ -80,8 +80,8 @@ body {
 }
 
 .nav-logo {
-    width: 85px;
-    height: 85px;
+    width: 95px;
+    height: 95px;
     object-fit: contain;
 }
 
@@ -91,7 +91,7 @@ body {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: var(--accent-blue);
     line-height: 1.2;
