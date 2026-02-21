@@ -423,8 +423,8 @@ body {
 }
 
 .step-number {
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
     background: #4ade80;
     color: #0f172a;
     border-radius: 50%;
