@@ -1,11 +1,17 @@
-// Sinyoro App JS
+// app.js - Sinyoro App JS
 
-console.log("Sinyoro App loaded");
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("✅ Sinyoro App loaded");
 
-// Select the button
-const greetBtn = document.getElementById('greetBtn');
-
-// Add a click event
-greetBtn.addEventListener('click', () => {
-    alert("Welcome to Sinyoro!");
+    // Select the button (ONLY if it exists)
+    const greetBtn = document.getElementById('greetBtn');
+    
+    if (greetBtn) {
+        greetBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert("Welcome to Sinyoro!");
+        });
+    } else {
+        console.log("ℹ️ greetBtn not found - skipping greeting button setup");
+    }
 });
