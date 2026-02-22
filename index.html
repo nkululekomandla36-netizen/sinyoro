@@ -69,45 +69,53 @@
                 </div>
             </div>
 
-            <!-- NEW: Market Categories Summary Table -->
-            <div class="hero-table-container">
-                <table class="hero-summary-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Category</th>
-                            <th scope="col">Items</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>🌾 <strong>Food</strong></td>
-                            <td>Maize, Beans, Vegetables, Rice</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>🐐 <strong>Livestock</strong></td>
-                            <td>Goats, Chickens, Dairy Cow</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>🛠️ <strong>Tools</strong></td>
-                            <td>Farming Tools, Wheelbarrow, Water Pump</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>💼 <strong>Services</strong></td>
-                            <td>Ploughing, Transport, Repair, Classes</td>
-                            <td>4</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2"><strong>TOTAL</strong></td>
-                            <td><strong>14 items</strong></td>
-                        </tr>
-                    </tfoot>
-                </table>
+            <!-- NEW: Organized Categories Summary Grid -->
+            <div class="hero-categories-section">
+                <h2 class="hero-categories-title">Available Categories</h2>
+                <div class="hero-categories-grid">
+                    <!-- Food -->
+                    <div class="hero-category-card">
+                        <div class="hero-cat-icon">🌾</div>
+                        <div class="hero-cat-name">Food</div>
+                        <div class="hero-cat-items">Maize, Beans, Vegetables, Rice</div>
+                        <div class="hero-cat-count">4 items</div>
+                    </div>
+                    
+                    <!-- Livestock -->
+                    <div class="hero-category-card">
+                        <div class="hero-cat-icon">🐐</div>
+                        <div class="hero-cat-name">Livestock</div>
+                        <div class="hero-cat-items">Goats, Chickens, Dairy Cow</div>
+                        <div class="hero-cat-count">3 items</div>
+                    </div>
+                    
+                    <!-- Tools -->
+                    <div class="hero-category-card">
+                        <div class="hero-cat-icon">🛠️</div>
+                        <div class="hero-cat-name">Tools</div>
+                        <div class="hero-cat-items">Farming Tools, Wheelbarrow, Water Pump</div>
+                        <div class="hero-cat-count">3 items</div>
+                    </div>
+                    
+                    <!-- Services -->
+                    <div class="hero-category-card">
+                        <div class="hero-cat-icon">💼</div>
+                        <div class="hero-cat-name">Services</div>
+                        <div class="hero-cat-items">Ploughing, Transport, Repair, Classes</div>
+                        <div class="hero-cat-count">4 items</div>
+                    </div>
+                    
+                    <!-- Herbs - NEW -->
+                    <div class="hero-category-card">
+                        <div class="hero-cat-icon">🌿</div>
+                        <div class="hero-cat-name">Herbs</div>
+                        <div class="hero-cat-items">Moringa, Neem, Aloe Vera, Ginger</div>
+                        <div class="hero-cat-count">4 items</div>
+                    </div>
+                </div>
+                <div class="hero-total-items">
+                    <strong>Total: 18 items available</strong>
+                </div>
             </div>
 
             <div class="hero-actions">
@@ -153,10 +161,17 @@
                 <span class="filter-icon">💼</span>
                 <span class="filter-text">Services</span>
             </button>
+            <!-- NEW: Herbs Filter Button -->
+            <button class="filter-btn" data-category="herbs" aria-pressed="false" type="button">
+                <span class="filter-icon">🌿</span>
+                <span class="filter-text">Herbs</span>
+            </button>
         </div>
         
         <div class="market-grid" id="marketGrid" role="list">
-            <!-- Item 1: Food -->
+            <!-- ===================== FOOD ITEMS ===================== -->
+            
+            <!-- Item 1: Maize -->
             <article class="glass-card market-card" data-category="food" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌽</div>
@@ -164,8 +179,7 @@
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Maize - 50kg Bag</h3>
-                    <p class="item-description">Grade A, dried and ready. Harvested this season.</p>
-                    
+                    <p class="item-description">Grade A, dried and ready. Harvested this season. Perfect for grinding.</p>
                     <div class="item-meta">
                         <div class="meta-row">
                             <span class="price-tag">
@@ -196,7 +210,126 @@
                 </div>
             </article>
 
-            <!-- Item 2: Livestock -->
+            <!-- Item 2: Beans -->
+            <article class="glass-card market-card" data-category="food" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🫘</div>
+                    <span class="category-tag">Food</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Beans - 20kg Sack</h3>
+                    <p class="item-description">Red kidney beans, organically grown. Clean and ready to cook.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$18</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">1km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Grace N.</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="beans" data-seller="grace-n" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 3: Vegetables -->
+            <article class="glass-card market-card" data-category="food" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🥬</div>
+                    <span class="category-tag">Food</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Fresh Vegetables Bundle</h3>
+                    <p class="item-description">Spinach, kale, tomatoes, onions. Picked fresh this morning.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$5/bundle</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">500m away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Auntie Rose</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="vegetables" data-seller="auntie-rose" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 4: Rice -->
+            <article class="glass-card market-card" data-category="food" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🍚</div>
+                    <span class="category-tag">Food</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Rice - 25kg Bag</h3>
+                    <p class="item-description">Long grain white rice. Imported quality, affordable price.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$30</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">4km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Shopkeeper Tom</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="rice" data-seller="shopkeeper-tom" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- ===================== LIVESTOCK ITEMS ===================== -->
+
+            <!-- Item 5: Goats -->
             <article class="glass-card market-card" data-category="livestock" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐐</div>
@@ -205,7 +338,6 @@
                 <div class="card-body">
                     <h3 class="item-title">Goats - 3 Available</h3>
                     <p class="item-description">Healthy, vaccinated. 2 years old. Good for breeding or meat.</p>
-                    
                     <div class="item-meta">
                         <div class="meta-row">
                             <span class="price-tag barter">
@@ -236,7 +368,87 @@
                 </div>
             </article>
 
-            <!-- Item 3: Tools -->
+            <!-- Item 6: Chickens -->
+            <article class="glass-card market-card" data-category="livestock" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🐔</div>
+                    <span class="category-tag">Livestock</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Chickens - 12 Layers</h3>
+                    <p class="item-description">Mature laying hens. Producing 10+ eggs daily. Healthy stock.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$8 each</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">3km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Mary K.</span>
+                            </div>
+                            <span class="trust-badge new">
+                                <span class="badge-icon">🆕</span>
+                                <span class="badge-text">New Seller</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="chickens" data-seller="mary-k" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 7: Dairy Cow -->
+            <article class="glass-card market-card" data-category="livestock" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🐄</div>
+                    <span class="category-tag">Livestock</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Dairy Cow - 1 Available</h3>
+                    <p class="item-description">Fresian cow, 5 years old. Producing 15L milk daily. Calved 3 months ago.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$400 or best offer</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">8km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Elder Mwangi</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="cow" data-seller="elder-mwangi" type="button">
+                        Make Offer
+                    </button>
+                </div>
+            </article>
+
+            <!-- ===================== TOOLS ITEMS ===================== -->
+
+            <!-- Item 8: Farming Tools -->
             <article class="glass-card market-card" data-category="tools" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">⛏️</div>
@@ -244,8 +456,7 @@
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Farming Tools Set</h3>
-                    <p class="item-description">Hoe, rake, and shovel. Good condition, barely used.</p>
-                    
+                    <p class="item-description">Hoe, rake, and shovel. Good condition, barely used. Wooden handles.</p>
                     <div class="item-meta">
                         <div class="meta-row">
                             <span class="price-tag">
@@ -276,7 +487,87 @@
                 </div>
             </article>
 
-            <!-- Item 4: Services -->
+            <!-- Item 9: Wheelbarrow -->
+            <article class="glass-card market-card" data-category="tools" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🛒</div>
+                    <span class="category-tag">Tools</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Heavy Duty Wheelbarrow</h3>
+                    <p class="item-description">Metal tray, pneumatic tire. Perfect for construction or farm work.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$35</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">6km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Builder Sam</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="wheelbarrow" data-seller="builder-sam" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 10: Water Pump -->
+            <article class="glass-card market-card" data-category="tools" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🔧</div>
+                    <span class="category-tag">Tools</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Manual Water Pump</h3>
+                    <p class="item-description">Hand pump for well or borehole. Cast iron, very durable. Includes fittings.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag barter">
+                                <span class="meta-icon">🔄</span>
+                                <span class="price-amount">Barter for livestock</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">4km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Mechanic Joe</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="water-pump" data-seller="mechanic-joe" type="button">
+                        Make Offer
+                    </button>
+                </div>
+            </article>
+
+            <!-- ===================== SERVICES ITEMS ===================== -->
+
+            <!-- Item 11: Ploughing -->
             <article class="glass-card market-card" data-category="services" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🚜</div>
@@ -284,8 +575,7 @@
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Ploughing Service</h3>
-                    <p class="item-description">Tractor ploughing available. Per acre pricing. Reliable and fast.</p>
-                    
+                    <p class="item-description">Tractor ploughing available. Per acre pricing. Reliable and fast. Book early!</p>
                     <div class="item-meta">
                         <div class="meta-row">
                             <span class="price-tag">
@@ -312,6 +602,281 @@
                 <div class="card-footer">
                     <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button">
                         Book Service
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 12: Transport -->
+            <article class="glass-card market-card" data-category="services" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🛻</div>
+                    <span class="category-tag">Services</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Pickup Truck Transport</h3>
+                    <p class="item-description">Move goods to market. 1-ton capacity. Available weekends. Call to book.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$20/trip</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">2km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Driver Charles</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="transport" data-seller="driver-charles" type="button">
+                        Book Transport
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 13: Repair -->
+            <article class="glass-card market-card" data-category="services" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🔨</div>
+                    <span class="category-tag">Services</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Phone & Radio Repair</h3>
+                    <p class="item-description">Fix broken phones, solar radios, small electronics. Fair prices. Guaranteed work.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$5-20 (depends)</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">5km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Tech Wanjiku</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="repair" data-seller="tech-wanjiku" type="button">
+                        Get Quote
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 14: Classes -->
+            <article class="glass-card market-card" data-category="services" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">📚</div>
+                    <span class="category-tag">Services</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Adult Literacy Classes</h3>
+                    <p class="item-description">Learn to read, write, and do basic math. Evening classes. All ages welcome.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag barter">
+                                <span class="meta-icon">🔄</span>
+                                <span class="price-amount">Barter (food/tools)</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">1km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Teacher Amina</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="classes" data-seller="teacher-amina" type="button">
+                        Enroll Now
+                    </button>
+                </div>
+            </article>
+
+            <!-- ===================== HERBS ITEMS (NEW) ===================== -->
+
+            <!-- Item 15: Moringa -->
+            <article class="glass-card market-card" data-category="herbs" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🌿</div>
+                    <span class="category-tag">Herbs</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Moringa Leaves - 1kg</h3>
+                    <p class="item-description">Dried organic moringa. High nutritional value. Great for tea or cooking.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$5</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">1km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Herbalist Jane</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="moringa" data-seller="herbalist-jane" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 16: Neem -->
+            <article class="glass-card market-card" data-category="herbs" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🍃</div>
+                    <span class="category-tag">Herbs</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Neem Leaves & Seeds</h3>
+                    <p class="item-description">Natural pesticide and medicinal. Freshly harvested. 500g pack.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$3</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">3km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Mama Fatima</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="neem" data-seller="mama-fatima" type="button">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 17: Aloe Vera -->
+            <article class="glass-card market-card" data-category="herbs" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🌵</div>
+                    <span class="category-tag">Herbs</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Aloe Vera Plants</h3>
+                    <p class="item-description">Mature plants for skin care and medicine. 3 large leaves per plant.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag barter">
+                                <span class="meta-icon">🔄</span>
+                                <span class="price-amount">Barter for vegetables</span>
+                            </span>
+                            <span class="distance-tag nearby">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">800m away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Sister Mary</span>
+                            </div>
+                            <span class="trust-badge new">
+                                <span class="badge-icon">🆕</span>
+                                <span class="badge-text">New Seller</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="aloe" data-seller="sister-mary" type="button">
+                        Make Offer
+                    </button>
+                </div>
+            </article>
+
+            <!-- Item 18: Ginger -->
+            <article class="glass-card market-card" data-category="herbs" role="listitem">
+                <div class="card-header">
+                    <div class="item-image" aria-hidden="true">🫚</div>
+                    <span class="category-tag">Herbs</span>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">Fresh Ginger - 5kg</h3>
+                    <p class="item-description">Organic ginger rhizomes. Perfect for cooking and herbal remedies.</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span class="price-amount">$12</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span class="distance-value">4km away</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Farmer Kofi</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="ginger" data-seller="farmer-kofi" type="button">
+                        Contact Seller
                     </button>
                 </div>
             </article>
@@ -362,7 +927,7 @@
                 <div class="community-stats">
                     <div class="stat-item">
                         <span class="stat-icon">📦</span>
-                        <span class="stat-number" id="itemsCount">45</span>
+                        <span class="stat-number" id="itemsCount">18</span>
                         <span class="stat-label">Items Listed</span>
                     </div>
                     <div class="stat-item">
@@ -519,6 +1084,7 @@
                         <option value="livestock">🐐 Livestock</option>
                         <option value="tools">🛠️ Tools & Equipment</option>
                         <option value="services">💼 Services</option>
+                        <option value="herbs">🌿 Herbs & Medicine</option>
                         <option value="other">📦 Other</option>
                     </select>
                 </div>
