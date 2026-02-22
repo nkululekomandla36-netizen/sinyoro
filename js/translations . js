@@ -1,0 +1,827 @@
+/**
+ * SINYORO TRANSLATIONS SYSTEM
+ * Handles multilingual support for English, Kiswahili, isiZulu, ChiShona, and Afrikaans
+ */
+
+const SinyoroTranslations = (function() {
+    'use strict';
+
+    // Translation data for all supported languages
+    const translations = {
+        en: {
+            // Navbar
+            brandName: "Community Marketplace",
+            navHome: "Home",
+            navMarket: "Market",
+            navMyItems: "My Items",
+            navCommunity: "Community",
+            navHelp: "Help",
+            postItem: "Post Item",
+            profile: "Profile",
+
+            // Hero Section
+            heroTitle: "Trade Without Internet",
+            heroDescription: "Buy, sell, and barter essential goods with your nearby community. Works completely offline.",
+            featureLocal: "Local Only",
+            featureSecure: "Secure",
+            featureEssential: "Essential Goods",
+            categoriesTitle: "Available Categories",
+            catFood: "Food",
+            catLivestock: "Livestock",
+            catTools: "Tools",
+            catServices: "Services",
+            catHerbs: "Herbs",
+            totalItems: "Total: 18 items available",
+            browseMarket: "Browse Market",
+            howItWorks: "How It Works",
+            checkingConnection: "Checking connection...",
+            offlineStatus: "Offline Mode - Working Locally",
+            onlineStatus: "Online - Connected",
+
+            // Market Section
+            marketTitle: "🛒 Local Market",
+            marketSubtitle: "Essential goods from your community",
+            filterAll: "All Items",
+            contactSeller: "Contact Seller",
+            makeOffer: "Make Offer",
+            bookService: "Book Service",
+            getQuote: "Get Quote",
+            enrollNow: "Enroll Now",
+            trusted: "Trusted",
+            newSeller: "New Seller",
+
+            // My Items Section
+            myItemsTitle: "📦 My Listings",
+            myItemsSubtitle: "Manage your items and services",
+            noItemsTitle: "No items yet",
+            noItemsDescription: "Start selling or bartering by posting your first item!",
+            postFirstItem: "Post Your First Item",
+            active: "Active",
+            sold: "Sold",
+            pending: "Pending",
+
+            // Community Section
+            communityTitle: "👥 Community",
+            communitySubtitle: "Connect with nearby traders",
+            nearbyTraders: "Nearby Traders",
+            communityStats: "Community Stats",
+            statActive: "Active",
+            statSuccess: "Success",
+            statMembers: "Members",
+
+            // Help Section
+            helpTitle: "❓ How It Works",
+            helpSubtitle: "Learn to use Sinyoro in 3 simple steps",
+            step1Title: "Browse the Market",
+            step1Desc: "Explore items available in your local area. Filter by category to find what you need.",
+            step2Title: "Connect & Trade",
+            step2Desc: "Contact sellers directly. Negotiate prices or arrange barter exchanges face-to-face.",
+            step3Title: "Post Your Items",
+            step3Desc: "List your own goods or services. Set prices in cash or barter terms.",
+            featureOffline: "✓ Works without internet",
+            featureLocalOnly: "✓ Local community focus",
+            featureSecureTrade: "✓ Secure face-to-face trading",
+            featureFree: "✓ Free to use",
+            readyToStart: "Ready to Start Trading?",
+            joinCommunity: "Join your local community marketplace today",
+            getStarted: "Get Started Now",
+
+            // Post Item Modal
+            modalPostItem: "Post New Item",
+            labelItemName: "Item Name",
+            placeholderItemName: "e.g., Fresh Maize, Goat, Ploughing Service",
+            labelCategory: "Category",
+            selectCategory: "Select category",
+            optionFood: "Food",
+            optionLivestock: "Livestock",
+            optionTools: "Tools",
+            optionServices: "Services",
+            optionHerbs: "Herbs",
+            labelPrice: "Price or Exchange Terms",
+            placeholderPrice: "e.g., $20, 2 chickens, or negotiable",
+            labelDescription: "Description",
+            placeholderDescription: "Describe your item or service...",
+            labelLocation: "Your Location/Village",
+            placeholderLocation: "e.g., Sinyoro Village, near the clinic",
+            labelContact: "Contact Method",
+            placeholderContact: "Phone number or meeting point",
+            noticeOffline: "💡 This will be saved locally and shared when you connect with nearby users.",
+            btnCancel: "Cancel",
+            btnSavePost: "Save & Post",
+
+            // Toast Messages
+            toastItemPosted: "Item posted successfully!",
+            toastLanguageChanged: "Language changed to English",
+            toastComingSoon: "Coming soon!",
+            toastOfflineMode: "You are in offline mode",
+
+            // Footer
+            footerTagline: "Empowering rural trade through technology",
+            footerOffline: "Works Offline",
+            footerSecure: "Secure Trading",
+            footerCommunity: "Community Driven",
+            footerCopyright: "© 2026 Sinyoro. Built for rural communities."
+        },
+
+        sw: {
+            // Navbar - Kiswahili
+            brandName: "Soko la Jamii",
+            navHome: "Nyumbani",
+            navMarket: "Soko",
+            navMyItems: "Vitu Vyangu",
+            navCommunity: "Jamii",
+            navHelp: "Msaada",
+            postItem: "Weka Tangazo",
+            profile: "Wasifu",
+
+            // Hero Section
+            heroTitle: "Biashara Bila Mtandao",
+            heroDescription: "Nunua, uza, ubadilishe bidhaa muhimu na jamii yako ya karibu. Inafanya kazi bila mtandao.",
+            featureLocal: "Ya Karibu Tu",
+            featureSecure: "Salama",
+            featureEssential: "Bidhaa Muhimu",
+            categoriesTitle: "Kategoria Zinazopatikana",
+            catFood: "Chakula",
+            catLivestock: "Mifugo",
+            catTools: "Vifaa",
+            catServices: "Huduma",
+            catHerbs: "Mimea ya Dawa",
+            totalItems: "Jumla: Vitu 18 vinapatikana",
+            browseMarket: "Tazama Soko",
+            howItWorks: "Jinsi Inavyofanya Kazi",
+            checkingConnection: "Inakagua muunganiko...",
+            offlineStatus: "Hali ya Nje ya Mtandao - Inafanya Kazi Kikanda",
+            onlineStatus: "Mtandaoni - Imeunganishwa",
+
+            // Market Section
+            marketTitle: "🛒 Soko la Kijiji",
+            marketSubtitle: "Bidhaa muhimu kutoka jamii yako",
+            filterAll: "Vitu Vyote",
+            contactSeller: "Wasiliana na Mchuuzi",
+            makeOffer: "Toa Ofa",
+            bookService: "Huduma ya Booking",
+            getQuote: "Pata Bei",
+            enrollNow: "Jiandikishe Sasa",
+            trusted: "Anaaminika",
+            newSeller: "Mchuuzi Mpya",
+
+            // My Items Section
+            myItemsTitle: "📦 Tangazo Langu",
+            myItemsSubtitle: "Simamia vitu vyako na huduma zako",
+            noItemsTitle: "Hakuna vitu bado",
+            noItemsDescription: "Anza kuuza au kubadilisha kwa kuweka tangazo lako la kwanza!",
+            postFirstItem: "Weka Tangazo Lako la Kwanza",
+            active: "Hai",
+            sold: "Imeuzwa",
+            pending: "Inasubiri",
+
+            // Community Section
+            communityTitle: "👥 Jamii",
+            communitySubtitle: "Ungana na wafanyabiashara wa karibu",
+            nearbyTraders: "Wafanyabiashara wa Karibu",
+            communityStats: "Takwimu za Jamii",
+            statActive: "Hai",
+            statSuccess: "Mafanikio",
+            statMembers: "Wanachama",
+
+            // Help Section
+            helpTitle: "❓ Jinsi Inavyofanya Kazi",
+            helpSubtitle: "Jifunze kutumia Sinyoro katika hatua 3 rahisi",
+            step1Title: "Tazama Soko",
+            step1Desc: "Chunguza vitu vinavyopatikana katika eneo lako la kijiji. Chuja kwa kategoria kupata unachohitaji.",
+            step2Title: "Ungana & Biashara",
+            step2Desc: "Wasiliana na wachuuzi moja kwa moja. Kubaliana bei au panga mabadilishano ya ngozi kwa ngozi.",
+            step3Title: "Weka Vitu Vyako",
+            step3Desc: "Weka bidhaa au huduma zako mwenyewe. Weka bei katika pesa au masharti ya ubadilishaji.",
+            featureOffline: "✓ Inafanya kazi bila mtandao",
+            featureLocalOnly: "✓ Lengo la jamii ya karibu",
+            featureSecureTrade: "✓ Biashara salama ana kwa ana",
+            featureFree: "✓ Bure kutumia",
+            readyToStart: "Tayari Kuanza Biashara?",
+            joinCommunity: "Jiunge na soko la jamii yako ya kijiji leo",
+            getStarted: "Anza Sasa",
+
+            // Post Item Modal
+            modalPostItem: "Weka Tangazo Jipya",
+            labelItemName: "Jina la Kitu",
+            placeholderItemName: "mfano, Mahindi Mazuri, Mbuzi, Huduma ya Kulima",
+            labelCategory: "Kategoria",
+            selectCategory: "Chagua kategoria",
+            optionFood: "Chakula",
+            optionLivestock: "Mifugo",
+            optionTools: "Vifaa",
+            optionServices: "Huduma",
+            optionHerbs: "Mimea ya Dawa",
+            labelPrice: "Bei au Masharti ya Ubadilishaji",
+            placeholderPrice: "mfano, $20, kuku 2, au inaweza kubadilishana",
+            labelDescription: "Maelezo",
+            placeholderDescription: "Eleza kitu au huduma yako...",
+            labelLocation: "Eneo Lako/Kijiji",
+            placeholderLocation: "mfano, Kijiji cha Sinyoro, karibu na kliniki",
+            labelContact: "Njia ya Mawasiliano",
+            placeholderContact: "Namba ya simu au mahali pa kukutana",
+            noticeOffline: "💡 Hii itahifadhiwa kikanda na kushirikiwa unapoungana na watumiaji wa karibu.",
+            btnCancel: "Ghairi",
+            btnSavePost: "Hifadhi & Weka",
+
+            // Toast Messages
+            toastItemPosted: "Tangazo limewekwa kwa mafanikio!",
+            toastLanguageChanged: "Lugha imebadilishwa kuwa Kiswahili",
+            toastComingSoon: "Inakuja hivi karibuni!",
+            toastOfflineMode: "Upo katika hali ya nje ya mtandao",
+
+            // Footer
+            footerTagline: "Kuimarisha biashara vijijini kupitia teknolojia",
+            footerOffline: "Inafanya Kazi Bila Mtandao",
+            footerSecure: "Biashara Salama",
+            footerCommunity: "Kiongozi wa Jamii",
+            footerCopyright: "© 2026 Sinyoro. Ilijengwa kwa vijiji vya jamii."
+        },
+
+        zu: {
+            // Navbar - isiZulu
+            brandName: "Imakethe Yomphakathi",
+            navHome: "Ikhaya",
+            navMarket: "Imakethe",
+            navMyItems: "Izinto Zami",
+            navCommunity: "Umphakathi",
+            navHelp: "Usizo",
+            postItem: "Faka Into",
+            profile: "Iphrofayela",
+
+            // Hero Section
+            heroTitle: "Thenga Ngaphandle Kwe-Intanethi",
+            heroDescription: "Thenga, thengisa, faneleke izimpahla ezibalulekile nomphakathi wakho osondelene. Isebenza ngaphandle kwe-inthanethi.",
+            featureLocal: "Endaweni Kuphela",
+            featureSecure: "Iphephile",
+            featureEssential: "Izimpahla Ezibalulekile",
+            categoriesTitle: "Izigaba Ezitholakalayo",
+            catFood: "Ukudla",
+            catLivestock: "Izinkomo",
+            catTools: "Amathuluzi",
+            catServices: "Izinsiza",
+            catHerbs: "Imithi Yezifo",
+            totalItems: "Isamba: Izinto eziyi-18 ezitholakala",
+            browseMarket: "Phequlula Imakethe",
+            howItWorks: "Ukusebenza Kwayo",
+            checkingConnection: "Ihlola uxhumano...",
+            offlineStatus: "Imodi Engaxhunyiwe - Isebenza Endaweni",
+            onlineStatus: "Kuxhunyiwe - Ixhumeke",
+
+            // Market Section
+            marketTitle: "🛒 Imakethe Yendawo",
+            marketSubtitle: "Izimpahla ezibalulekile ezivela emphakathini wakho",
+            filterAll: "Zonke Izinto",
+            contactSeller: "Xhumana Nothengisi",
+            makeOffer: "Enza Isehlulelo",
+            bookService: "Bhuka Insiza",
+            getQuote: "Thola Isilinganiso",
+            enrollNow: "Bhalisa Manje",
+            trusted: "Thembekile",
+            newSeller: "Uthengisi Omusha",
+
+            // My Items Section
+            myItemsTitle: "📦 Okwami Okufakiwe",
+            myItemsSubtitle: "Phatha izinto zakho nezinsiza",
+            noItemsTitle: "Azikho izinto okwamanje",
+            noItemsDescription: "Qala ukuthengisa noma ukufaneleka ngokufaka into yakho yokuqala!",
+            postFirstItem: "Faka Into Yakho Yokuqala",
+            active: "Iyasebenza",
+            sold: "Ithengisiwe",
+            pending: "Ilindelwe",
+
+            // Community Section
+            communityTitle: "👥 Umphakathi",
+            communitySubtitle: "Xhumana nothengisi osondelene",
+            nearbyTraders: "Abathengisi Basondelene",
+            communityStats: "Izibalo Zomphakathi",
+            statActive: "Iyasebenza",
+            statSuccess: "Impumelelo",
+            statMembers: "Amalungu",
+
+            // Help Section
+            helpTitle: "❓ Ukusebenza Kwayo",
+            helpSubtitle: "Funda ukusebenzisa i-Sinyoro ngezinyathelo ezintathu ezilula",
+            step1Title: "Phequlula Imakethe",
+            step1Desc: "Hlola izinto ezitholakala endaweni yakho yendawo. Hlunga ngesigaba ukuthola okudingekayo.",
+            step2Title: "Xhumana & Thenge",
+            step2Desc: "Xhumana nothengisi ngqo. Cebelana ngamanani noma hlela ukufaniselana ubuso nobuso.",
+            step3Title: "Faka Izinto Zakho",
+            step3Desc: "Faka impahla yakho noma izinsiza. Beka amanani emali noma imigomo yokufaniselana.",
+            featureOffline: "✓ Isebenza ngaphandle kwe-inthanethi",
+            featureLocalOnly: "✓ Ukugxila emphakathini wendawo",
+            featureSecureTrade: "✓ Ukuthengiselana okuphephile ubuso nobuso",
+            featureFree: "✓ Mahhala ukusebenzisa",
+            readyToStart: "Ukulungele Ukuqala Ukuthengisa?",
+            joinCommunity: "Joyina imakethe yomphakathi wakho wendawo namuhla",
+            getStarted: "Qala Manje",
+
+            // Post Item Modal
+            modalPostItem: "Faka Into Entsha",
+            labelItemName: "Igama Lento",
+            placeholderItemName: "isib., Amabele Amahle, Imbuzi, Insiza Yokulima",
+            labelCategory: "Isigaba",
+            selectCategory: "Khetha isigaba",
+            optionFood: "Ukudla",
+            optionLivestock: "Izinkomo",
+            optionTools: "Amathuluzi",
+            optionServices: "Izinsiza",
+            optionHerbs: "Imithi Yezifo",
+            labelPrice: "Intengo noma Imigomo Yokufaniselana",
+            placeholderPrice: "isib., $20, amakhuku angama-2, noma ingxoxwe",
+            labelDescription: "Incazelo",
+            placeholderDescription: "Chaza into noma insiza yakho...",
+            labelLocation: "Indawo Yakho/Isigodi",
+            placeholderLocation: "isib., Isigodi seSinyoro, eduze nesibhedlela",
+            labelContact: "Indlela Yoxhumano",
+            placeholderContact: "Inombolo yocingo noma indawo yokuhlangana",
+            noticeOffline: "💡 Lokhu kuzogcinwa kule ndawo futhi kabelwe uma uxhumana nabasebenzisi basondelene.",
+            btnCancel: "Khansela",
+            btnSavePost: "Gcina & Faka",
+
+            // Toast Messages
+            toastItemPosted: "Into ifakiwe ngempumelelo!",
+            toastLanguageChanged: "Ulimi lushintshelwe isiZulu",
+            toastComingSoon: "Iyeza kungekudala!",
+            toastOfflineMode: "Ukwimodi engaxhunyiwe",
+
+            // Footer
+            footerTagline: "Ukuqinisa ukuthengiselana kwezindawo ngobuchwepheshe",
+            footerOffline: "Isebenza Ngaphandle Kwe-Intanethi",
+            footerSecure: "Ukuthengiselana Okuphephile",
+            footerCommunity: "Umqondisi Womphakathi",
+            footerCopyright: "© 2026 Sinyoro. Yakhelwe imiphakathi yezindawo."
+        },
+
+        sn: {
+            // Navbar - ChiShona
+            brandName: "Musika weVanhu",
+            navHome: "Kumba",
+            navMarket: "Musika",
+            navMyItems: "Zvinhu Zvangu",
+            navCommunity: "Vanhu",
+            navHelp: "Rubatsiro",
+            postItem: "Isa Zvinhu",
+            profile: "Profile",
+
+            // Hero Section
+            heroTitle: "Itengesane Pasina Internet",
+            heroDescription: "Tenga, tengesa, uchange zvinhu zvinokosha nevamwe vemunharaunda yako. Inoshanda pasina internet.",
+            featureLocal: "Yemunharaunda Chete",
+            featureSecure: "Yakachengeteka",
+            featureEssential: "Zvinhu Zvinokosha",
+            categoriesTitle: "Zvakagadzirwa Zvinowanikwa",
+            catFood: "Zvokudya",
+            catLivestock: "Mhuka",
+            catTools: "Zvishandiso",
+            catServices: "Mabasa",
+            catHerbs: "Mititi",
+            totalItems: "Zvese: Zvinhu 18 zvinowanikwa",
+            browseMarket: "Tarisa Musika",
+            howItWorks: "Maitiro EKushandisa",
+            checkingConnection: "Kutarisa kuunganidzwa...",
+            offlineStatus: "Pasina Internet - Inoshanda Mumusha",
+            onlineStatus: "Pane Internet - Yakasungwa",
+
+            // Market Section
+            marketTitle: "🛒 Musika weMunharaunda",
+            marketSubtitle: "Zvinhu zvinokosha zvemunharaunda yako",
+            filterAll: "Zvinhu Zvose",
+            contactSeller: "Taura neMutengesi",
+            makeOffer: "Ita Kumbirwa",
+            bookService: "Booka Basa",
+            getQuote: "Wana Mutengo",
+            enrollNow: "Nyoresa Zvino",
+            trusted: "Anogamuchirwa",
+            newSeller: "Mutengesi Mutsva",
+
+            // My Items Section
+            myItemsTitle: "📦 Zvangu Zvakaiswa",
+            myItemsSubtitle: "Tonga zvinhu zvako nemabasa ako",
+            noItemsTitle: "Pasina zvinhu zvino",
+            noItemsDescription: "Tanga kutengesa kana kuchinjanisa nekuisa chako chekutanga!",
+            postFirstItem: "Isa Chako Chekutanga",
+            active: "Chiri Kuramba",
+            sold: "Chatengeswa",
+            pending: "Chakamirira",
+
+            // Community Section
+            communityTitle: "👥 Vanhu",
+            communitySubtitle: "Batanidza navatengesi vavemunharaunda",
+            nearbyTraders: "Vatengesi Vavemunharaunda",
+            communityStats: "Zvakareva neVanhu",
+            statActive: "Chiri Kuramba",
+            statSuccess: "Mubudiriro",
+            statMembers: "Vakwavanhu",
+
+            // Help Section
+            helpTitle: "❓ Maitiro EKushandisa",
+            helpSubtitle: "Dzidza kushandisa Sinyoro mumatanho matatu akasimba",
+            step1Title: "Tarisa Musika",
+            step1Desc: "Ona zvinhu zvinowanikwa munharaunda yako. Sarudza nechikamu kuwana zvaunoda.",
+            step2Title: "Batanidza & Itengesane",
+            step2Desc: "Taura nemutengesi zvakasimba. Gunyanisira mitengo kana kurongana kuchinjanisana zviso neziso.",
+            step3Title: "Isa Zvinhu Zvako",
+            step3Desc: "Isa zvinhu zvako kana mabasa ako. Gara mitengo memari kana mamiriro ekuchinjanisana.",
+            featureOffline: "✓ Inoshanda pasina internet",
+            featureLocalOnly: "✓ Yemunharaunda chete",
+            featureSecureTrade: "✓ Kutengesana kwakachengeteka zviso neziso",
+            featureFree: "✓ Mahara kushandisa",
+            readyToStart: "Wagadzirira Kutanga Kutengesa?",
+            joinCommunity: "Pinda musika wevanhu vemunharaunda yako nhasi",
+            getStarted: "Tanga Zvino",
+
+            // Post Item Modal
+            modalPostItem: "Isa Chinhhu Chitsva",
+            labelItemName: "Zita rechinhhu",
+            placeholderItemName: "sokuti, Mapfunde Akasimba, Mbudzi, Basa reKurima",
+            labelCategory: "Chikamu",
+            selectCategory: "Sarudza chikamu",
+            optionFood: "Zvokudya",
+            optionLivestock: "Mhuka",
+            optionTools: "Zvishandiso",
+            optionServices: "Mabasa",
+            optionHerbs: "Mititi",
+            labelPrice: "Mutengo kana Mamiriro Ekuchinjanisana",
+            placeholderPrice: "sokuti, $20, huku 2, kana ingagadzirsiswa",
+            labelDescription: "Tsanangudzo",
+            placeholderDescription: "Tsanangudza chinhhu chako kana basa rako...",
+            labelLocation: "Nzvimbo Yako/Musha",
+            placeholderLocation: "sokuti, Musha weSinyoro, pedyo nechirongo",
+            labelContact: "Nzira Yekutaurirana",
+            placeholderContact: "Nhamba yefoni kana nzvimbo yekusangana",
+            noticeOffline: "💡 Izvi zvichachengetwa mumusha uye zvichagovana paunobatanidzana navashandisi vavemunharaunda.",
+            btnCancel: "Kanzura",
+            btnSavePost: "Chengeta & Isa",
+
+            // Toast Messages
+            toastItemPosted: "Chinhhu chaiswa zvakanaka!",
+            toastLanguageChanged: "Mutauro wachinjwa kuChiShona",
+            toastComingSoon: "Chichiuya kare!",
+            toastOfflineMode: "Uri mumusika pasina internet",
+
+            // Footer
+            footerTagline: "Kusimbisa kutengesana kwevamwe nokushandisa tekinoroji",
+            footerOffline: "Inoshanda Pasina Internet",
+            footerSecure: "Kutengesana Kwakachengeteka",
+            footerCommunity: "Yakamirira neVanhu",
+            footerCopyright: "© 2026 Sinyoro. Yakavakirwa vamwe vemamisha."
+        },
+
+        af: {
+            // Navbar - Afrikaans
+            brandName: "Gemeenskap Markplein",
+            navHome: "Tuis",
+            navMarket: "Mark",
+            navMyItems: "My Items",
+            navCommunity: "Gemeenskap",
+            navHelp: "Hulp",
+            postItem: "Plaas Item",
+            profile: "Profiel",
+
+            // Hero Section
+            heroTitle: "Handel Sonder Internet",
+            heroDescription: "Koop, verkoop en ruil noodsaaklike goedere met jou nabygeleë gemeenskap. Werk heeltemal vanlyn.",
+            featureLocal: "Slegs Plaaslik",
+            featureSecure: "Veilig",
+            featureEssential: "Noodsaaklike Goedere",
+            categoriesTitle: "Beskikbare Kategorieë",
+            catFood: "Kos",
+            catLivestock: "Vee",
+            catTools: "Gereedskap",
+            catServices: "Dienste",
+            catHerbs: "Kruie",
+            totalItems: "Totaal: 18 items beskikbaar",
+            browseMarket: "Blaai Mark",
+            howItWorks: "Hoe Dit Werk",
+            checkingConnection: "Kontroleer verbinding...",
+            offlineStatus: "Vanlyn Modus - Werk Plaaslik",
+            onlineStatus: "Aanlyn - Gekoppel",
+
+            // Market Section
+            marketTitle: "🛒 Plaaslike Mark",
+            marketSubtitle: "Noodsaaklike goedere van jou gemeenskap",
+            filterAll: "Alle Items",
+            contactSeller: "Kontak Verkoper",
+            makeOffer: "Maak 'n Aanbod",
+            bookService: "Boek Diens",
+            getQuote: "Kry Kwotasie",
+            enrollNow: "Skryf Nou In",
+            trusted: "Betroubaar",
+            newSeller: "Nuwe Verkoper",
+
+            // My Items Section
+            myItemsTitle: "📦 My Advertensies",
+            myItemsSubtitle: "Bestuur jou items en dienste",
+            noItemsTitle: "Nog geen items",
+            noItemsDescription: "Begin verkoop of ruil deur jou eerste item te plaas!",
+            postFirstItem: "Plaas Jou Eerste Item",
+            active: "Aktief",
+            sold: "Verkoop",
+            pending: "Hangend",
+
+            // Community Section
+            communityTitle: "👥 Gemeenskap",
+            communitySubtitle: "Koppel met nabygeleë handelaars",
+            nearbyTraders: "Nabygeleë Handelaars",
+            communityStats: "Gemeenskap Statistieke",
+            statActive: "Aktief",
+            statSuccess: "Sukses",
+            statMembers: "Lede",
+
+            // Help Section
+            helpTitle: "❓ Hoe Dit Werk",
+            helpSubtitle: "Leer om Sinyoro te gebruik in 3 eenvoudige stappe",
+            step1Title: "Blaai die Mark",
+            step1Desc: "Verken items beskikbaar in jou plaaslike area. Filter per kategorie om te vind wat jy nodig het.",
+            step2Title: "Koppel & Handel",
+            step2Desc: "Kontak verkopers direk. Onderhandel pryse of reël ruiltransaksies gesig-tot-gesig.",
+            step3Title: "Plaas Jou Items",
+            step3Desc: "Lys jou eie goedere of dienste. Stel pryse in kontant of ruilterme.",
+            featureOffline: "✓ Werk sonder internet",
+            featureLocalOnly: "✓ Plaaslike gemeenskap fokus",
+            featureSecureTrade: "✓ Veilige gesig-tot-gesig handel",
+            featureFree: "✓ Gratis om te gebruik",
+            readyToStart: "Gereed om te Begin Handel?",
+            joinCommunity: "Sluit aan by jou plaaslike gemeenskap markplein vandag",
+            getStarted: "Begin Nou",
+
+            // Post Item Modal
+            modalPostItem: "Plaas Nuwe Item",
+            labelItemName: "Item Naam",
+            placeholderItemName: "bv., Vars Mielies, Bok, Ploegdiens",
+            labelCategory: "Kategorie",
+            selectCategory: "Kies kategorie",
+            optionFood: "Kos",
+            optionLivestock: "Vee",
+            optionTools: "Gereedskap",
+            optionServices: "Dienste",
+            optionHerbs: "Kruie",
+            labelPrice: "Prys of Ruil Terme",
+            placeholderPrice: "bv., $20, 2 hoenders, of onderhandelbaar",
+            labelDescription: "Beskrywing",
+            placeholderDescription: "Beskryf jou item of diens...",
+            labelLocation: "Jou Ligging/Dorp",
+            placeholderLocation: "bv., Sinyoro Dorp, naby die kliniek",
+            labelContact: "Kontak Metode",
+            placeholderContact: "Telefoonnommer of ontmoetingspunt",
+            noticeOffline: "💡 Dit sal plaaslik gestoor word en gedeel word wanneer jy koppel met nabygeleë gebruikers.",
+            btnCancel: "Kanselleer",
+            btnSavePost: "Stoor & Plaas",
+
+            // Toast Messages
+            toastItemPosted: "Item suksesvol geplaas!",
+            toastLanguageChanged: "Taal verander na Afrikaans",
+            toastComingSoon: "Kom binnekort!",
+            toastOfflineMode: "Jy is in vanlyn modus",
+
+            // Footer
+            footerTagline: "Bemagtiging van landelike handel deur tegnologie",
+            footerOffline: "Werk Sonder Internet",
+            footerSecure: "Veilige Handel",
+            footerCommunity: "Gemeenskap Gedrewe",
+            footerCopyright: "© 2026 Sinyoro. Gebou vir landelike gemeenskappe."
+        }
+    };
+
+    // Current language state
+    let currentLang = localStorage.getItem('sinyoro-language') || 'en';
+
+    /**
+     * Initialize the translations system
+     */
+    function init() {
+        setupEventListeners();
+        applyLanguage(currentLang);
+        updateLanguageButton(currentLang);
+    }
+
+    /**
+     * Setup all event listeners for language switching
+     */
+    function setupEventListeners() {
+        const langBtn = document.getElementById('languageBtn');
+        const langDropdown = document.getElementById('langDropdown');
+
+        if (!langBtn || !langDropdown) return;
+
+        // Toggle dropdown
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('active');
+            }
+        });
+
+        // Language option clicks
+        const langOptions = langDropdown.querySelectorAll('.lang-option');
+        langOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                if (lang && lang !== currentLang) {
+                    changeLanguage(lang);
+                }
+                langDropdown.classList.remove('active');
+            });
+        });
+    }
+
+    /**
+     * Change the active language
+     */
+    function changeLanguage(lang) {
+        if (!translations[lang]) return;
+
+        // Add animation class to body
+        document.body.classList.add('lang-changing');
+
+        // Update current language
+        currentLang = lang;
+        localStorage.setItem('sinyoro-language', lang);
+
+        // Apply translations
+        applyLanguage(lang);
+
+        // Update UI
+        updateLanguageButton(lang);
+        updateActiveOption(lang);
+
+        // Show toast notification
+        showToast(translations[lang].toastLanguageChanged);
+
+        // Remove animation class
+        setTimeout(() => {
+            document.body.classList.remove('lang-changing');
+        }, 300);
+    }
+
+    /**
+     * Apply translations to all elements with data-i18n attribute
+     */
+    function applyLanguage(lang) {
+        const texts = translations[lang];
+        if (!texts) return;
+
+        // Update all elements with data-i18n attribute
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (texts[key]) {
+                // Handle different element types
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    if (el.hasAttribute('placeholder')) {
+                        el.placeholder = texts[key];
+                    } else {
+                        el.value = texts[key];
+                    }
+                } else {
+                    el.textContent = texts[key];
+                }
+            }
+        });
+
+        // Update HTML lang attribute
+        document.documentElement.lang = lang;
+
+        // Update any dynamic content
+        updateDynamicContent(lang);
+    }
+
+    /**
+     * Update the language button display
+     */
+    function updateLanguageButton(lang) {
+        const langBtn = document.getElementById('languageBtn');
+        if (!langBtn) return;
+
+        const currentLangSpan = langBtn.querySelector('.current-lang');
+        if (currentLangSpan) {
+            const langNames = {
+                en: 'English',
+                sw: 'Kiswahili',
+                zu: 'isiZulu',
+                sn: 'ChiShona',
+                af: 'Afrikaans'
+            };
+            currentLangSpan.textContent = langNames[lang] || 'English';
+        }
+    }
+
+    /**
+     * Update active state in dropdown
+     */
+    function updateActiveOption(lang) {
+        const langDropdown = document.getElementById('langDropdown');
+        if (!langDropdown) return;
+
+        const options = langDropdown.querySelectorAll('.lang-option');
+        options.forEach(option => {
+            option.classList.remove('active');
+            if (option.getAttribute('data-lang') === lang) {
+                option.classList.add('active');
+            }
+        });
+    }
+
+    /**
+     * Update dynamic content that might change based on language
+     */
+    function updateDynamicContent(lang) {
+        // Update status text if it exists
+        const statusText = document.getElementById('statusText');
+        if (statusText) {
+            const isOffline = !navigator.onLine;
+            if (isOffline) {
+                statusText.textContent = translations[lang].offlineStatus;
+            } else {
+                statusText.textContent = translations[lang].onlineStatus;
+            }
+        }
+    }
+
+    /**
+     * Show toast notification
+     */
+    function showToast(message) {
+        // Check if toast container exists, if not create it
+        let toastContainer = document.getElementById('toastContainer');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toastContainer';
+            document.body.appendChild(toastContainer);
+        }
+
+        // Create toast element
+        const toast = document.createElement('div');
+        toast.className = 'glass-card toast';
+        toast.textContent = message;
+        toast.style.cssText = `
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        `;
+
+        // Add slide-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        toastContainer.appendChild(toast);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    /**
+     * Get current language
+     */
+    function getCurrentLanguage() {
+        return currentLang;
+    }
+
+    /**
+     * Get translation for a specific key
+     */
+    function getText(key, lang = currentLang) {
+        return translations[lang]?.[key] || translations['en']?.[key] || key;
+    }
+
+    // Public API
+    return {
+        init,
+        changeLanguage,
+        getCurrentLanguage,
+        getText,
+        translations
+    };
+})();
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => SinyoroTranslations.init());
+} else {
+    SinyoroTranslations.init();
+}
+
+// Export for global access
+window.SinyoroTranslations = SinyoroTranslations;
