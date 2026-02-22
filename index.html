@@ -19,7 +19,7 @@
             <img src="assets/sinyoro_logo_glowing.svg" alt="Sinyoro Logo" class="nav-logo" width="40" height="40">
             <div class="brand-text">
                 <div class="logo">Sinyoro</div>
-                <div class="brand-name">Community Marketplace</div>
+                <div class="brand-name" data-i18n="brandName">Community Marketplace</div>
             </div>
         </div>
         
@@ -30,19 +30,34 @@
         </button>
 
         <ul class="nav-menu" role="menubar">
-            <li role="none"><a href="#home" class="nav-link active" role="menuitem">Home</a></li>
-            <li role="none"><a href="#market" class="nav-link" role="menuitem">Market</a></li>
-            <li role="none"><a href="#myitems" class="nav-link" role="menuitem">My Items</a></li>
-            <li role="none"><a href="#community" class="nav-link" role="menuitem">Community</a></li>
-            <li role="none"><a href="#help" class="nav-link" role="menuitem">Help</a></li>
+            <li role="none"><a href="#home" class="nav-link active" role="menuitem" data-i18n="navHome">Home</a></li>
+            <li role="none"><a href="#market" class="nav-link" role="menuitem" data-i18n="navMarket">Market</a></li>
+            <li role="none"><a href="#myitems" class="nav-link" role="menuitem" data-i18n="navMyItems">My Items</a></li>
+            <li role="none"><a href="#community" class="nav-link" role="menuitem" data-i18n="navCommunity">Community</a></li>
+            <li role="none"><a href="#help" class="nav-link" role="menuitem" data-i18n="navHelp">Help</a></li>
         </ul>
         
         <div class="nav-actions">
+            <!-- NEW: Language Selector -->
+            <div class="language-selector">
+                <button class="btn btn-secondary lang-btn" id="languageBtn" type="button">
+                    <span class="lang-icon">🌐</span>
+                    <span class="current-lang">English</span>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-option active" data-lang="en">🇬🇧 English</button>
+                    <button class="lang-option" data-lang="sw">🇰🇪 Kiswahili</button>
+                    <button class="lang-option" data-lang="zu">🇿🇦 isiZulu</button>
+                    <button class="lang-option" data-lang="sn">🇿🇼 ChiShona</button>
+                    <button class="lang-option" data-lang="af">🇿🇦 Afrikaans</button>
+                </div>
+            </div>
+
             <button class="btn btn-primary" id="postItemBtn" aria-label="Post new item" type="button">
                 <span class="btn-icon">+</span>
-                <span class="btn-text">Post Item</span>
+                <span class="btn-text" data-i18n="postItem">Post Item</span>
             </button>
-            <button class="btn btn-secondary" id="profileBtn" type="button">Profile</button>
+            <button class="btn btn-secondary" id="profileBtn" type="button" data-i18n="profile">Profile</button>
         </div>
     </nav>
 
@@ -51,32 +66,32 @@
     <!-- ===================== -->
     <section id="home" class="hero-section" aria-labelledby="hero-heading">
         <div class="glass-card hero-card">
-            <h1 id="hero-heading">Trade Without Internet</h1>
-            <p class="hero-description">Buy, sell, and barter essential goods with your nearby community. Works completely offline.</p>
+            <h1 id="hero-heading" data-i18n="heroTitle">Trade Without Internet</h1>
+            <p class="hero-description" data-i18n="heroDescription">Buy, sell, and barter essential goods with your nearby community. Works completely offline.</p>
             
             <div class="hero-features">
                 <div class="feature-badge">
                     <span class="feature-icon">📍</span>
-                    <span class="feature-text">Local Only</span>
+                    <span class="feature-text" data-i18n="featureLocal">Local Only</span>
                 </div>
                 <div class="feature-badge">
                     <span class="feature-icon">🔒</span>
-                    <span class="feature-text">Secure</span>
+                    <span class="feature-text" data-i18n="featureSecure">Secure</span>
                 </div>
                 <div class="feature-badge">
                     <span class="feature-icon">🌾</span>
-                    <span class="feature-text">Essential Goods</span>
+                    <span class="feature-text" data-i18n="featureEssential">Essential Goods</span>
                 </div>
             </div>
 
             <!-- NEW: Organized Categories Summary Grid -->
             <div class="hero-categories-section">
-                <h2 class="hero-categories-title">Available Categories</h2>
+                <h2 class="hero-categories-title" data-i18n="categoriesTitle">Available Categories</h2>
                 <div class="hero-categories-grid">
                     <!-- Food -->
                     <div class="hero-category-card">
                         <div class="hero-cat-icon">🌾</div>
-                        <div class="hero-cat-name">Food</div>
+                        <div class="hero-cat-name" data-i18n="catFood">Food</div>
                         <div class="hero-cat-items">Maize, Beans, Vegetables, Rice</div>
                         <div class="hero-cat-count">4 items</div>
                     </div>
@@ -84,7 +99,7 @@
                     <!-- Livestock -->
                     <div class="hero-category-card">
                         <div class="hero-cat-icon">🐐</div>
-                        <div class="hero-cat-name">Livestock</div>
+                        <div class="hero-cat-name" data-i18n="catLivestock">Livestock</div>
                         <div class="hero-cat-items">Goats, Chickens, Dairy Cow</div>
                         <div class="hero-cat-count">3 items</div>
                     </div>
@@ -92,7 +107,7 @@
                     <!-- Tools -->
                     <div class="hero-category-card">
                         <div class="hero-cat-icon">🛠️</div>
-                        <div class="hero-cat-name">Tools</div>
+                        <div class="hero-cat-name" data-i18n="catTools">Tools</div>
                         <div class="hero-cat-items">Farming Tools, Wheelbarrow, Water Pump</div>
                         <div class="hero-cat-count">3 items</div>
                     </div>
@@ -100,7 +115,7 @@
                     <!-- Services -->
                     <div class="hero-category-card">
                         <div class="hero-cat-icon">💼</div>
-                        <div class="hero-cat-name">Services</div>
+                        <div class="hero-cat-name" data-i18n="catServices">Services</div>
                         <div class="hero-cat-items">Ploughing, Transport, Repair, Classes</div>
                         <div class="hero-cat-count">4 items</div>
                     </div>
@@ -108,28 +123,28 @@
                     <!-- Herbs - NEW -->
                     <div class="hero-category-card">
                         <div class="hero-cat-icon">🌿</div>
-                        <div class="hero-cat-name">Herbs</div>
+                        <div class="hero-cat-name" data-i18n="catHerbs">Herbs</div>
                         <div class="hero-cat-items">Moringa, Neem, Aloe Vera, Ginger</div>
                         <div class="hero-cat-count">4 items</div>
                     </div>
                 </div>
                 <div class="hero-total-items">
-                    <strong>Total: 18 items available</strong>
+                    <strong data-i18n="totalItems">Total: 18 items available</strong>
                 </div>
             </div>
 
             <div class="hero-actions">
-                <button class="btn btn-primary btn-large" id="browseMarketBtn" type="button">
+                <button class="btn btn-primary btn-large" id="browseMarketBtn" type="button" data-i18n="browseMarket">
                     Browse Market
                 </button>
-                <button class="btn btn-secondary btn-large" id="learnMoreBtn" type="button">
+                <button class="btn btn-secondary btn-large" id="learnMoreBtn" type="button" data-i18n="howItWorks">
                     How It Works
                 </button>
             </div>
 
             <div class="offline-indicator">
                 <span class="status-dot" id="connectionStatus"></span>
-                <span id="statusText">Checking connection...</span>
+                <span id="statusText" data-i18n="checkingConnection">Checking connection...</span>
             </div>
         </div>
     </section>
@@ -139,32 +154,32 @@
     <!-- ===================== -->
     <section id="market" class="section" aria-labelledby="market-heading">
         <div class="section-header">
-            <h2 class="section-title" id="market-heading">🛒 Local Market</h2>
-            <p class="section-subtitle">Essential goods from your community</p>
+            <h2 class="section-title" id="market-heading" data-i18n="marketTitle">🛒 Local Market</h2>
+            <p class="section-subtitle" data-i18n="marketSubtitle">Essential goods from your community</p>
         </div>
 
         <div class="filter-bar" role="group" aria-label="Filter items by category">
-            <button class="filter-btn active" data-category="all" aria-pressed="true" type="button">All Items</button>
+            <button class="filter-btn active" data-category="all" aria-pressed="true" type="button" data-i18n="filterAll">All Items</button>
             <button class="filter-btn" data-category="food" aria-pressed="false" type="button">
                 <span class="filter-icon">🌾</span>
-                <span class="filter-text">Food</span>
+                <span class="filter-text" data-i18n="catFood">Food</span>
             </button>
             <button class="filter-btn" data-category="livestock" aria-pressed="false" type="button">
                 <span class="filter-icon">🐐</span>
-                <span class="filter-text">Livestock</span>
+                <span class="filter-text" data-i18n="catLivestock">Livestock</span>
             </button>
             <button class="filter-btn" data-category="tools" aria-pressed="false" type="button">
                 <span class="filter-icon">🛠️</span>
-                <span class="filter-text">Tools</span>
+                <span class="filter-text" data-i18n="catTools">Tools</span>
             </button>
             <button class="filter-btn" data-category="services" aria-pressed="false" type="button">
                 <span class="filter-icon">💼</span>
-                <span class="filter-text">Services</span>
+                <span class="filter-text" data-i18n="catServices">Services</span>
             </button>
             <!-- NEW: Herbs Filter Button -->
             <button class="filter-btn" data-category="herbs" aria-pressed="false" type="button">
                 <span class="filter-icon">🌿</span>
-                <span class="filter-text">Herbs</span>
+                <span class="filter-text" data-i18n="catHerbs">Herbs</span>
             </button>
         </div>
         
@@ -175,7 +190,7 @@
             <article class="glass-card market-card" data-category="food" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌽</div>
-                    <span class="category-tag">Food</span>
+                    <span class="category-tag" data-i18n="catFood">Food</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Maize - 50kg Bag</h3>
@@ -198,13 +213,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="maize" data-seller="mama-sarah" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="maize" data-seller="mama-sarah" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -214,7 +229,7 @@
             <article class="glass-card market-card" data-category="food" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🫘</div>
-                    <span class="category-tag">Food</span>
+                    <span class="category-tag" data-i18n="catFood">Food</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Beans - 20kg Sack</h3>
@@ -237,13 +252,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="beans" data-seller="grace-n" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="beans" data-seller="grace-n" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -253,7 +268,7 @@
             <article class="glass-card market-card" data-category="food" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🥬</div>
-                    <span class="category-tag">Food</span>
+                    <span class="category-tag" data-i18n="catFood">Food</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Fresh Vegetables Bundle</h3>
@@ -276,13 +291,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="vegetables" data-seller="auntie-rose" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="vegetables" data-seller="auntie-rose" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -292,7 +307,7 @@
             <article class="glass-card market-card" data-category="food" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🍚</div>
-                    <span class="category-tag">Food</span>
+                    <span class="category-tag" data-i18n="catFood">Food</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Rice - 25kg Bag</h3>
@@ -315,13 +330,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="rice" data-seller="shopkeeper-tom" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="rice" data-seller="shopkeeper-tom" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -333,7 +348,7 @@
             <article class="glass-card market-card" data-category="livestock" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐐</div>
-                    <span class="category-tag">Livestock</span>
+                    <span class="category-tag" data-i18n="catLivestock">Livestock</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Goats - 3 Available</h3>
@@ -356,13 +371,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="goats" data-seller="baba-john" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="goats" data-seller="baba-john" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
                 </div>
@@ -372,7 +387,7 @@
             <article class="glass-card market-card" data-category="livestock" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐔</div>
-                    <span class="category-tag">Livestock</span>
+                    <span class="category-tag" data-i18n="catLivestock">Livestock</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Chickens - 12 Layers</h3>
@@ -395,13 +410,13 @@
                             </div>
                             <span class="trust-badge new">
                                 <span class="badge-icon">🆕</span>
-                                <span class="badge-text">New Seller</span>
+                                <span class="badge-text" data-i18n="newSeller">New Seller</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="chickens" data-seller="mary-k" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="chickens" data-seller="mary-k" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -411,7 +426,7 @@
             <article class="glass-card market-card" data-category="livestock" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐄</div>
-                    <span class="category-tag">Livestock</span>
+                    <span class="category-tag" data-i18n="catLivestock">Livestock</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Dairy Cow - 1 Available</h3>
@@ -434,13 +449,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="cow" data-seller="elder-mwangi" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="cow" data-seller="elder-mwangi" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
                 </div>
@@ -452,7 +467,7 @@
             <article class="glass-card market-card" data-category="tools" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">⛏️</div>
-                    <span class="category-tag">Tools</span>
+                    <span class="category-tag" data-i18n="catTools">Tools</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Farming Tools Set</h3>
@@ -475,13 +490,13 @@
                             </div>
                             <span class="trust-badge new">
                                 <span class="badge-icon">🆕</span>
-                                <span class="badge-text">New Seller</span>
+                                <span class="badge-text" data-i18n="newSeller">New Seller</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="tools" data-seller="peter-m" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="tools" data-seller="peter-m" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -491,7 +506,7 @@
             <article class="glass-card market-card" data-category="tools" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🛒</div>
-                    <span class="category-tag">Tools</span>
+                    <span class="category-tag" data-i18n="catTools">Tools</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Heavy Duty Wheelbarrow</h3>
@@ -514,13 +529,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="wheelbarrow" data-seller="builder-sam" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="wheelbarrow" data-seller="builder-sam" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -530,7 +545,7 @@
             <article class="glass-card market-card" data-category="tools" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🔧</div>
-                    <span class="category-tag">Tools</span>
+                    <span class="category-tag" data-i18n="catTools">Tools</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Manual Water Pump</h3>
@@ -553,13 +568,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="water-pump" data-seller="mechanic-joe" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="water-pump" data-seller="mechanic-joe" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
                 </div>
@@ -571,7 +586,7 @@
             <article class="glass-card market-card" data-category="services" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🚜</div>
-                    <span class="category-tag">Services</span>
+                    <span class="category-tag" data-i18n="catServices">Services</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Ploughing Service</h3>
@@ -594,13 +609,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button" data-i18n="bookService">
                         Book Service
                     </button>
                 </div>
@@ -610,7 +625,7 @@
             <article class="glass-card market-card" data-category="services" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🛻</div>
-                    <span class="category-tag">Services</span>
+                    <span class="category-tag" data-i18n="catServices">Services</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Pickup Truck Transport</h3>
@@ -633,14 +648,14 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="transport" data-seller="driver-charles" type="button">
-                        Book Transport
+                    <button class="btn btn-primary contact-btn" data-item="transport" data-seller="driver-charles" type="button" data-i18n="bookService">
+                        Book Service
                     </button>
                 </div>
             </article>
@@ -649,7 +664,7 @@
             <article class="glass-card market-card" data-category="services" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🔨</div>
-                    <span class="category-tag">Services</span>
+                    <span class="category-tag" data-i18n="catServices">Services</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Phone & Radio Repair</h3>
@@ -672,13 +687,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="repair" data-seller="tech-wanjiku" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="repair" data-seller="tech-wanjiku" type="button" data-i18n="getQuote">
                         Get Quote
                     </button>
                 </div>
@@ -688,7 +703,7 @@
             <article class="glass-card market-card" data-category="services" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">📚</div>
-                    <span class="category-tag">Services</span>
+                    <span class="category-tag" data-i18n="catServices">Services</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Adult Literacy Classes</h3>
@@ -711,13 +726,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="classes" data-seller="teacher-amina" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="classes" data-seller="teacher-amina" type="button" data-i18n="enrollNow">
                         Enroll Now
                     </button>
                 </div>
@@ -729,7 +744,7 @@
             <article class="glass-card market-card" data-category="herbs" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌿</div>
-                    <span class="category-tag">Herbs</span>
+                    <span class="category-tag" data-i18n="catHerbs">Herbs</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Moringa Leaves - 1kg</h3>
@@ -752,13 +767,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="moringa" data-seller="herbalist-jane" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="moringa" data-seller="herbalist-jane" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -768,7 +783,7 @@
             <article class="glass-card market-card" data-category="herbs" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🍃</div>
-                    <span class="category-tag">Herbs</span>
+                    <span class="category-tag" data-i18n="catHerbs">Herbs</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Neem Leaves & Seeds</h3>
@@ -791,13 +806,13 @@
                             </div>
                             <span class="trust-badge trusted">
                                 <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="neem" data-seller="mama-fatima" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="neem" data-seller="mama-fatima" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
                 </div>
@@ -807,7 +822,7 @@
             <article class="glass-card market-card" data-category="herbs" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌵</div>
-                    <span class="category-tag">Herbs</span>
+                    <span class="category-tag" data-i18n="catHerbs">Herbs</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Aloe Vera Plants</h3>
@@ -830,13 +845,13 @@
                             </div>
                             <span class="trust-badge new">
                                 <span class="badge-icon">🆕</span>
-                                <span class="badge-text">New Seller</span>
+                                <span class="badge-text" data-i18n="newSeller">New Seller</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="aloe" data-seller="sister-mary" type="button">
+                    <button class="btn btn-primary contact-btn" data-item="aloe" data-seller="sister-mary" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
                 </div>
@@ -846,7 +861,7 @@
             <article class="glass-card market-card" data-category="herbs" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🫚</div>
-                    <span class="category-tag">Herbs</span>
+                    <span class="category-tag" data-i18n="catHerbs">Herbs</span>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Fresh Ginger - 5kg</h3>
@@ -862,279 +877,4 @@
                                 <span class="distance-value">4km away</span>
                             </span>
                         </div>
-                        <div class="seller-row">
-                            <div class="seller-info">
-                                <span class="seller-avatar" aria-hidden="true">👤</span>
-                                <span class="seller-name">Farmer Kofi</span>
-                            </div>
-                            <span class="trust-badge trusted">
-                                <span class="badge-icon">⭐</span>
-                                <span class="badge-text">Trusted</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary contact-btn" data-item="ginger" data-seller="farmer-kofi" type="button">
-                        Contact Seller
-                    </button>
-                </div>
-            </article>
-        </div>
-
-        <div class="load-more">
-            <button class="btn btn-secondary" id="loadMoreBtn" type="button">Load More Items</button>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- My Items Section      -->
-    <!-- ===================== -->
-    <section id="myitems" class="section" aria-labelledby="myitems-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="myitems-heading">📦 My Listings</h2>
-            <p class="section-subtitle">Manage your items and trades</p>
-        </div>
-        
-        <div class="glass-card empty-state" id="emptyState">
-            <div class="empty-icon">📭</div>
-            <h3>No Listings Yet</h3>
-            <p>You haven't posted any items. Start selling or bartering with your community!</p>
-            <button class="btn btn-primary btn-large" id="postFirstItemBtn" type="button">
-                <span class="btn-icon">+</span>
-                Post Your First Item
-            </button>
-        </div>
-
-        <!-- Hidden by default - shown when user has items -->
-        <div class="my-items-list" id="myItemsList" style="display: none;">
-            <!-- User's items will be dynamically inserted here -->
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Community Section     -->
-    <!-- ===================== -->
-    <section id="community" class="section" aria-labelledby="community-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="community-heading">🤝 Community</h2>
-            <p class="section-subtitle">Connect with nearby traders</p>
-        </div>
-
-        <div class="community-grid">
-            <div class="glass-card community-card stats-card">
-                <h3>Market Activity</h3>
-                <div class="community-stats">
-                    <div class="stat-item">
-                        <span class="stat-icon">📦</span>
-                        <span class="stat-number" id="itemsCount">18</span>
-                        <span class="stat-label">Items Listed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-icon">🤝</span>
-                        <span class="stat-number" id="tradesCount">23</span>
-                        <span class="stat-label">Trades This Week</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-icon">⭐</span>
-                        <span class="stat-number" id="sellersCount">8</span>
-                        <span class="stat-label">Trusted Sellers</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-card community-card nearby-card">
-                <h3>Nearby Traders</h3>
-                <p class="nearby-summary">12 active sellers within 10km of your location</p>
-                <div class="nearby-list">
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Mama Sarah</span>
-                            <span class="nearby-distance">2km away • 5 items</span>
-                        </div>
-                    </div>
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Baba John</span>
-                            <span class="nearby-distance">5km away • 3 items</span>
-                        </div>
-                    </div>
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Peter M.</span>
-                            <span class="nearby-distance">1km away • 2 items</span>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-secondary btn-full" type="button">View All Traders</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Help Section          -->
-    <!-- ===================== -->
-    <section id="help" class="section" aria-labelledby="help-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="help-heading">❓ How It Works</h2>
-            <p class="section-subtitle">Simple steps to start trading</p>
-        </div>
-
-        <div class="help-grid">
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">📱</div>
-                </div>
-                <h3>Browse Offline</h3>
-                <p>View all local items without internet. All data is stored securely on your phone using advanced offline technology.</p>
-                <ul class="feature-list">
-                    <li>✓ No data charges</li>
-                    <li>✓ Works in remote areas</li>
-                    <li>✓ Instant loading</li>
-                </ul>
-            </div>
-
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">📞</div>
-                </div>
-                <h3>Connect Directly</h3>
-                <p>Contact sellers via SMS or phone call. Arrange to meet in person at a safe, public location.</p>
-                <ul class="feature-list">
-                    <li>✓ Direct communication</li>
-                    <li>✓ No middlemen fees</li>
-                    <li>✓ Build relationships</li>
-                </ul>
-            </div>
-
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">🤝</div>
-                </div>
-                <h3>Trade Safely</h3>
-                <p>Pay with cash or barter goods. Rate your experience to help build a trusted community marketplace.</p>
-                <ul class="feature-list">
-                    <li>✓ Cash or barter</li>
-                    <li>✓ Meet safely</li>
-                    <li>✓ Build trust scores</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="help-cta">
-            <div class="glass-card cta-card">
-                <h3>Ready to Start Trading?</h3>
-                <p>Join your local community marketplace today. No internet required!</p>
-                <button class="btn btn-primary btn-large" id="getStartedBtn" type="button">Get Started Now</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Footer                -->
-    <!-- ===================== -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="footer-logo">🌍</span>
-                <div>
-                    <strong>Sinyoro</strong>
-                    <p>Empowering Rural Communities</p>
-                </div>
-            </div>
-            <div class="footer-features">
-                <span class="footer-badge">📱 Works Offline</span>
-                <span class="footer-badge">🔒 Secure</span>
-                <span class="footer-badge">🌾 Local First</span>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Sinyoro App. Built for rural Africa. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- ===================== -->
-    <!-- Post Item Modal       -->
-    <!-- ===================== -->
-    <div id="postItemModal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" hidden>
-        <div class="modal-overlay"></div>
-        <div class="glass-card modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Post New Item</h2>
-                <button class="close-btn" aria-label="Close modal" type="button">&times;</button>
-            </div>
-            
-            <form id="postItemForm" class="post-form">
-                <div class="form-group">
-                    <label for="itemName">Item Name *</label>
-                    <input type="text" id="itemName" name="itemName" placeholder="e.g., Fresh Maize, Healthy Goats" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemCategory">Category *</label>
-                    <select id="itemCategory" name="itemCategory" required>
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="food">🌾 Food & Crops</option>
-                        <option value="livestock">🐐 Livestock</option>
-                        <option value="tools">🛠️ Tools & Equipment</option>
-                        <option value="services">💼 Services</option>
-                        <option value="herbs">🌿 Herbs & Medicine</option>
-                        <option value="other">📦 Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemDescription">Description *</label>
-                    <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Describe your item, condition, quantity..." required></textarea>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="itemPrice">Price or Barter Terms *</label>
-                        <input type="text" id="itemPrice" name="itemPrice" placeholder="e.g., $25, 2 chickens, or negotiable" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="itemLocation">Your Location</label>
-                        <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Near the school">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="sellerName">Your Name *</label>
-                    <input type="text" id="sellerName" name="sellerName" placeholder="How should people call you?" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="contactMethod">Contact Method *</label>
-                    <select id="contactMethod" name="contactMethod" required>
-                        <option value="phone">📞 Phone Call</option>
-                        <option value="sms">💬 SMS/Text</option>
-                        <option value="both">📞💬 Both</option>
-                    </select>
-                </div>
-
-                <div class="form-notice">
-                    <p>ℹ️ This item will be saved on your phone and shared with nearby users when you're online.</p>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancelPostBtn">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Post Item</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Container -->
-    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
-
-    <script src="js/app.js"></script>
-</body>
-</html>
+                        <div class
