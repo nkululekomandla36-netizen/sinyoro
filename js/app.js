@@ -4,6 +4,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Sinyoro Rural Marketplace Loaded');
 
+    // Wait for translations to be ready
+    const checkTranslations = setInterval(() => {
+        if (window.SinyoroTranslations) {
+            clearInterval(checkTranslations);
+            initApp();
+        }
+    }, 50);
+
+    // Fallback if translations don't load
+    setTimeout(() => {
+        clearInterval(checkTranslations);
+        if (!window.SinyoroTranslations) {
+            console.warn('Translations not loaded, continuing without i18n');
+            initApp();
+        }
+    }, 2000);
+});
+
+function initApp() {
+    const i18n = window.SinyoroTranslations;
+    const t = (key) => i18n ? i18n.getText(key) : key;
+
     // ==========================================
     // OFFLINE STORAGE SETUP (IndexedDB)
     // ==========================================
@@ -15,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     request.onerror = () => {
         console.error('❌ Database failed to open');
-        showToast('Storage not available. Some features may not work.', 'warning');
+        showToast(t('toastOfflineMode'), 'warning');
     };
     
     request.onsuccess = () => {
@@ -51,12 +73,21 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
+        toast.className = `glass-card toast`;
         toast.setAttribute('role', 'alert');
+        
+        // Get translated title based on type
+        const titles = {
+            info: t('navHelp') || 'Info',
+            success: t('trusted') || 'Success',
+            warning: t('checkingConnection') || 'Warning',
+            error: t('navHelp') || 'Error'
+        };
+
         toast.innerHTML = `
             <div class="toast-icon">${icons[type]}</div>
             <div class="toast-content">
-                <h4 class="toast-title">${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+                <h4 class="toast-title">${titles[type]}</h4>
                 <p class="toast-message">${message}</p>
             </div>
             <button class="toast-close" aria-label="Close notification">×</button>
@@ -120,10 +151,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (navigator.onLine) {
             statusDot.className = 'status-dot online';
-            statusText.textContent = '🌐 Online - Full features available';
+            statusText.textContent = '🌐 ' + (t('onlineStatus') || 'Online - Connected');
         } else {
             statusDot.className = 'status-dot offline';
-            statusText.textContent = '📴 Offline mode - Using saved data';
+            statusText.textContent = '📴 ' + (t('offlineStatus') || 'Offline Mode - Working Locally');
         }
     }
 
@@ -156,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         postItemModal.hidden = false;
         postItemModal.style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        showToast('Create your listing. It will be saved offline.', 'info');
+        showToast(t('noticeOffline') || 'Create your listing. It will be saved offline.', 'info');
     }
 
     function closeModal() {
@@ -189,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         browseMarketBtn.addEventListener('click', (e) => {
             e.preventDefault();
             document.getElementById('market')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            showToast('Showing local items near you 📍', 'success');
+            showToast(t('marketSubtitle') || 'Showing local items near you 📍', 'success');
         });
     }
 
@@ -264,15 +295,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // Use translations for category names
             const categoryNames = {
-                all: 'all items',
-                food: 'food & crops',
-                livestock: 'livestock',
-                tools: 'tools & equipment',
-                services: 'services'
+                all: t('filterAll') || 'all items',
+                food: t('catFood') || 'food & crops',
+                livestock: t('catLivestock') || 'livestock',
+                tools: t('catTools') || 'tools & equipment',
+                services: t('catServices') || 'services',
+                herbs: t('catHerbs') || 'herbs'
             };
 
-            showToast(`Showing ${categoryNames[category] || category}`, 'success');
+            showToast(`${t('browseMarket') || 'Showing'} ${categoryNames[category] || category}`, 'success');
         });
     });
 
@@ -286,21 +319,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const card = contactBtn.closest('.market-card');
         if (!card) return;
 
-        const itemName = card.querySelector('.item-title')?.textContent || 'Item';
-        const sellerName = card.querySelector('.seller-name')?.textContent || 'Seller';
+        const itemName = card.querySelector('.item-title')?.textContent || t('catFood') || 'Item';
+        const sellerName = card.querySelector('.seller-name')?.textContent || t('profile') || 'Seller';
         const item = contactBtn.dataset.item;
         const seller = contactBtn.dataset.seller;
 
-        showToast(`Opening contact options for ${sellerName}...`, 'info');
+        showToast(`${t('contactSeller') || 'Opening contact options for'} ${sellerName}...`, 'info');
 
         // Simulate contact dialog
         setTimeout(() => {
-            const contactMethod = confirm(`📞 Contact ${sellerName} about ${itemName}\n\nClick OK to simulate a phone call\nClick Cancel to simulate SMS`);
+            const contactMethod = confirm(`📞 ${t('contactSeller') || 'Contact'} ${sellerName} ${t('about') || 'about'} ${itemName}\n\n${t('toastComingSoon') || 'Click OK to simulate a phone call\nClick Cancel to simulate SMS'}`);
             
             if (contactMethod) {
-                showToast(`📞 Calling ${sellerName}... (simulated)`, 'success');
+                showToast(`📞 ${t('calling') || 'Calling'} ${sellerName}... (${t('simulated') || 'simulated'})`, 'success');
             } else {
-                showToast(`💬 SMS sent to ${sellerName}... (simulated)`, 'success');
+                showToast(`💬 SMS ${t('sent') || 'sent to'} ${sellerName}... (${t('simulated') || 'simulated'})`, 'success');
             }
         }, 600);
     });
@@ -325,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Validation
             if (!itemName || !category || !description || !price || !sellerName) {
-                showToast('Please fill in all required fields.', 'error');
+                showToast(t('toastOfflineMode') || 'Please fill in all required fields.', 'error');
                 return;
             }
 
@@ -334,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 category: category,
                 description: description,
                 price: price,
-                location: location || 'Not specified',
+                location: location || t('notSpecified') || 'Not specified',
                 sellerName: sellerName,
                 contactMethod: contactMethod || 'phone',
                 date: new Date().toISOString(),
@@ -349,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const request = store.add(item);
 
                 request.onsuccess = () => {
-                    showToast('✅ Item saved! It will be visible to others when online.', 'success');
+                    showToast(t('toastItemPosted') || '✅ Item saved! It will be visible to others when online.', 'success');
                     closeModal();
                     postItemForm.reset();
                     
@@ -358,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 request.onerror = () => {
-                    showToast('❌ Failed to save item. Please try again.', 'error');
+                    showToast(t('toastOfflineMode') || '❌ Failed to save item. Please try again.', 'error');
                 };
             } else {
                 // Fallback to localStorage if IndexedDB fails
@@ -366,12 +399,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     const items = JSON.parse(localStorage.getItem('sinyoro_items') || '[]');
                     items.push({ ...item, id: Date.now() });
                     localStorage.setItem('sinyoro_items', JSON.stringify(items));
-                    showToast('✅ Item saved locally!', 'success');
+                    showToast(t('toastItemPosted') || '✅ Item saved locally!', 'success');
                     closeModal();
                     postItemForm.reset();
                     updateMyItemsSection();
                 } catch (err) {
-                    showToast('⚠️ Storage not available.', 'error');
+                    showToast(t('toastOfflineMode') || '⚠️ Storage not available.', 'error');
                 }
             }
         });
@@ -422,8 +455,8 @@ document.addEventListener('DOMContentLoaded', function() {
         myItemsList.innerHTML = items.map(item => `
             <div class="glass-card my-item-card">
                 <div class="item-header">
-                    <span class="item-category">${item.category}</span>
-                    <span class="item-status">${item.synced ? '✅ Synced' : '⏳ Pending'}</span>
+                    <span class="item-category">${t('cat' + item.category.charAt(0).toUpperCase() + item.category.slice(1)) || item.category}</span>
+                    <span class="item-status">${item.synced ? '✅ ' + (t('synced') || 'Synced') : '⏳ ' + (t('pending') || 'Pending')}</span>
                 </div>
                 <h4>${item.name}</h4>
                 <p>${item.description.substring(0, 100)}...</p>
@@ -460,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     function handleOnline() {
         updateConnectionStatus();
-        showToast('🌐 Back online! Syncing your listings...', 'success');
+        showToast('🌐 ' + (t('onlineStatus') || 'Back online! Syncing your listings...'), 'success');
         
         // Attempt to sync offline items
         syncOfflineItems();
@@ -468,7 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleOffline() {
         updateConnectionStatus();
-        showToast('📴 Offline mode activated. Using saved data.', 'warning');
+        showToast('📴 ' + (t('offlineStatus') || 'Offline mode activated. Using saved data.'), 'warning');
     }
 
     window.addEventListener('online', handleOnline);
@@ -497,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         updateStore.put(item);
                     });
                     
-                    showToast(`✅ ${unsyncedItems.length} items synced successfully!`, 'success');
+                    showToast(`✅ ${unsyncedItems.length} ${t('items') || 'items'} ${t('synced') || 'synced successfully!'}`, 'success');
                     updateMyItemsSection();
                 }, 1500);
             }
@@ -510,8 +543,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
-            showToast('Loading more items... (demo)', 'info');
-            loadMoreBtn.textContent = 'No more items';
+            showToast(t('toastComingSoon') || 'Loading more items... (demo)', 'info');
+            loadMoreBtn.textContent = t('noMoreItems') || 'No more items';
             loadMoreBtn.disabled = true;
         });
     }
@@ -527,4 +560,4 @@ document.addEventListener('DOMContentLoaded', function() {
     updateMyItemsSection();
 
     console.log('✅ Sinyoro Marketplace Ready - Offline First!');
-});
+}
