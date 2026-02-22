@@ -560,4 +560,6 @@ function initApp() {
     updateMyItemsSection();
 
     console.log('✅ Sinyoro Marketplace Ready - Offline First!');
-}
+
+    {
+        
