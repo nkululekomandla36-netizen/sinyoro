@@ -232,7 +232,7 @@ body {
 }
 
 .hero-card {
-    max-width: 800px;
+    max-width: 1000px;
     width: 100%;
 }
 
@@ -275,6 +275,87 @@ body {
 
 .feature-icon {
     font-size: 1.2rem;
+}
+
+/* NEW: Hero Categories Grid Styles */
+.hero-categories-section {
+    margin: 2.5rem 0;
+    width: 100%;
+}
+
+.hero-categories-title {
+    text-align: center;
+    color: var(--text-white);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.hero-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-category-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-category-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-cat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.hero-cat-name {
+    color: var(--text-white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-cat-items {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    min-height: 2.8em;
+}
+
+.hero-cat-count {
+    color: var(--accent-green);
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: rgba(74, 222, 128, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.hero-total-items {
+    text-align: center;
+    color: var(--text-white);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.2));
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-top: 1rem;
+    font-weight: 600;
 }
 
 .hero-actions {
@@ -1067,6 +1148,34 @@ body {
         align-items: center;
     }
 
+    /* Responsive Hero Categories */
+    .hero-categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .hero-category-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .hero-cat-icon {
+        font-size: 2rem;
+    }
+
+    .hero-cat-name {
+        font-size: 0.95rem;
+    }
+
+    .hero-cat-items {
+        font-size: 0.75rem;
+        min-height: 3.2em;
+    }
+
+    .hero-total-items {
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+    }
+
     .filter-bar {
         gap: 0.5rem;
     }
@@ -1117,6 +1226,10 @@ body {
 
     .section-title {
         font-size: 1.5rem;
+    }
+
+    .hero-categories-grid {
+        grid-template-columns: 1fr;
     }
 }
 
