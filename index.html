@@ -39,29 +39,29 @@
         
         <div class="nav-actions">
             <!-- Language Selector -->
-<div class="language-selector">
-    <button id="languageBtn" class="btn btn-secondary">
-        🌍 <span class="current-lang">English</span> ▼
-    </button>
-    
-    <div id="langDropdown" class="lang-dropdown">
-        <button class="lang-option" data-lang="en">
-            🇬🇧 English
-        </button>
-        <button class="lang-option" data-lang="sw">
-            🇰🇪 Kiswahili
-        </button>
-        <button class="lang-option" data-lang="zu">
-            🇿🇦 isiZulu
-        </button>
-        <button class="lang-option" data-lang="sn">
-            🇿🇼 ChiShona
-        </button>
-        <button class="lang-option" data-lang="af">
-            🇿🇦 Afrikaans
-        </button>
-    </div>
-</div>
+            <div class="language-selector">
+                <button id="languageBtn" class="btn btn-secondary">
+                    🌍 <span class="current-lang">English</span> ▼
+                </button>
+                
+                <div id="langDropdown" class="lang-dropdown">
+                    <button class="lang-option" data-lang="en">
+                        🇬🇧 English
+                    </button>
+                    <button class="lang-option" data-lang="sw">
+                        🇰🇪 Kiswahili
+                    </button>
+                    <button class="lang-option" data-lang="zu">
+                        🇿🇦 isiZulu
+                    </button>
+                    <button class="lang-option" data-lang="sn">
+                        🇿🇼 ChiShona
+                    </button>
+                    <button class="lang-option" data-lang="af">
+                        🇿🇦 Afrikaans
+                    </button>
+                </div>
+            </div>
 
             <button class="btn btn-primary" id="postItemBtn" aria-label="Post new item" type="button">
                 <span class="btn-icon">+</span>
@@ -887,4 +887,270 @@
                                 <span class="distance-value">4km away</span>
                             </span>
                         </div>
-                        <div class
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span class="seller-avatar" aria-hidden="true">👤</span>
+                                <span class="seller-name">Farmer Juma</span>
+                            </div>
+                            <span class="trust-badge trusted">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text" data-i18n="trusted">Trusted</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn" data-item="ginger" data-seller="farmer-juma" type="button" data-i18n="contactSeller">
+                        Contact Seller
+                    </button>
+                </div>
+            </article>
+        </div> <!-- close market-grid -->
+        
+        <div class="load-more">
+            <button class="btn btn-secondary" type="button" data-i18n="loadMore">Load More</button>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- My Items Section      -->
+    <!-- ===================== -->
+    <section id="myitems" class="section" aria-labelledby="myitems-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="myitems-heading" data-i18n="myItemsTitle">📦 My Items</h2>
+            <p class="section-subtitle" data-i18n="myItemsSubtitle">Manage your listings and trades</p>
+        </div>
+        
+        <div class="my-items-list" id="myItemsList">
+            <!-- Empty state shown when no items -->
+            <div class="glass-card empty-state" id="emptyState">
+                <div class="empty-icon">📭</div>
+                <h3 data-i18n="noItemsTitle">No Items Yet</h3>
+                <p data-i18n="noItemsDesc">Start selling by posting your first item to the marketplace.</p>
+                <button class="btn btn-primary" id="postFirstItemBtn" type="button" data-i18n="postItem">
+                    Post Item
+                </button>
+            </div>
+            
+            <!-- Items will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Community Section     -->
+    <!-- ===================== -->
+    <section id="community" class="section" aria-labelledby="community-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="community-heading" data-i18n="communityTitle">🤝 Community</h2>
+            <p class="section-subtitle" data-i18n="communitySubtitle">Connect with nearby traders</p>
+        </div>
+
+        <div class="community-grid">
+            <div class="glass-card community-card">
+                <h3 data-i18n="nearbyTraders">Nearby Traders</h3>
+                <p class="nearby-summary" data-i18n="nearbySummary">5 traders within 5km of your location</p>
+                <div class="nearby-list">
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Mama Sarah</span>
+                            <span class="nearby-distance">2km away • Food specialist</span>
+                        </div>
+                    </div>
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Baba John</span>
+                            <span class="nearby-distance">3km away • Livestock</span>
+                        </div>
+                    </div>
+                    <div class="nearby-item">
+                        <span class="nearby-avatar">👤</span>
+                        <div class="nearby-info">
+                            <span class="nearby-name">Tech Wanjiku</span>
+                            <span class="nearby-distance">4km away • Services</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary btn-full" type="button" data-i18n="viewAllTraders">
+                    View All Traders
+                </button>
+            </div>
+
+            <div class="glass-card community-card">
+                <h3 data-i18n="trustNetwork">Trust Network</h3>
+                <div class="community-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-number">12</span>
+                        <span class="stat-label" data-i18n="trustedTraders">Trusted Traders</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🤝</span>
+                        <span class="stat-number">48</span>
+                        <span class="stat-label" data-i18n="successfulTrades">Successful Trades</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">📍</span>
+                        <span class="stat-number">5km</span>
+                        <span class="stat-label" data-i18n="coverageArea">Coverage Area</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Help Section          -->
+    <!-- ===================== -->
+    <section id="help" class="section" aria-labelledby="help-heading">
+        <div class="section-header">
+            <h2 class="section-title" id="help-heading" data-i18n="helpTitle">❓ How It Works</h2>
+            <p class="section-subtitle" data-i18n="helpSubtitle">Get started in 3 simple steps</p>
+        </div>
+
+        <div class="help-grid">
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <span class="step-icon">📱</span>
+                </div>
+                <h3 data-i18n="step1Title">Browse Offline</h3>
+                <p data-i18n="step1Desc">View all items without internet. The marketplace works completely offline using local network.</p>
+                <ul class="feature-list">
+                    <li>✓ No data needed</li>
+                    <li>✓ Instant loading</li>
+                    <li>✓ Works anywhere</li>
+                </ul>
+            </div>
+
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <span class="step-icon">💬</span>
+                </div>
+                <h3 data-i18n="step2Title">Connect Directly</h3>
+                <p data-i18n="step2Desc">Contact sellers via SMS or call. No middleman, no fees. Deal directly with your community.</p>
+                <ul class="feature-list">
+                    <li>✓ Direct contact</li>
+                    <li>✓ No commissions</li>
+                    <li>✓ Local trust</li>
+                </ul>
+            </div>
+
+            <div class="glass-card help-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <span class="step-icon">🔄</span>
+                </div>
+                <h3 data-i18n="step3Title">Trade & Barter</h3>
+                <p data-i18n="step3Desc">Buy with cash or barter goods. Flexible trading that works for your community's needs.</p>
+                <ul class="feature-list">
+                    <li>✓ Cash or barter</li>
+                    <li>✓ Flexible prices</li>
+                    <li>✓ Community building</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="help-cta">
+            <div class="glass-card cta-card">
+                <h3 data-i18n="readyToStart">Ready to Start Trading?</h3>
+                <p data-i18n="ctaDesc">Join hundreds of community members already trading on Sinyoro.</p>
+                <button class="btn btn-primary btn-large" id="helpPostItemBtn" type="button" data-i18n="postItemNow">
+                    Post Your First Item
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== -->
+    <!-- Footer               -->
+    <!-- ===================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="footer-logo">🌍</span>
+                <div>
+                    <strong>Sinyoro</strong>
+                    <p data-i18n="footerTagline">Community Marketplace</p>
+                </div>
+            </div>
+            <div class="footer-features">
+                <span class="footer-badge">📍 Local</span>
+                <span class="footer-badge">🔒 Secure</span>
+                <span class="footer-badge">🌾 Essential</span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="copyright">© 2024 Sinyoro. Built for rural communities.</p>
+        </div>
+    </footer>
+
+    <!-- ===================== -->
+    <!-- Post Item Modal      -->
+    <!-- ===================== -->
+    <div class="modal" id="postItemModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="glass-card modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title" data-i18n="postItemTitle">Post New Item</h2>
+                <button class="close-btn" aria-label="Close modal" type="button">&times;</button>
+            </div>
+            
+            <form class="post-form" id="postItemForm">
+                <div class="form-group">
+                    <label for="itemTitle" data-i18n="itemTitleLabel">Item Title</label>
+                    <input type="text" id="itemTitle" name="title" required placeholder="e.g., Fresh Maize - 50kg">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="itemCategory" data-i18n="itemCategoryLabel">Category</label>
+                        <select id="itemCategory" name="category" required>
+                            <option value="" data-i18n="selectCategory">Select category...</option>
+                            <option value="food" data-i18n="catFood">Food</option>
+                            <option value="livestock" data-i18n="catLivestock">Livestock</option>
+                            <option value="tools" data-i18n="catTools">Tools</option>
+                            <option value="services" data-i18n="catServices">Services</option>
+                            <option value="herbs" data-i18n="catHerbs">Herbs</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemPrice" data-i18n="itemPriceLabel">Price / Barter</label>
+                        <input type="text" id="itemPrice" name="price" required placeholder="e.g., $25 or barter for tools">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemDescription" data-i18n="itemDescriptionLabel">Description</label>
+                    <textarea id="itemDescription" name="description" rows="3" required placeholder="Describe your item..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sellerName" data-i18n="sellerNameLabel">Your Name</label>
+                    <input type="text" id="sellerName" name="seller" required>
+                </div>
+                
+                <div class="form-notice">
+                    <p data-i18n="offlineNotice">ℹ️ This will be saved locally and shared when you connect to the network.</p>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelPostBtn" data-i18n="cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-i18n="postItem">Post Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================== -->
+    <!-- Toast Container      -->
+    <!-- ===================== -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
