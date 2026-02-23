@@ -38,35 +38,26 @@
         </ul>
         
         <div class="nav-actions">
-            <!-- Language Selector - SINGLE INSTANCE ONLY -->
-            <div class="language-selector" id="languageSelector">
-                <button type="button" id="languageBtn" class="btn btn-secondary lang-btn" aria-haspopup="true" aria-expanded="false">
+            <!-- Search Bar (New) -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search items..." data-i18n-placeholder="searchPlaceholder">
+                <button id="searchBtn" class="search-btn" aria-label="Search">🔍</button>
+            </div>
+
+            <!-- Language Selector -->
+            <div class="language-selector">
+                <button type="button" id="languageBtn" class="btn btn-secondary lang-btn">
                     <span class="lang-icon">🌍</span>
                     <span class="current-lang">English</span>
                     <span class="dropdown-arrow">▼</span>
                 </button>
                 
-                <div id="langDropdown" class="lang-dropdown" role="menu" hidden>
-                    <button type="button" class="lang-option" data-lang="en" role="menuitem">
-                        <span class="flag">🇬🇧</span>
-                        <span class="lang-name">English</span>
-                    </button>
-                    <button type="button" class="lang-option" data-lang="sw" role="menuitem">
-                        <span class="flag">🇰🇪</span>
-                        <span class="lang-name">Kiswahili</span>
-                    </button>
-                    <button type="button" class="lang-option" data-lang="zu" role="menuitem">
-                        <span class="flag">🇿🇦</span>
-                        <span class="lang-name">isiZulu</span>
-                    </button>
-                    <button type="button" class="lang-option" data-lang="sn" role="menuitem">
-                        <span class="flag">🇿🇼</span>
-                        <span class="lang-name">ChiShona</span>
-                    </button>
-                    <button type="button" class="lang-option" data-lang="af" role="menuitem">
-                        <span class="flag">🇿🇦</span>
-                        <span class="lang-name">Afrikaans</span>
-                    </button>
+                <div id="langDropdown" class="lang-dropdown">
+                    <button type="button" class="lang-option" data-lang="en">🇬🇧 English</button>
+                    <button type="button" class="lang-option" data-lang="sw">🇰🇪 Kiswahili</button>
+                    <button type="button" class="lang-option" data-lang="zu">🇿🇦 isiZulu</button>
+                    <button type="button" class="lang-option" data-lang="sn">🇿🇼 ChiShona</button>
+                    <button type="button" class="lang-option" data-lang="af">🇿🇦 Afrikaans</button>
                 </div>
             </div>
 
@@ -101,12 +92,12 @@
                 </div>
             </div>
 
-            <!-- NEW: Organized Categories Summary Grid -->
+            <!-- Organized Categories Summary Grid -->
             <div class="hero-categories-section">
                 <h2 class="hero-categories-title" data-i18n="categoriesTitle">Available Categories</h2>
                 <div class="hero-categories-grid">
                     <!-- Food -->
-                    <div class="hero-category-card">
+                    <div class="hero-category-card" data-category="food">
                         <div class="hero-cat-icon">🌾</div>
                         <div class="hero-cat-name" data-i18n="catFood">Food</div>
                         <div class="hero-cat-items">Maize, Beans, Vegetables, Rice</div>
@@ -114,7 +105,7 @@
                     </div>
                     
                     <!-- Livestock -->
-                    <div class="hero-category-card">
+                    <div class="hero-category-card" data-category="livestock">
                         <div class="hero-cat-icon">🐐</div>
                         <div class="hero-cat-name" data-i18n="catLivestock">Livestock</div>
                         <div class="hero-cat-items">Goats, Chickens, Dairy Cow</div>
@@ -122,7 +113,7 @@
                     </div>
                     
                     <!-- Tools -->
-                    <div class="hero-category-card">
+                    <div class="hero-category-card" data-category="tools">
                         <div class="hero-cat-icon">🛠️</div>
                         <div class="hero-cat-name" data-i18n="catTools">Tools</div>
                         <div class="hero-cat-items">Farming Tools, Wheelbarrow, Water Pump</div>
@@ -130,15 +121,15 @@
                     </div>
                     
                     <!-- Services -->
-                    <div class="hero-category-card">
+                    <div class="hero-category-card" data-category="services">
                         <div class="hero-cat-icon">💼</div>
                         <div class="hero-cat-name" data-i18n="catServices">Services</div>
                         <div class="hero-cat-items">Ploughing, Transport, Repair, Classes</div>
                         <div class="hero-cat-count">4 items</div>
                     </div>
                     
-                    <!-- Herbs - NEW -->
-                    <div class="hero-category-card">
+                    <!-- Herbs -->
+                    <div class="hero-category-card" data-category="herbs">
                         <div class="hero-cat-icon">🌿</div>
                         <div class="hero-cat-name" data-i18n="catHerbs">Herbs</div>
                         <div class="hero-cat-items">Moringa, Neem, Aloe Vera, Ginger</div>
@@ -193,7 +184,6 @@
                 <span class="filter-icon">💼</span>
                 <span class="filter-text" data-i18n="catServices">Services</span>
             </button>
-            <!-- NEW: Herbs Filter Button -->
             <button class="filter-btn" data-category="herbs" aria-pressed="false" type="button">
                 <span class="filter-icon">🌿</span>
                 <span class="filter-text" data-i18n="catHerbs">Herbs</span>
@@ -201,13 +191,14 @@
         </div>
         
         <div class="market-grid" id="marketGrid" role="list">
-            <!-- ===================== FOOD ITEMS ===================== -->
+            <!-- FOOD ITEMS -->
             
             <!-- Item 1: Maize -->
-            <article class="glass-card market-card" data-category="food" role="listitem">
+            <article class="glass-card market-card" data-category="food" data-item-id="1" data-phone="+1234567890" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌽</div>
                     <span class="category-tag" data-i18n="catFood">Food</span>
+                    <button class="favorite-btn" data-item-id="1" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Maize - 50kg Bag</h3>
@@ -239,14 +230,18 @@
                     <button class="btn btn-primary contact-btn" data-item="maize" data-seller="mama-sarah" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="1" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 2: Beans -->
-            <article class="glass-card market-card" data-category="food" role="listitem">
+            <article class="glass-card market-card" data-category="food" data-item-id="2" data-phone="+1234567891" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🫘</div>
                     <span class="category-tag" data-i18n="catFood">Food</span>
+                    <button class="favorite-btn" data-item-id="2" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Beans - 20kg Sack</h3>
@@ -278,14 +273,18 @@
                     <button class="btn btn-primary contact-btn" data-item="beans" data-seller="grace-n" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="2" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 3: Vegetables -->
-            <article class="glass-card market-card" data-category="food" role="listitem">
+            <article class="glass-card market-card" data-category="food" data-item-id="3" data-phone="+1234567892" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🥬</div>
                     <span class="category-tag" data-i18n="catFood">Food</span>
+                    <button class="favorite-btn" data-item-id="3" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Fresh Vegetables Bundle</h3>
@@ -317,14 +316,18 @@
                     <button class="btn btn-primary contact-btn" data-item="vegetables" data-seller="auntie-rose" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="3" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 4: Rice -->
-            <article class="glass-card market-card" data-category="food" role="listitem">
+            <article class="glass-card market-card" data-category="food" data-item-id="4" data-phone="+1234567893" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🍚</div>
                     <span class="category-tag" data-i18n="catFood">Food</span>
+                    <button class="favorite-btn" data-item-id="4" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Rice - 25kg Bag</h3>
@@ -356,16 +359,20 @@
                     <button class="btn btn-primary contact-btn" data-item="rice" data-seller="shopkeeper-tom" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="4" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
-            <!-- ===================== LIVESTOCK ITEMS ===================== -->
+            <!-- LIVESTOCK ITEMS -->
 
             <!-- Item 5: Goats -->
-            <article class="glass-card market-card" data-category="livestock" role="listitem">
+            <article class="glass-card market-card" data-category="livestock" data-item-id="5" data-phone="+1234567894" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐐</div>
                     <span class="category-tag" data-i18n="catLivestock">Livestock</span>
+                    <button class="favorite-btn" data-item-id="5" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Goats - 3 Available</h3>
@@ -397,14 +404,18 @@
                     <button class="btn btn-primary contact-btn" data-item="goats" data-seller="baba-john" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="5" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 6: Chickens -->
-            <article class="glass-card market-card" data-category="livestock" role="listitem">
+            <article class="glass-card market-card" data-category="livestock" data-item-id="6" data-phone="+1234567895" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐔</div>
                     <span class="category-tag" data-i18n="catLivestock">Livestock</span>
+                    <button class="favorite-btn" data-item-id="6" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Chickens - 12 Layers</h3>
@@ -436,14 +447,18 @@
                     <button class="btn btn-primary contact-btn" data-item="chickens" data-seller="mary-k" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="6" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 7: Dairy Cow -->
-            <article class="glass-card market-card" data-category="livestock" role="listitem">
+            <article class="glass-card market-card" data-category="livestock" data-item-id="7" data-phone="+1234567896" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🐄</div>
                     <span class="category-tag" data-i18n="catLivestock">Livestock</span>
+                    <button class="favorite-btn" data-item-id="7" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Dairy Cow - 1 Available</h3>
@@ -475,16 +490,20 @@
                     <button class="btn btn-primary contact-btn" data-item="cow" data-seller="elder-mwangi" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="7" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
-            <!-- ===================== TOOLS ITEMS ===================== -->
+            <!-- TOOLS ITEMS -->
 
             <!-- Item 8: Farming Tools -->
-            <article class="glass-card market-card" data-category="tools" role="listitem">
+            <article class="glass-card market-card" data-category="tools" data-item-id="8" data-phone="+1234567897" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">⛏️</div>
                     <span class="category-tag" data-i18n="catTools">Tools</span>
+                    <button class="favorite-btn" data-item-id="8" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Farming Tools Set</h3>
@@ -516,14 +535,18 @@
                     <button class="btn btn-primary contact-btn" data-item="tools" data-seller="peter-m" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="8" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 9: Wheelbarrow -->
-            <article class="glass-card market-card" data-category="tools" role="listitem">
+            <article class="glass-card market-card" data-category="tools" data-item-id="9" data-phone="+1234567898" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🛒</div>
                     <span class="category-tag" data-i18n="catTools">Tools</span>
+                    <button class="favorite-btn" data-item-id="9" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Heavy Duty Wheelbarrow</h3>
@@ -555,14 +578,18 @@
                     <button class="btn btn-primary contact-btn" data-item="wheelbarrow" data-seller="builder-sam" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="9" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 10: Water Pump -->
-            <article class="glass-card market-card" data-category="tools" role="listitem">
+            <article class="glass-card market-card" data-category="tools" data-item-id="10" data-phone="+1234567899" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🔧</div>
                     <span class="category-tag" data-i18n="catTools">Tools</span>
+                    <button class="favorite-btn" data-item-id="10" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Manual Water Pump</h3>
@@ -594,16 +621,20 @@
                     <button class="btn btn-primary contact-btn" data-item="water-pump" data-seller="mechanic-joe" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="10" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
-            <!-- ===================== SERVICES ITEMS ===================== -->
+            <!-- SERVICES ITEMS -->
 
             <!-- Item 11: Ploughing -->
-            <article class="glass-card market-card" data-category="services" role="listitem">
+            <article class="glass-card market-card" data-category="services" data-item-id="11" data-phone="+1234567900" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🚜</div>
                     <span class="category-tag" data-i18n="catServices">Services</span>
+                    <button class="favorite-btn" data-item-id="11" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Ploughing Service</h3>
@@ -635,14 +666,18 @@
                     <button class="btn btn-primary contact-btn" data-item="ploughing" data-seller="tractor-coop" type="button" data-i18n="bookService">
                         Book Service
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="11" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 12: Transport -->
-            <article class="glass-card market-card" data-category="services" role="listitem">
+            <article class="glass-card market-card" data-category="services" data-item-id="12" data-phone="+1234567901" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🛻</div>
                     <span class="category-tag" data-i18n="catServices">Services</span>
+                    <button class="favorite-btn" data-item-id="12" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Pickup Truck Transport</h3>
@@ -674,14 +709,18 @@
                     <button class="btn btn-primary contact-btn" data-item="transport" data-seller="driver-charles" type="button" data-i18n="bookService">
                         Book Service
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="12" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 13: Repair -->
-            <article class="glass-card market-card" data-category="services" role="listitem">
+            <article class="glass-card market-card" data-category="services" data-item-id="13" data-phone="+1234567902" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🔨</div>
                     <span class="category-tag" data-i18n="catServices">Services</span>
+                    <button class="favorite-btn" data-item-id="13" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Phone & Radio Repair</h3>
@@ -713,14 +752,18 @@
                     <button class="btn btn-primary contact-btn" data-item="repair" data-seller="tech-wanjiku" type="button" data-i18n="getQuote">
                         Get Quote
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="13" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 14: Classes -->
-            <article class="glass-card market-card" data-category="services" role="listitem">
+            <article class="glass-card market-card" data-category="services" data-item-id="14" data-phone="+1234567903" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">📚</div>
                     <span class="category-tag" data-i18n="catServices">Services</span>
+                    <button class="favorite-btn" data-item-id="14" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Adult Literacy Classes</h3>
@@ -752,16 +795,20 @@
                     <button class="btn btn-primary contact-btn" data-item="classes" data-seller="teacher-amina" type="button" data-i18n="enrollNow">
                         Enroll Now
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="14" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
-            <!-- ===================== HERBS ITEMS (NEW) ===================== -->
+            <!-- HERBS ITEMS -->
 
             <!-- Item 15: Moringa -->
-            <article class="glass-card market-card" data-category="herbs" role="listitem">
+            <article class="glass-card market-card" data-category="herbs" data-item-id="15" data-phone="+1234567904" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌿</div>
                     <span class="category-tag" data-i18n="catHerbs">Herbs</span>
+                    <button class="favorite-btn" data-item-id="15" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Moringa Leaves - 1kg</h3>
@@ -793,14 +840,18 @@
                     <button class="btn btn-primary contact-btn" data-item="moringa" data-seller="herbalist-jane" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="15" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 16: Neem -->
-            <article class="glass-card market-card" data-category="herbs" role="listitem">
+            <article class="glass-card market-card" data-category="herbs" data-item-id="16" data-phone="+1234567905" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🍃</div>
                     <span class="category-tag" data-i18n="catHerbs">Herbs</span>
+                    <button class="favorite-btn" data-item-id="16" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Neem Leaves & Seeds</h3>
@@ -832,14 +883,18 @@
                     <button class="btn btn-primary contact-btn" data-item="neem" data-seller="mama-fatima" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="16" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 17: Aloe Vera -->
-            <article class="glass-card market-card" data-category="herbs" role="listitem">
+            <article class="glass-card market-card" data-category="herbs" data-item-id="17" data-phone="+1234567906" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🌵</div>
                     <span class="category-tag" data-i18n="catHerbs">Herbs</span>
+                    <button class="favorite-btn" data-item-id="17" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Aloe Vera Plants</h3>
@@ -871,14 +926,18 @@
                     <button class="btn btn-primary contact-btn" data-item="aloe" data-seller="sister-mary" type="button" data-i18n="makeOffer">
                         Make Offer
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="17" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
 
             <!-- Item 18: Ginger -->
-            <article class="glass-card market-card" data-category="herbs" role="listitem">
+            <article class="glass-card market-card" data-category="herbs" data-item-id="18" data-phone="+1234567907" role="listitem">
                 <div class="card-header">
                     <div class="item-image" aria-hidden="true">🫚</div>
                     <span class="category-tag" data-i18n="catHerbs">Herbs</span>
+                    <button class="favorite-btn" data-item-id="18" aria-label="Add to favorites">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">Fresh Ginger - 5kg</h3>
@@ -910,12 +969,15 @@
                     <button class="btn btn-primary contact-btn" data-item="ginger" data-seller="farmer-juma" type="button" data-i18n="contactSeller">
                         Contact Seller
                     </button>
+                    <button class="btn btn-secondary share-btn" data-item-id="18" aria-label="Share item">
+                        📤
+                    </button>
                 </div>
             </article>
-        </div> <!-- close market-grid -->
+        </div>
         
         <div class="load-more">
-            <button class="btn btn-secondary" type="button" data-i18n="loadMore">Load More</button>
+            <button class="btn btn-secondary" id="loadMoreBtn" type="button" data-i18n="loadMore">Load More</button>
         </div>
     </section>
 
@@ -989,12 +1051,12 @@
                 <div class="community-stats">
                     <div class="stat-item">
                         <span class="stat-icon">⭐</span>
-                        <span class="stat-number">12</span>
+                        <span class="stat-number" id="trustedTradersCount">12</span>
                         <span class="stat-label" data-i18n="trustedTraders">Trusted Traders</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-icon">🤝</span>
-                        <span class="stat-number">48</span>
+                        <span class="stat-number" id="successfulTradesCount">48</span>
                         <span class="stat-label" data-i18n="successfulTrades">Successful Trades</span>
                     </div>
                     <div class="stat-item">
@@ -1097,7 +1159,7 @@
     <!-- ===================== -->
     <!-- Post Item Modal      -->
     <!-- ===================== -->
-    <div class="modal" id="postItemModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal" id="postItemModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" hidden>
         <div class="modal-overlay"></div>
         <div class="glass-card modal-content">
             <div class="modal-header">
@@ -1107,8 +1169,8 @@
             
             <form class="post-form" id="postItemForm">
                 <div class="form-group">
-                    <label for="itemTitle" data-i18n="itemTitleLabel">Item Title</label>
-                    <input type="text" id="itemTitle" name="title" required placeholder="e.g., Fresh Maize - 50kg">
+                    <label for="itemName" data-i18n="itemTitleLabel">Item Title</label>
+                    <input type="text" id="itemName" name="title" required placeholder="e.g., Fresh Maize - 50kg">
                 </div>
                 
                 <div class="form-row">
@@ -1129,15 +1191,39 @@
                         <input type="text" id="itemPrice" name="price" required placeholder="e.g., $25 or barter for tools">
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="itemLocation" data-i18n="itemLocationLabel">Location</label>
+                    <input type="text" id="itemLocation" name="location" placeholder="e.g., 2km from market">
+                </div>
                 
                 <div class="form-group">
                     <label for="itemDescription" data-i18n="itemDescriptionLabel">Description</label>
                     <textarea id="itemDescription" name="description" rows="3" required placeholder="Describe your item..."></textarea>
                 </div>
+
+                <!-- Image Upload (New) -->
+                <div class="form-group">
+                    <label for="itemImage" data-i18n="itemImageLabel">Item Image</label>
+                    <input type="file" id="itemImage" name="image" accept="image/*" class="file-input">
+                    <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                        <img id="imagePreview" src="" alt="Preview" class="image-preview">
+                        <button type="button" id="removeImageBtn" class="btn btn-secondary btn-small">Remove</button>
+                    </div>
+                </div>
                 
                 <div class="form-group">
                     <label for="sellerName" data-i18n="sellerNameLabel">Your Name</label>
                     <input type="text" id="sellerName" name="seller" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contactMethod" data-i18n="contactMethodLabel">Contact Method</label>
+                    <select id="contactMethod" name="contactMethod" required>
+                        <option value="phone">Phone/SMS</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="visit">In-person visit</option>
+                    </select>
                 </div>
                 
                 <div class="form-notice">
@@ -1146,7 +1232,7 @@
                 
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="cancelPostBtn" data-i18n="cancel">Cancel</button>
-                    <button type="submit" class="btn btn-primary" data-i18n="postItem">Post Item</button>
+                    <button type="submit" class="btn btn-primary" id="submitItemBtn" data-i18n="postItem">Post Item</button>
                 </div>
             </form>
         </div>
@@ -1157,7 +1243,7 @@
     <!-- ===================== -->
     <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- JavaScript - Load in correct order -->
+    <!-- JavaScript -->
     <script src="js/translator.js"></script>
     <script src="js/app.js"></script>
 </body>
