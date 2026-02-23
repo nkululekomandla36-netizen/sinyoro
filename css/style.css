@@ -168,7 +168,7 @@ body {
 .language-selector {
     position: relative;
     display: inline-block;
-    z-index: 1002;
+    z-index: 9999;
 }
 
 .lang-btn {
@@ -186,7 +186,8 @@ body {
     min-width: 120px;
     justify-content: center;
     position: relative;
-    z-index: 1003;
+    z-index: 100;
+    pointer-events: auto;
 }
 
 .lang-btn:hover {
@@ -215,14 +216,17 @@ body {
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
     min-width: 160px;
-    z-index: 9999;
+    z-index: 99999 !important;
+    pointer-events: auto;
 }
 
 /* Show dropdown when active */
 .lang-dropdown.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
 }
 
 .lang-dropdown::before {
@@ -236,6 +240,7 @@ body {
     border-left: 1px solid var(--glass-border);
     border-top: 1px solid var(--glass-border);
     transform: rotate(45deg);
+    z-index: 99999;
 }
 
 .lang-option {
@@ -252,6 +257,9 @@ body {
     border-radius: 8px;
     transition: all 0.2s ease;
     text-align: left;
+    position: relative;
+    z-index: 100000;
+    pointer-events: auto;
 }
 
 .lang-option:hover {
