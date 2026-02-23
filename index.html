@@ -44,24 +44,19 @@
                     🌍 <span class="current-lang">English</span> ▼
                 </button>
                 
-                <div id="langDropdown" class="lang-dropdown">
-                    <button class="lang-option" data-lang="en">
-                        🇬🇧 English
-                    </button>
-                    <button class="lang-option" data-lang="sw">
-                        🇰🇪 Kiswahili
-                    </button>
-                    <button class="lang-option" data-lang="zu">
-                        🇿🇦 isiZulu
-                    </button>
-                    <button class="lang-option" data-lang="sn">
-                        🇿🇼 ChiShona
-                    </button>
-                    <button class="lang-option" data-lang="af">
-                        🇿🇦 Afrikaans
-                    </button>
-                </div>
-            </div>
+                <div class="language-selector">
+    <button type="button" id="languageBtn" class="btn btn-secondary lang-btn">
+        🌍 <span class="current-lang">English</span> ▼
+    </button>
+    
+    <div id="langDropdown" class="lang-dropdown">
+        <button type="button" class="lang-option" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="lang-option" data-lang="sw">🇰🇪 Kiswahili</button>
+        <button type="button" class="lang-option" data-lang="zu">🇿🇦 isiZulu</button>
+        <button type="button" class="lang-option" data-lang="sn">🇿🇼 ChiShona</button>
+        <button type="button" class="lang-option" data-lang="af">🇿🇦 Afrikaans</button>
+    </div>
+</div>
 
             <button class="btn btn-primary" id="postItemBtn" aria-label="Post new item" type="button">
                 <span class="btn-icon">+</span>
