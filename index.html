@@ -38,18 +38,35 @@
         </ul>
         
         <div class="nav-actions">
-            <!-- Language Selector -->
-            <div class="language-selector">
-                <button type="button" id="languageBtn" class="btn btn-secondary lang-btn">
-                    🌍 <span class="current-lang">English</span> ▼
+            <!-- Language Selector - SINGLE INSTANCE ONLY -->
+            <div class="language-selector" id="languageSelector">
+                <button type="button" id="languageBtn" class="btn btn-secondary lang-btn" aria-haspopup="true" aria-expanded="false">
+                    <span class="lang-icon">🌍</span>
+                    <span class="current-lang">English</span>
+                    <span class="dropdown-arrow">▼</span>
                 </button>
                 
-                <div id="langDropdown" class="lang-dropdown">
-                    <button type="button" class="lang-option" data-lang="en">🇬🇧 English</button>
-                    <button type="button" class="lang-option" data-lang="sw">🇰🇪 Kiswahili</button>
-                    <button type="button" class="lang-option" data-lang="zu">🇿🇦 isiZulu</button>
-                    <button type="button" class="lang-option" data-lang="sn">🇿🇼 ChiShona</button>
-                    <button type="button" class="lang-option" data-lang="af">🇿🇦 Afrikaans</button>
+                <div id="langDropdown" class="lang-dropdown" role="menu" hidden>
+                    <button type="button" class="lang-option" data-lang="en" role="menuitem">
+                        <span class="flag">🇬🇧</span>
+                        <span class="lang-name">English</span>
+                    </button>
+                    <button type="button" class="lang-option" data-lang="sw" role="menuitem">
+                        <span class="flag">🇰🇪</span>
+                        <span class="lang-name">Kiswahili</span>
+                    </button>
+                    <button type="button" class="lang-option" data-lang="zu" role="menuitem">
+                        <span class="flag">🇿🇦</span>
+                        <span class="lang-name">isiZulu</span>
+                    </button>
+                    <button type="button" class="lang-option" data-lang="sn" role="menuitem">
+                        <span class="flag">🇿🇼</span>
+                        <span class="lang-name">ChiShona</span>
+                    </button>
+                    <button type="button" class="lang-option" data-lang="af" role="menuitem">
+                        <span class="flag">🇿🇦</span>
+                        <span class="lang-name">Afrikaans</span>
+                    </button>
                 </div>
             </div>
 
@@ -1140,7 +1157,8 @@
     <!-- ===================== -->
     <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- JavaScript -->
+    <!-- JavaScript - Load in correct order -->
+    <script src="js/translator.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
