@@ -241,12 +241,14 @@
             e.preventDefault();
             e.stopPropagation();
             langDropdown.classList.toggle('active');
+            langBtn.classList.toggle('active');
         });
 
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
             if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
                 langDropdown.classList.remove('active');
+                langBtn.classList.remove('active');
             }
         });
 
@@ -261,6 +263,7 @@
                     changeLanguage(lang);
                 }
                 langDropdown.classList.remove('active');
+                langBtn.classList.remove('active');
             });
         });
 
