@@ -202,19 +202,49 @@ body {
     font-size: 0.9rem;
 }
 
-/* Language Dropdown - CRITICAL FIX */
+.language-selector {
+    position: relative;
+}
+
 .lang-dropdown {
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: 100%;
     right: 0;
+    margin-top: 0.5rem;
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 0.5rem;
-    min-width: 180px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    display: none;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.lang-dropdown.active {
+    display: block;
+}
+
+.lang-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.lang-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-option.active {
+    background: rgba(99, 102, 241, 0.3);
+}
     
     /* Hidden by default */
     display: none;
