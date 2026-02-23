@@ -1,13 +1,18 @@
 /* ==========================================
-   LANGUAGE SELECTOR - COMPLETELY FIXED
+   LANGUAGE SELECTOR - FIXED VERSION
+   
+   INSTRUCTION: In your style.css file:
+   1. Find the section starting with ".language-selector"
+   2. DELETE everything from ".language-selector {" down to the end of language styles
+   3. PASTE this entire section in its place
    ========================================== */
+
 .language-selector {
     position: relative;
     display: inline-block;
-    z-index: 1000;
 }
 
-.lang-btn {
+#languageBtn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -21,73 +26,39 @@
     transition: all 0.3s ease;
     min-width: 140px;
     justify-content: center;
-    position: relative;
-    /* CRITICAL: Ensure button is clickable */
-    pointer-events: auto;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    font-family: inherit;
 }
 
-.lang-btn:hover {
+#languageBtn:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: var(--accent-blue);
-}
-
-.lang-btn.active {
-    background: rgba(59, 130, 246, 0.3);
-    border-color: var(--accent-blue);
-}
-
-.lang-icon {
-    font-size: 1.2rem;
 }
 
 .current-lang {
     font-size: 0.9rem;
 }
 
-.dropdown-arrow {
-    font-size: 0.7rem;
-    transition: transform 0.3s ease;
-    margin-left: 0.25rem;
-}
-
-.lang-btn.active .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-/* CRITICAL FIX: Dropdown visibility and clickability */
-.lang-dropdown {
+#langDropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
     background: rgba(15, 23, 42, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 0.5rem;
+    display: none;
     min-width: 180px;
-    z-index: 9999;
-    /* CRITICAL: Start hidden but ready to show */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    /* CRITICAL: Ensure dropdown is clickable when visible */
-    pointer-events: none;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 100000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* CRITICAL FIX: Show dropdown when active */
-.lang-dropdown.active,
-.lang-dropdown:not([hidden]) {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
+#langDropdown.active {
+    display: block;
 }
 
-/* Arrow pointer */
-.lang-dropdown::before {
+#langDropdown::before {
     content: '';
     position: absolute;
     top: -6px;
@@ -98,7 +69,6 @@
     border-left: 1px solid rgba(255, 255, 255, 0.15);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     transform: rotate(45deg);
-    z-index: 1;
 }
 
 .lang-option {
@@ -115,10 +85,7 @@
     border-radius: 8px;
     transition: all 0.2s ease;
     text-align: left;
-    /* CRITICAL: Ensure options are clickable */
-    pointer-events: auto;
-    position: relative;
-    z-index: 2;
+    font-family: inherit;
 }
 
 .lang-option:hover {
@@ -128,6 +95,7 @@
 .lang-option.active {
     background: var(--accent-blue);
     color: white;
+    font-weight: 600;
 }
 
 .lang-option.active::after {
@@ -136,41 +104,28 @@
     font-weight: bold;
 }
 
-.flag {
-    font-size: 1.2rem;
-}
+/* Mobile Language Selector */
+@media (max-width: 768px) {
+    #languageBtn {
+        padding: 0.5rem 0.75rem;
+        min-width: 110px;
+    }
 
-.lang-name {
-    font-weight: 500;
-}
-/* ==========================================
-   LANGUAGE DROPDOWN FIX ONLY
-   ========================================== */
+    .current-lang {
+        font-size: 0.85rem;
+    }
 
-/* Make sure dropdown shows when active */
-.lang-dropdown.active {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    z-index: 99999 !important;
-}
+    #langDropdown {
+        right: -20px;
+        min-width: 160px;
+    }
 
-/* Ensure button is clickable */
-#languageBtn {
-    pointer-events: auto !important;
-    position: relative;
-    z-index: 1000;
-}
+    #langDropdown::before {
+        right: 40px;
+    }
 
-/* Ensure dropdown container is above everything */
-.language-selector {
-    position: relative;
-    z-index: 1000;
-}
-
-/* Make sure options are clickable */
-.lang-option {
-    pointer-events: auto !important;
-    cursor: pointer;
+    .lang-option {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.875rem;
+    }
 }
