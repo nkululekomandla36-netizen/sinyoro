@@ -143,3 +143,34 @@
 .lang-name {
     font-weight: 500;
 }
+/* ==========================================
+   LANGUAGE DROPDOWN FIX ONLY
+   ========================================== */
+
+/* Make sure dropdown shows when active */
+.lang-dropdown.active {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 99999 !important;
+}
+
+/* Ensure button is clickable */
+#languageBtn {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Ensure dropdown container is above everything */
+.language-selector {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Make sure options are clickable */
+.lang-option {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
