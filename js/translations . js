@@ -1,12 +1,12 @@
 /**
- * SINYORO TRANSLATIONS SYSTEM v2.0
- * Fixed version - no duplicate event listeners
+ * SINYORO TRANSLATIONS SYSTEM
+ * Handles language switching for the marketplace
  */
 
 (function() {
     'use strict';
 
-    // Translation data
+    // Translation data (keep your existing data)
     const translations = {
         en: {
             brandName: "Community Marketplace",
@@ -403,26 +403,15 @@
     let currentLang = localStorage.getItem('sinyoro-language') || 'en';
     let isInitialized = false;
 
-    // CRITICAL FIX: Only initialize once
     function init() {
-        if (isInitialized) {
-            console.log('Translator already initialized, skipping...');
-            return;
-        }
+        // Prevent double initialization
+        if (isInitialized) return;
         isInitialized = true;
 
-        console.log('Initializing translator...');
-        
-        // Apply saved language immediately
         applyLanguage(currentLang);
         
-        // Setup event listeners with delay to ensure DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', setupEventListeners);
-        } else {
-            // DOM already loaded, setup immediately
-            setupEventListeners();
-        }
+        // Small delay to ensure DOM is fully ready
+        setTimeout(setupEventListeners, 100);
     }
 
     function setupEventListeners() {
@@ -430,99 +419,60 @@
         const langDropdown = document.getElementById('langDropdown');
 
         if (!langBtn || !langDropdown) {
-            console.error('Language selector elements not found');
+            console.error('Language selector not found');
             return;
         }
 
-        console.log('Setting up language selector listeners');
-
-        // Remove any existing listeners by cloning (nuclear option)
-        const newLangBtn = langBtn.cloneNode(true);
-        langBtn.parentNode.replaceChild(newLangBtn, langBtn);
-
         // Toggle dropdown
-        newLangBtn.addEventListener('click', function(e) {
+        langBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
             const isExpanded = this.getAttribute('aria-expanded') === 'true';
             this.setAttribute('aria-expanded', !isExpanded);
-            this.classList.toggle('active');
-            
-            // Toggle dropdown visibility
-            if (langDropdown.hasAttribute('hidden')) {
-                langDropdown.removeAttribute('hidden');
-                // Small delay to allow transition
-                requestAnimationFrame(() => {
-                    langDropdown.classList.add('active');
-                });
-            } else {
-                langDropdown.classList.remove('active');
-                setTimeout(() => {
-                    langDropdown.setAttribute('hidden', '');
-                }, 300);
-            }
+            langDropdown.classList.toggle('active');
         });
 
         // Close when clicking outside
         document.addEventListener('click', function(e) {
-            if (!newLangBtn.contains(e.target) && !langDropdown.contains(e.target)) {
-                newLangBtn.setAttribute('aria-expanded', 'false');
-                newLangBtn.classList.remove('active');
+            if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+                langBtn.setAttribute('aria-expanded', 'false');
                 langDropdown.classList.remove('active');
-                setTimeout(() => {
-                    langDropdown.setAttribute('hidden', '');
-                }, 300);
             }
         });
 
-        // Language option clicks - use event delegation
-        langDropdown.addEventListener('click', function(e) {
-            const option = e.target.closest('.lang-option');
-            if (!option) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            const lang = option.getAttribute('data-lang');
-            if (lang && lang !== currentLang) {
-                changeLanguage(lang);
-            }
-
-            // Close dropdown
-            newLangBtn.setAttribute('aria-expanded', 'false');
-            newLangBtn.classList.remove('active');
-            langDropdown.classList.remove('active');
-            setTimeout(() => {
-                langDropdown.setAttribute('hidden', '');
-            }, 300);
+        // Language selection
+        const langOptions = langDropdown.querySelectorAll('.lang-option');
+        langOptions.forEach(function(option) {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const lang = this.getAttribute('data-lang');
+                if (lang && lang !== currentLang) {
+                    changeLanguage(lang);
+                }
+                
+                langBtn.setAttribute('aria-expanded', 'false');
+                langDropdown.classList.remove('active');
+            });
         });
 
-        // Update UI
         updateLanguageButton(currentLang);
         updateActiveOption(currentLang);
     }
 
     function changeLanguage(lang) {
-        if (!translations[lang]) {
-            console.error('Unknown language:', lang);
-            return;
-        }
-
-        console.log('Changing language to:', lang);
+        if (!translations[lang]) return;
+        
         currentLang = lang;
         localStorage.setItem('sinyoro-language', lang);
-
+        
         applyLanguage(lang);
         updateLanguageButton(lang);
         updateActiveOption(lang);
         
-        // Dispatch custom event for other scripts
-        document.dispatchEvent(new CustomEvent('languageChanged', {
-            detail: { language: lang }
-        }));
-
-        showToast(translations[lang].toastLanguageChanged || `Language changed to ${lang}`);
+        showToast(translations[lang].toastLanguageChanged);
     }
 
     function applyLanguage(lang) {
@@ -597,14 +547,13 @@
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             animation: slideIn 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
         `;
 
         toastContainer.appendChild(toast);
         
-        setTimeout(() => {
+        setTimeout(function() {
             toast.style.animation = 'slideOut 0.3s ease forwards';
-            setTimeout(() => toast.remove(), 300);
+            setTimeout(function() { toast.remove(); }, 300);
         }, 3000);
     }
 
@@ -612,8 +561,12 @@
         return translations[currentLang]?.[key] || translations['en']?.[key] || key;
     }
 
-    // Initialize immediately
-    init();
+    // Initialize
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 
     // Expose to window
     window.SinyoroTranslations = {
