@@ -1,5 +1,5 @@
 /**
- * SINYORO TRANSLATIONS SYSTEM
+ * SINYORO TRANSLATIONS SYSTEM - FIXED VERSION
  */
 
 (function() {
@@ -355,11 +355,31 @@
     };
 
     let currentLang = localStorage.getItem('sinyoro-language') || 'en';
+    let isInitialized = false;
 
     function init() {
+        if (isInitialized) {
+            console.log('Translations already initialized');
+            return;
+        }
+        
         console.log('Translations initializing...');
+        
+        // Check if DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', doInit);
+        } else {
+            doInit();
+        }
+    }
+
+    function doInit() {
+        if (isInitialized) return;
+        
         setupEventListeners();
         applyLanguage(currentLang);
+        isInitialized = true;
+        console.log('Translations initialized successfully');
     }
 
     function setupEventListeners() {
@@ -367,7 +387,10 @@
         const langDropdown = document.getElementById('langDropdown');
         
         if (!langBtn || !langDropdown) {
-            console.error('Language elements not found:', { langBtn, langDropdown });
+            console.error('Language elements not found:', { 
+                langBtn: !!langBtn, 
+                langDropdown: !!langDropdown 
+            });
             return;
         }
 
@@ -427,6 +450,8 @@
         const langBtn = document.getElementById('languageBtn');
         const langDropdown = document.getElementById('langDropdown');
         
+        if (!langBtn || !langDropdown) return;
+
         langDropdown.classList.add('active');
         langBtn.classList.add('active');
         langBtn.setAttribute('aria-expanded', 'true');
@@ -437,6 +462,8 @@
     function closeDropdown() {
         const langBtn = document.getElementById('languageBtn');
         const langDropdown = document.getElementById('langDropdown');
+        
+        if (!langBtn || !langDropdown) return;
         
         langDropdown.classList.remove('active');
         langBtn.classList.remove('active');
@@ -545,12 +572,8 @@
         return translations[currentLang]?.[key] || translations['en']?.[key] || key;
     }
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+    // Initialize immediately if DOM is ready, otherwise wait
+    init();
 
     // Expose globally
     window.SinyoroTranslations = {
