@@ -1,7 +1,7 @@
-/* ======================================================
+ /* ======================================================
    SINYORO APP.JS
-   Main Application Logic (UI + Market + GPS Integration)
-   ====================================================== */
+   Main Application Logic (UI + Market + GPS + Language + Connection)
+====================================================== */
 
 /* -----------------------------
    GLOBAL STATE
@@ -9,22 +9,6 @@
 let currentLanguage = "en";
 let currentUserLocation = null;
 let marketItems = [];
-
-/* -----------------------------
-   CONNECTION STATUS (SAFE OFFLINE)
------------------------------ */
-function checkConnection() {
-  const statusEl = document.getElementById("connection-status");
-  if (!statusEl) return;
-
-  if (navigator.onLine) {
-    statusEl.textContent = "Online";
-    statusEl.style.color = "green";
-  } else {
-    statusEl.textContent = "Offline mode";
-    statusEl.style.color = "orange";
-  }
-}
 
 /* -----------------------------
    UTILITIES
@@ -43,8 +27,23 @@ function showToast(message, duration = 3000) {
   toast.style.fontSize = "14px";
   toast.style.zIndex = "9999";
   document.body.appendChild(toast);
-
   setTimeout(() => toast.remove(), duration);
+}
+
+/* -----------------------------
+   CONNECTION STATUS
+----------------------------- */
+function checkConnection() {
+  const statusEl = document.getElementById("connection-status");
+  if (!statusEl) return;
+
+  if (navigator.onLine) {
+    statusEl.textContent = "Online";
+    statusEl.style.color = "green";
+  } else {
+    statusEl.textContent = "Offline mode";
+    statusEl.style.color = "orange";
+  }
 }
 
 /* -----------------------------
@@ -60,6 +59,8 @@ function setLanguage(lang) {
       }
     });
   }
+  const currentLangEl = document.querySelector(".current-lang");
+  if (currentLangEl) currentLangEl.textContent = TRANSLATIONS[lang]?.languageName || lang;
 }
 
 /* -----------------------------
@@ -112,17 +113,10 @@ function handleAddItem(form) {
     return;
   }
 
-  const item = createMarketItem({
-    title,
-    category,
-    description,
-    price
-  });
-
+  const item = createMarketItem({ title, category, description, price });
   marketItems.push(item);
   saveItemsOffline();
   renderMarketItems();
-
   form.reset();
   showToast("Item posted successfully");
 }
@@ -133,15 +127,10 @@ function handleAddItem(form) {
 function saveItemsOffline() {
   localStorage.setItem("sinyoro_market_items", JSON.stringify(marketItems));
 }
-
 function loadItemsOffline() {
   const saved = localStorage.getItem("sinyoro_market_items");
   if (saved) {
-    try {
-      marketItems = JSON.parse(saved);
-    } catch {
-      marketItems = [];
-    }
+    try { marketItems = JSON.parse(saved); } catch { marketItems = []; }
   }
 }
 
@@ -162,12 +151,11 @@ function calculateDistance(itemLocation) {
    RENDER MARKET
 ----------------------------- */
 function renderMarketItems() {
-  const container = document.getElementById("marketList");
+  const container = document.getElementById("marketGrid");
   if (!container) return;
 
   container.innerHTML = "";
-
-  const sortedItems = [...marketItems].sort((a, b) => {
+  const sortedItems = [...marketItems].sort((a,b) => {
     const dA = calculateDistance(a.location) ?? Infinity;
     const dB = calculateDistance(b.location) ?? Infinity;
     return dA - dB;
@@ -176,50 +164,69 @@ function renderMarketItems() {
   sortedItems.forEach(item => {
     const card = document.createElement("div");
     card.className = "market-card";
-
     const distance = calculateDistance(item.location);
-    const distanceText = distance
-      ? `${distance.toFixed(1)} km away`
-      : "Distance unknown";
-
+    const distanceText = distance ? `${distance.toFixed(1)} km away` : "Distance unknown";
     card.innerHTML = `
       <h3>${item.title}</h3>
       <p><strong>Category:</strong> ${item.category}</p>
       <p>${item.description || ""}</p>
       <p><strong>${distanceText}</strong></p>
     `;
-
     container.appendChild(card);
   });
 }
 
 /* -----------------------------
-   INIT APP (SAFE ORDER)
+   INIT APP
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  // Connection status
+  // Connection
   checkConnection();
   window.addEventListener("online", checkConnection);
   window.addEventListener("offline", checkConnection);
 
-  // Load data
+  // Load offline items
   loadItemsOffline();
   renderMarketItems();
 
-  // Bind UI
+  // Location button
   const locationBtn = document.getElementById("captureLocationBtn");
-  if (locationBtn) {
-    locationBtn.addEventListener("click", captureLocation);
-  }
+  if (locationBtn) locationBtn.addEventListener("click", captureLocation);
 
-  const addItemForm = document.getElementById("addItemForm");
-  if (addItemForm) {
-    addItemForm.addEventListener("submit", e => {
-      e.preventDefault();
-      handleAddItem(addItemForm);
+  // Post item form
+  const addItemForm = document.getElementById("postItemForm");
+  if (addItemForm) addItemForm.addEventListener("submit", e => {
+    e.preventDefault();
+    handleAddItem(addItemForm);
+  });
+
+  // Language dropdown
+  const languageBtn = document.getElementById("languageBtn");
+  const langDropdown = document.getElementById("langDropdown");
+  if (languageBtn && langDropdown) {
+    langDropdown.hidden = true; // start hidden
+    languageBtn.addEventListener("click", () => {
+      const expanded = languageBtn.getAttribute("aria-expanded") === "true";
+      languageBtn.setAttribute("aria-expanded", !expanded);
+      langDropdown.hidden = expanded;
+    });
+
+    langDropdown.querySelectorAll(".lang-option").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const selectedLang = btn.dataset.lang;
+        setLanguage(selectedLang);
+
+        // update active state
+        langDropdown.querySelectorAll(".lang-option").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // close dropdown
+        languageBtn.setAttribute("aria-expanded", false);
+        langDropdown.hidden = true;
+      });
     });
   }
 
-  // Language
+  // Initial language
   setLanguage(currentLanguage);
 });
