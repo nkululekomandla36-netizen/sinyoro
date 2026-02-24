@@ -1251,3 +1251,281 @@ body {
         font-size: 0.875rem;
     }
 }
+
+
+/* ==========================================
+   LOCATION SYSTEM STYLES
+   Add this to the END of your style.css
+   ========================================== */
+
+/* Location Section in Modal */
+.location-section {
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: var(--accent-blue);
+}
+
+.section-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+}
+
+/* GPS Capture Box */
+.gps-capture-box {
+    margin-bottom: 1rem;
+}
+
+.gps-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.status-icon {
+    font-size: 1.25rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.status-text {
+    font-weight: 600;
+    color: var(--accent-yellow);
+}
+
+.status-details {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+}
+
+/* GPS Result */
+.gps-result {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 8px;
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.result-icon {
+    font-size: 1.25rem;
+}
+
+.result-text {
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+.result-details {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    margin-bottom: 0.75rem;
+}
+
+.result-details p {
+    margin: 0.25rem 0;
+}
+
+/* Badges */
+.recommended-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--accent-green);
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+.optional-badge {
+    display: inline-block;
+    background: rgba(148, 163, 184, 0.2);
+    color: var(--text-gray);
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* Field Hints */
+.field-hint {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    font-style: italic;
+}
+
+/* Privacy Notice */
+.privacy-notice {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 8px;
+    font-size: 0.875rem;
+}
+
+.privacy-notice p {
+    margin: 0;
+    color: var(--text-gray);
+}
+
+/* Location Display in Cards */
+.location-display {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--glass-bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-blue);
+}
+
+.location-display p {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+}
+
+.location-display .landmark {
+    font-weight: 600;
+    color: var(--accent-yellow);
+}
+
+.location-display .area {
+    color: var(--text-gray);
+}
+
+.location-display .notes {
+    color: var(--text-gray);
+    font-style: italic;
+}
+
+.location-display .coordinates {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--text-gray);
+}
+
+.location-display .accuracy {
+    font-size: 0.75rem;
+    color: var(--accent-green);
+}
+
+.no-location {
+    color: var(--text-gray);
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+/* GPS Status Indicators */
+.gps-excellent {
+    color: var(--accent-green);
+}
+
+.gps-good {
+    color: var(--accent-blue);
+}
+
+.gps-weak {
+    color: var(--accent-yellow);
+}
+
+.gps-warning {
+    color: var(--accent-yellow);
+}
+
+.gps-error {
+    color: var(--accent-red);
+}
+
+/* Distance Badge in Cards */
+.distance-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+.distance-badge.nearby {
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--accent-green);
+}
+
+.distance-badge.far {
+    background: rgba(148, 163, 184, 0.2);
+    color: var(--text-gray);
+}
+
+/* Location Reveal Dialog */
+.location-reveal {
+    padding: 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+.location-reveal h4 {
+    margin-bottom: 0.5rem;
+    color: var(--accent-yellow);
+}
+
+.reveal-warning {
+    padding: 0.75rem;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .location-section {
+        padding: 1rem;
+    }
+    
+    .gps-capture-box button {
+        font-size: 0.875rem;
+        padding: 0.75rem;
+    }
+    
+    .gps-result,
+    .gps-status {
+        padding: 0.75rem;
+    }
+}
