@@ -380,4 +380,66 @@ function initApp() {
     }
 
     function renderMarketItems(items) {
-        const grid = document.getElementById
+        const grid = document.getElementById('marketGrid');
+        if (!grid) return;
+
+        const icons = {
+            food: '🌾',
+            livestock: '🐐',
+            tools: '🛠️',
+            services: '💼',
+            herbs: '🌿'
+        };
+
+        grid.innerHTML = items.map(item => `
+            <article class="glass-card market-card" data-category="${item.category}" data-item-id="${item.id}">
+                <div class="card-header">
+                    <div class="item-image">${icons[item.category] || '📦'}</div>
+                    <span class="category-tag">${item.category}</span>
+                    <button class="favorite-btn" data-item-id="${item.id}">☆</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="item-title">${item.name}</h3>
+                    <p class="item-description">${item.description}</p>
+                    <div class="item-meta">
+                        <div class="meta-row">
+                            <span class="price-tag">
+                                <span class="meta-icon">💰</span>
+                                <span>${item.price}</span>
+                            </span>
+                            <span class="distance-tag">
+                                <span class="meta-icon">📍</span>
+                                <span>${item.location}</span>
+                            </span>
+                        </div>
+                        <div class="seller-row">
+                            <div class="seller-info">
+                                <span>👤 ${item.sellerName}</span>
+                            </div>
+                            <span class="trust-badge trusted">⭐ Trusted</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary contact-btn">Contact Seller</button>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    updateConnectionStatus();
+    loadMarketItems();
+    
+    // Welcome message
+    if (!localStorage.getItem('sinyoro_welcomed')) {
+        setTimeout(() => {
+            showToast('Welcome to Sinyoro! 🌾 Start trading offline.', 'success', 5000);
+            localStorage.setItem('sinyoro_welcomed', 'true');
+        }, 1000);
+    }
+
+    console.log('✅ Sinyoro Ready!');
+}
