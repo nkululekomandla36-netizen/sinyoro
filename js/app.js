@@ -1,21 +1,19 @@
 // ==========================================
-// SINYORO APP - Main Application Logic
+// SINYORO APP - Main Application Logic (COMPLETED)
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Sinyoro Loading...');
+    console.log('Sinyoro app initializing...');
     
-    // Initialize when translations are ready
-    if (window.SinyoroTranslations) {
+    // Wait a bit for translations to initialize first
+    setTimeout(function() {
         initApp();
-    } else {
-        document.addEventListener('translationsLoaded', initApp);
-        // Fallback if event never fires
-        setTimeout(initApp, 1000);
-    }
+    }, 100);
 });
 
 function initApp() {
+    console.log('Initializing app...');
+    
     const i18n = window.SinyoroTranslations;
     const t = (key) => i18n ? i18n.getText(key) : key;
 
@@ -79,39 +77,6 @@ function initApp() {
         toast.classList.add('hiding');
         setTimeout(() => toast.remove(), 400);
     }
-
-    // ==========================================
-    // INDEXEDDB SETUP
-    // ==========================================
-    const DB_NAME = 'SinyoroDB';
-    const DB_VERSION = 2;
-    let db;
-
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-    
-    request.onerror = () => {
-        console.error('Database failed to open');
-        showToast('Using local storage mode', 'warning');
-    };
-    
-    request.onsuccess = () => {
-        db = request.result;
-        console.log('Database ready');
-        loadMarketItems();
-    };
-    
-    request.onupgradeneeded = (e) => {
-        const db = e.target.result;
-        
-        if (!db.objectStoreNames.contains('items')) {
-            const itemsStore = db.createObjectStore('items', { keyPath: 'id', autoIncrement: true });
-            itemsStore.createIndex('category', 'category', { unique: false });
-        }
-        
-        if (!db.objectStoreNames.contains('favorites')) {
-            db.createObjectStore('favorites', { keyPath: 'itemId' });
-        }
-    };
 
     // ==========================================
     // CONNECTION STATUS
@@ -320,63 +285,19 @@ function initApp() {
     }
 
     // ==========================================
-    // FORM SUBMISSION
-    // ==========================================
-    const postItemForm = document.getElementById('postItemForm');
-    
-    if (postItemForm) {
-        postItemForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const itemData = {
-                name: document.getElementById('itemName')?.value.trim(),
-                category: document.getElementById('itemCategory')?.value,
-                description: document.getElementById('itemDescription')?.value.trim(),
-                price: document.getElementById('itemPrice')?.value.trim(),
-                location: document.getElementById('itemLocation')?.value.trim() || 'Not specified',
-                sellerName: document.getElementById('sellerName')?.value.trim(),
-                contactMethod: document.getElementById('contactMethod')?.value || 'phone',
-                imageData: imagePreview?.src || null,
-                date: new Date().toISOString(),
-                synced: false
-            };
-
-            if (!itemData.name || !itemData.category || !itemData.description || !itemData.price || !itemData.sellerName) {
-                showToast('Please fill all required fields', 'error');
-                return;
-            }
-
-            // Save to localStorage as fallback
-            try {
-                const items = JSON.parse(localStorage.getItem('sinyoro_items') || '[]');
-                items.push({ ...itemData, id: Date.now() });
-                localStorage.setItem('sinyoro_items', JSON.stringify(items));
-                
-                showToast('Item posted successfully!', 'success');
-                closeModal();
-                postItemForm.reset();
-                loadMarketItems();
-            } catch (err) {
-                showToast('Failed to save item', 'error');
-            }
-        });
-    }
-
-    // ==========================================
     // LOAD MARKET ITEMS
     // ==========================================
     function loadMarketItems() {
-        // Load sample items if none exist
         const sampleItems = [
-            { id: 1, name: 'Maize - 50kg Bag', category: 'food', description: 'Grade A, dried and ready', price: '$25 or barter', location: '2km away', sellerName: 'Mama Sarah', date: new Date().toISOString() },
-            { id: 2, name: 'Goats - 3 Available', category: 'livestock', description: 'Healthy, vaccinated', price: 'Barter for tools', location: '5km away', sellerName: 'Baba John', date: new Date().toISOString() },
-            { id: 3, name: 'Farming Tools Set', category: 'tools', description: 'Hoe, rake, and shovel', price: '$15', location: '1km away', sellerName: 'Peter M.', date: new Date().toISOString() }
+            { id: 1, name: 'Maize - 50kg Bag', category: 'food', description: 'Grade A, dried and ready', price: '$25 or barter', location: '2km away', sellerName: 'Mama Sarah' },
+            { id: 2, name: 'Goats - 3 Available', category: 'livestock', description: 'Healthy, vaccinated', price: 'Barter for tools', location: '5km away', sellerName: 'Baba John' },
+            { id: 3, name: 'Farming Tools Set', category: 'tools', description: 'Hoe, rake, and shovel', price: '$15', location: '1km away', sellerName: 'Peter M.' },
+            { id: 4, name: 'Fresh Vegetables', category: 'food', description: 'Spinach, kale, tomatoes', price: '$5/bundle', location: '500m away', sellerName: 'Auntie Rose' },
+            { id: 5, name: 'Ploughing Service', category: 'services', description: 'Tractor ploughing per acre', price: '$10/acre', location: '3km away', sellerName: 'Tractor Co-op' },
+            { id: 6, name: 'Moringa Leaves', category: 'herbs', description: 'Dried organic moringa 1kg', price: '$5', location: '1km away', sellerName: 'Herbalist Jane' }
         ];
 
-        const stored = localStorage.getItem('sinyoro_items');
-        const items = stored ? JSON.parse(stored) : sampleItems;
-        
-        renderMarketItems(items);
+        renderMarketItems(sampleItems);
     }
 
     function renderMarketItems(items) {
@@ -396,7 +317,6 @@ function initApp() {
                 <div class="card-header">
                     <div class="item-image">${icons[item.category] || '📦'}</div>
                     <span class="category-tag">${item.category}</span>
-                    <button class="favorite-btn" data-item-id="${item.id}">☆</button>
                 </div>
                 <div class="card-body">
                     <h3 class="item-title">${item.name}</h3>
@@ -416,15 +336,173 @@ function initApp() {
                             <div class="seller-info">
                                 <span>👤 ${item.sellerName}</span>
                             </div>
-                            <span class="trust-badge trusted">⭐ Trusted</span>
+                            <span class="trust-badge">⭐ Trusted</span>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary contact-btn">Contact Seller</button>
+                    <button class="btn btn-primary btn-full contact-seller-btn" data-item-id="${item.id}">
+                        ${t('contactSeller') || 'Contact Seller'}
+                    </button>
                 </div>
             </article>
         `).join('');
+
+        // Add event listeners to contact buttons
+        document.querySelectorAll('.contact-seller-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const itemId = e.target.closest('.contact-seller-btn').dataset.itemId;
+                const item = items.find(i => i.id == itemId);
+                if (item) {
+                    showContactDialog(item);
+                }
+            });
+        });
+    }
+
+    function showContactDialog(item) {
+        const contactMethod = confirm(`Contact ${item.sellerName} about "${item.name}"?\n\nClick OK for SMS, Cancel for Call`);
+        
+        if (contactMethod) {
+            // Simulate SMS
+            showToast(`Opening SMS to ${item.sellerName}...`, 'info');
+            setTimeout(() => {
+                showToast(`Message template: "Hi ${item.sellerName}, I'm interested in your ${item.name} listed on Sinyoro."`, 'success', 5000);
+            }, 1000);
+        } else {
+            // Simulate Call
+            showToast(`Calling ${item.sellerName}...`, 'info');
+        }
+    }
+
+    // ==========================================
+    // FORM SUBMISSION
+    // ==========================================
+    const postItemForm = document.getElementById('postItemForm');
+    
+    if (postItemForm) {
+        postItemForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(postItemForm);
+            const itemData = {
+                id: Date.now(),
+                name: formData.get('title'),
+                category: formData.get('category'),
+                price: formData.get('price'),
+                location: formData.get('location') || 'Unknown location',
+                description: formData.get('description'),
+                sellerName: formData.get('seller'),
+                contactMethod: formData.get('contactMethod'),
+                image: imagePreview?.src || null
+            };
+
+            // Validation
+            if (!itemData.name || !itemData.category || !itemData.price) {
+                showToast('Please fill in all required fields', 'error');
+                return;
+            }
+
+            // Save to localStorage (simulating offline storage)
+            saveItemLocally(itemData);
+            
+            // Show success message
+            showToast('Item posted successfully!', 'success');
+            
+            // Close modal and reset
+            closeModal();
+            
+            // Refresh my items display
+            loadMyItems();
+            
+            // If we're in the same category, refresh market view
+            const activeFilter = document.querySelector('.filter-btn.active')?.dataset.category;
+            if (activeFilter === 'all' || activeFilter === itemData.category) {
+                const currentItems = getStoredItems();
+                renderMarketItems(currentItems.filter(i => i.category === itemData.category || activeFilter === 'all'));
+            }
+        });
+    }
+
+    function saveItemLocally(item) {
+        let items = JSON.parse(localStorage.getItem('sinyoro-items') || '[]');
+        items.unshift(item); // Add to beginning
+        localStorage.setItem('sinyoro-items', JSON.stringify(items));
+    }
+
+    function getStoredItems() {
+        return JSON.parse(localStorage.getItem('sinyoro-items') || '[]');
+    }
+
+    // ==========================================
+    // MY ITEMS MANAGEMENT
+    // ==========================================
+    function loadMyItems() {
+        const myItemsList = document.getElementById('myItemsList');
+        if (!myItemsList) return;
+
+        const items = getStoredItems();
+        
+        if (items.length === 0) {
+            myItemsList.innerHTML = `
+                <div class="glass-card empty-state" id="emptyState">
+                    <div class="empty-icon">📭</div>
+                    <h3>${t('noItemsTitle') || 'No Items Yet'}</h3>
+                    <p>${t('noItemsDesc') || 'Start selling by posting your first item to the marketplace.'}</p>
+                    <button class="btn btn-primary" id="postFirstItemBtn" type="button">
+                        ${t('postItem') || 'Post Item'}
+                    </button>
+                </div>
+            `;
+            document.getElementById('postFirstItemBtn')?.addEventListener('click', openModal);
+        } else {
+            myItemsList.innerHTML = items.map(item => `
+                <div class="glass-card my-item-card" data-item-id="${item.id}">
+                    <div class="my-item-header">
+                        <h4>${item.name}</h4>
+                        <span class="category-tag">${item.category}</span>
+                    </div>
+                    <p class="my-item-price">${item.price}</p>
+                    <p class="my-item-location">📍 ${item.location}</p>
+                    <div class="my-item-actions">
+                        <button class="btn btn-secondary btn-small edit-item-btn" data-id="${item.id}">Edit</button>
+                        <button class="btn btn-secondary btn-small delete-item-btn" data-id="${item.id}" style="color: #ef4444;">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add delete handlers
+            document.querySelectorAll('.delete-item-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.dataset.id);
+                    deleteItem(id);
+                });
+            });
+        }
+    }
+
+    function deleteItem(id) {
+        if (!confirm('Are you sure you want to delete this item?')) return;
+        
+        let items = getStoredItems();
+        items = items.filter(item => item.id !== id);
+        localStorage.setItem('sinyoro-items', JSON.stringify(items));
+        
+        showToast('Item deleted', 'success');
+        loadMyItems();
+    }
+
+    // ==========================================
+    // LOAD MORE BUTTON
+    // ==========================================
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            showToast('Loading more items...', 'loading', 2000);
+            setTimeout(() => {
+                showToast('No more items available', 'info');
+            }, 2000);
+        });
     }
 
     // ==========================================
@@ -432,14 +510,7 @@ function initApp() {
     // ==========================================
     updateConnectionStatus();
     loadMarketItems();
-    
-    // Welcome message
-    if (!localStorage.getItem('sinyoro_welcomed')) {
-        setTimeout(() => {
-            showToast('Welcome to Sinyoro! 🌾 Start trading offline.', 'success', 5000);
-            localStorage.setItem('sinyoro_welcomed', 'true');
-        }, 1000);
-    }
+    loadMyItems();
 
-    console.log('✅ Sinyoro Ready!');
+    console.log('Sinyoro app initialized successfully!');
 }
