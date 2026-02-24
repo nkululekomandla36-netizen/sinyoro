@@ -148,7 +148,11 @@ function initApp() {
         postItemModal.hidden = true;
         document.body.style.overflow = '';
         document.getElementById('postItemForm')?.reset();
-        clearImagePreview();
+        clearImagePreview();currentItemLocation = null;
+    
+    // Hide GPS UI
+    if (gpsStatus) gpsStatus.style.display = 'none';
+    if (gpsResult) gpsResult.style.display = 'none';
     }
 
     document.getElementById('postItemBtn')?.addEventListener('click', openModal);
@@ -353,7 +357,7 @@ function initApp() {
             btn.addEventListener('click', (e) => {
                 const itemId = e.target.closest('.contact-seller-btn').dataset.itemId;
                 const item = items.find(i => i.id == itemId);
-                if (item) {
+                if (item) { imageData: imageData,):
                     showContactDialog(item);
                 }
             });
@@ -371,7 +375,11 @@ function initApp() {
             }, 1000);
         } else {
             // Simulate Call
-            showToast(`Calling ${item.sellerName}...`, 'info');
+            showToast(`Calling ${item.sellerName}...`, 'info');// Validate location
+if (!currentItemLocation && !landmark && !area) {
+    showToast('Please provide GPS, landmark, or area', 'warning');
+    return;
+}
         }
     }
 
@@ -513,4 +521,86 @@ function initApp() {
     loadMyItems();
 
     console.log('Sinyoro app initialized successfully!');
+}
+
+// ==========================================
+// GPS CAPTURE HANDLERS
+// ==========================================
+const captureGPSBtn = document.getElementById('captureGPSBtn');
+const gpsStatus = document.getElementById('gpsStatus');
+const gpsResult = document.getElementById('gpsResult');
+const retryGPSBtn = document.getElementById('retryGPSBtn');
+
+if (captureGPSBtn) {
+    captureGPSBtn.addEventListener('click', handleGPSCapture);
+}
+
+if (retryGPSBtn) {
+    retryGPSBtn.addEventListener('click', handleGPSCapture);
+}
+
+function handleGPSCapture() {
+    if (!window.SinyoroLocation) {
+        showToast('Location system not loaded', 'error');
+        return;
+    }
+
+    if (gpsStatus) {
+        gpsStatus.style.display = 'block';
+        gpsStatus.querySelector('.status-text').textContent = 'Searching for GPS signal...';
+    }
+    if (gpsResult) gpsResult.style.display = 'none';
+    if (captureGPSBtn) captureGPSBtn.disabled = true;
+
+    window.SinyoroLocation.captureGPS()
+        .then(location => {
+            console.log('📍 GPS captured:', location);
+            currentItemLocation = location;
+
+            if (gpsStatus) gpsStatus.style.display = 'none';
+            if (gpsResult) {
+                gpsResult.style.display = 'block';
+                
+                const accuracyEl = document.getElementById('gpsAccuracy');
+                const coordsEl = document.getElementById('gpsCoords');
+                
+                if (accuracyEl) {
+                    accuracyEl.textContent = `±${location.accuracy}m`;
+                }
+                if (coordsEl) {
+                    coordsEl.textContent = `${location.latitude.toFixed(6)}, ${location.longitude.toFixed(6)}`;
+                }
+
+                const statusInfo = window.SinyoroLocation.showGPSStatus(location.accuracy, location.source);
+                gpsResult.querySelector('.result-text').textContent = statusInfo.status;
+            }
+
+            if (captureGPSBtn) captureGPSBtn.disabled = false;
+            
+            if (location.source === 'last_known') {
+                showToast('Using last known location', 'warning');
+            } else {
+                showToast('GPS location captured!', 'success');
+            }
+        })
+        .catch(error => {
+            console.error('❌ GPS capture failed:', error);
+            
+            if (gpsStatus) { // Get location data
+const landmark = document.getElementById('itemLandmark')?.value.trim() || '';
+const area = document.getElementById('itemArea')?.value.trim() || '';
+const locationNotes = document.getElementById('itemLocationNotes')?.value.trim() || '';
+                gpsStatus.style.display = 'block';
+                const statusEl = gpsStatus.querySelector('.status-text');
+                const detailsEl = gpsStatus.querySelector('.status-details');
+                
+                if (statusEl) statusEl.textContent = 'GPS unavailable';
+                if (detailsEl) {
+                    detailsEl.innerHTML = '<p>Could not get GPS signal.</p><p>You can still use landmarks!</p>';
+                }
+            }
+            
+            if (captureGPSBtn) captureGPSBtn.disabled = false;
+            showToast('GPS unavailable - use landmark instead', 'warning', 4000);
+        });
 }
