@@ -156,6 +156,7 @@ body {
     display: flex;
     gap: 0.75rem;
     align-items: center;
+    position: relative;
 }
 
 /* ==========================================
@@ -210,11 +211,12 @@ body {
 }
 
 /* ==========================================
-   LANGUAGE SELECTOR
+   LANGUAGE SELECTOR - FIXED VERSION
    ========================================== */
 .language-selector {
     position: relative;
     display: inline-block;
+    z-index: 9999;
 }
 
 .lang-btn {
@@ -229,9 +231,15 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 10000;
 }
 
 .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn.active {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -252,14 +260,42 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 0.5rem;
-    display: none;
-    min-width: 160px;
-    z-index: 9999;
+    min-width: 180px;
+    z-index: 10001;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    
+    /* Hidden by default */
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    
+    /* Ensure clicks work */
+    pointer-events: auto;
 }
 
+/* Show when active */
 .lang-dropdown.active {
     display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Arrow pointer */
+.lang-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: rgba(15, 23, 42, 0.98);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    transform: rotate(45deg);
+    z-index: 10002;
 }
 
 .lang-option {
@@ -276,10 +312,15 @@ body {
     border-radius: 8px;
     transition: all 0.2s ease;
     text-align: left;
+    position: relative;
+    z-index: 10003;
+    
+    /* Ensure clicks work */
+    pointer-events: auto;
 }
 
 .lang-option:hover {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(59, 130, 246, 0.3);
 }
 
 .lang-option.active {
@@ -595,12 +636,6 @@ body {
     transform: scale(1.1);
 }
 
-.favorite-btn.favorited {
-    background: rgba(251, 191, 36, 0.2);
-    border-color: #fbbf24;
-    color: #fbbf24;
-}
-
 .card-body {
     flex: 1;
 }
@@ -639,20 +674,12 @@ body {
     color: #4ade80;
 }
 
-.price-tag.barter {
-    color: #a78bfa;
-}
-
 .distance-tag {
     display: flex;
     align-items: center;
     gap: 0.25rem;
     color: #fbbf24;
     font-size: 0.875rem;
-}
-
-.distance-tag.nearby {
-    color: #4ade80;
 }
 
 .seller-row {
@@ -677,27 +704,16 @@ body {
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.trust-badge.trusted {
     background: rgba(74, 222, 128, 0.2);
     color: #4ade80;
 }
 
-.trust-badge.new {
-    background: rgba(251, 191, 36, 0.2);
-    color: #fbbf24;
-}
-
 .card-footer {
     margin-top: 1rem;
-    display: flex;
-    gap: 0.5rem;
 }
 
 .card-footer .btn {
-    flex: 1;
+    width: 100%;
 }
 
 .load-more {
@@ -1115,10 +1131,6 @@ body {
     animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.toast-success { border-left-color: #4ade80; }
-.toast-error { border-left-color: #ef4444; }
-.toast-warning { border-left-color: #fbbf24; }
-
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
@@ -1215,6 +1227,13 @@ body {
     .footer-content {
         flex-direction: column;
         text-align: center;
+    }
+    
+    /* Mobile language dropdown fix */
+    .lang-dropdown {
+        right: 0;
+        left: auto;
+        min-width: 160px;
     }
 }
 
