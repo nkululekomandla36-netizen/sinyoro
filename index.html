@@ -1,479 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sinyoro - Offline-first marketplace for rural African communities. Buy, sell, and barter essential goods without internet.">
-    <meta name="theme-color" content="#0f172a">
-    <title>Sinyoro - Rural Community Marketplace</title>
-    
-    <!-- Critical CSS inline to prevent flash of unstyled content -->
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        .loading { opacity: 0; animation: fadeIn 0.5s forwards; }
-        @keyframes fadeIn { to { opacity: 1; } }
-    </style>
-    
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preload" href="css/style.css" as="style">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sinyoro - Offline-first marketplace for rural African communities. Buy, sell, and barter essential goods without internet.">
+<meta name="theme-color" content="#0f172a">
+<title>Sinyoro - Rural Community Marketplace</title>
+
+<!-- Critical CSS inline -->
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { 
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
+    color: #fff; min-height:100vh; line-height:1.6; overflow-x:hidden;
+}
+.loading { opacity: 0; animation: fadeIn 0.5s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+</style>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" href="css/style.css" as="style">
 </head>
 <body class="loading">
-    <!-- ===================== -->
-    <!-- Navbar               -->
-    <!-- ===================== -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-brand">
-            <div class="logo-icon">🌍</div>
-            <div class="brand-text">
-                <div class="logo">Sinyoro</div>
-                <div class="brand-name" data-i18n="brandName">Community Marketplace</div>
-            </div>
-        </div>
-        
-        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
 
-        <ul class="nav-menu" role="menubar">
-            <li role="none"><a href="#home" class="nav-link active" role="menuitem" data-i18n="navHome">Home</a></li>
-            <li role="none"><a href="#market" class="nav-link" role="menuitem" data-i18n="navMarket">Market</a></li>
-            <li role="none"><a href="#myitems" class="nav-link" role="menuitem" data-i18n="navMyItems">My Items</a></li>
-            <li role="none"><a href="#community" class="nav-link" role="menuitem" data-i18n="navCommunity">Community</a></li>
-            <li role="none"><a href="#help" class="nav-link" role="menuitem" data-i18n="navHelp">Help</a></li>
-        </ul>
-        
-        <div class="nav-actions">
-            <!-- Language Selector - FIXED -->
-            <div class="language-selector" id="langSelector">
-                <button type="button" id="languageBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
-                    <span class="lang-icon">🌍</span>
-                    <span class="current-lang">English</span>
-                    <span class="dropdown-arrow">▼</span>
-                </button>
-                
-                <div id="langDropdown" class="lang-dropdown" role="menu" aria-labelledby="languageBtn">
-                    <button type="button" class="lang-option active" data-lang="en" role="menuitem">🇬🇧 English</button>
-                    <button type="button" class="lang-option" data-lang="sw" role="menuitem">🇰🇪 Kiswahili</button>
-                    <button type="button" class="lang-option" data-lang="zu" role="menuitem">🇿🇦 isiZulu</button>
-                    <button type="button" class="lang-option" data-lang="sn" role="menuitem">🇿🇼 ChiShona</button>
-                    <button type="button" class="lang-option" data-lang="af" role="menuitem">🇿🇦 Afrikaans</button>
-                </div>
-            </div>
-
-            <button class="btn btn-primary" id="postItemBtn" type="button">
-                <span class="btn-icon">+</span>
-                <span class="btn-text" data-i18n="postItem">Post Item</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- ===================== -->
-    <!-- Hero Section         -->
-    <!-- ===================== -->
-    <section id="home" class="hero-section" aria-labelledby="hero-heading">
-        <div class="hero-content">
-            <div class="glass-card hero-card">
-                <h1 id="hero-heading" data-i18n="heroTitle">Trade Without Internet</h1>
-                <p class="hero-description" data-i18n="heroDescription">
-                    Buy, sell, and barter essential goods with your nearby community. Works completely offline.
-                </p>
-                
-                <div class="hero-features">
-                    <div class="feature-badge">
-                        <span class="feature-icon">📍</span>
-                        <span class="feature-text" data-i18n="featureLocal">Local Only</span>
-                    </div>
-                    <div class="feature-badge">
-                        <span class="feature-icon">🔒</span>
-                        <span class="feature-text" data-i18n="featureSecure">Secure</span>
-                    </div>
-                    <div class="feature-badge">
-                        <span class="feature-icon">🌾</span>
-                        <span class="feature-text" data-i18n="featureEssential">Essential Goods</span>
-                    </div>
-                </div>
-
-                <!-- Categories Grid -->
-                <div class="hero-categories-section">
-                    <h2 class="hero-categories-title" data-i18n="categoriesTitle">Available Categories</h2>
-                    <div class="hero-categories-grid">
-                        <div class="hero-category-card" data-category="food">
-                            <div class="hero-cat-icon">🌾</div>
-                            <div class="hero-cat-name" data-i18n="catFood">Food</div>
-                            <div class="hero-cat-items">Maize, Beans, Vegetables, Rice</div>
-                            <div class="hero-cat-count">4 items</div>
-                        </div>
-                        
-                        <div class="hero-category-card" data-category="livestock">
-                            <div class="hero-cat-icon">🐐</div>
-                            <div class="hero-cat-name" data-i18n="catLivestock">Livestock</div>
-                            <div class="hero-cat-items">Goats, Chickens, Dairy Cow</div>
-                            <div class="hero-cat-count">3 items</div>
-                        </div>
-                        
-                        <div class="hero-category-card" data-category="tools">
-                            <div class="hero-cat-icon">🛠️</div>
-                            <div class="hero-cat-name" data-i18n="catTools">Tools</div>
-                            <div class="hero-cat-items">Farming Tools, Wheelbarrow, Water Pump</div>
-                            <div class="hero-cat-count">3 items</div>
-                        </div>
-                        
-                        <div class="hero-category-card" data-category="services">
-                            <div class="hero-cat-icon">💼</div>
-                            <div class="hero-cat-name" data-i18n="catServices">Services</div>
-                            <div class="hero-cat-items">Ploughing, Transport, Repair, Classes</div>
-                            <div class="hero-cat-count">4 items</div>
-                        </div>
-                        
-                        <div class="hero-category-card" data-category="herbs">
-                            <div class="hero-cat-icon">🌿</div>
-                            <div class="hero-cat-name" data-i18n="catHerbs">Herbs</div>
-                            <div class="hero-cat-items">Moringa, Neem, Aloe Vera, Ginger</div>
-                            <div class="hero-cat-count">4 items</div>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-total-items">
-                        <strong data-i18n="totalItems">Total: 18 items available</strong>
-                    </div>
-                </div>
-
-                <div class="hero-actions">
-                    <button class="btn btn-primary btn-large" id="browseMarketBtn" type="button" data-i18n="browseMarket">
-                        Browse Market
-                    </button>
-                    <button class="btn btn-secondary btn-large" id="learnMoreBtn" type="button" data-i18n="howItWorks">
-                        How It Works
-                    </button>
-                </div>
-
-                <div class="offline-indicator">
-                    <span class="status-dot" id="connectionStatus"></span>
-                    <span id="statusText" data-i18n="checkingConnection">Checking connection...</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Market Section        -->
-    <!-- ===================== -->
-    <section id="market" class="section" aria-labelledby="market-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="market-heading" data-i18n="marketTitle">🛒 Local Market</h2>
-            <p class="section-subtitle" data-i18n="marketSubtitle">Essential goods from your community</p>
-        </div>
-
-        <div class="filter-bar" role="group" aria-label="Filter items by category">
-            <button class="filter-btn active" data-category="all" aria-pressed="true" type="button" data-i18n="filterAll">All Items</button>
-            <button class="filter-btn" data-category="food" aria-pressed="false" type="button">
-                <span class="filter-icon">🌾</span>
-                <span class="filter-text" data-i18n="catFood">Food</span>
-            </button>
-            <button class="filter-btn" data-category="livestock" aria-pressed="false" type="button">
-                <span class="filter-icon">🐐</span>
-                <span class="filter-text" data-i18n="catLivestock">Livestock</span>
-            </button>
-            <button class="filter-btn" data-category="tools" aria-pressed="false" type="button">
-                <span class="filter-icon">🛠️</span>
-                <span class="filter-text" data-i18n="catTools">Tools</span>
-            </button>
-            <button class="filter-btn" data-category="services" aria-pressed="false" type="button">
-                <span class="filter-icon">💼</span>
-                <span class="filter-text" data-i18n="catServices">Services</span>
-            </button>
-            <button class="filter-btn" data-category="herbs" aria-pressed="false" type="button">
-                <span class="filter-icon">🌿</span>
-                <span class="filter-text" data-i18n="catHerbs">Herbs</span>
-            </button>
-        </div>
-        
-        <div class="market-grid" id="marketGrid" role="list">
-            <!-- Market items loaded dynamically -->
-        </div>
-        
-        <div class="load-more">
-            <button class="btn btn-secondary" id="loadMoreBtn" type="button" data-i18n="loadMore">Load More</button>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- My Items Section      -->
-    <!-- ===================== -->
-    <section id="myitems" class="section" aria-labelledby="myitems-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="myitems-heading" data-i18n="myItemsTitle">📦 My Items</h2>
-            <p class="section-subtitle" data-i18n="myItemsSubtitle">Manage your listings and trades</p>
-        </div>
-        
-        <div class="my-items-list" id="myItemsList">
-            <div class="glass-card empty-state" id="emptyState">
-                <div class="empty-icon">📭</div>
-                <h3 data-i18n="noItemsTitle">No Items Yet</h3>
-                <p data-i18n="noItemsDesc">Start selling by posting your first item to the marketplace.</p>
-                <button class="btn btn-primary" id="postFirstItemBtn" type="button" data-i18n="postItem">
-                    Post Item
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Community Section     -->
-    <!-- ===================== -->
-    <section id="community" class="section" aria-labelledby="community-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="community-heading" data-i18n="communityTitle">🤝 Community</h2>
-            <p class="section-subtitle" data-i18n="communitySubtitle">Connect with nearby traders</p>
-        </div>
-
-        <div class="community-grid">
-            <div class="glass-card community-card">
-                <h3 data-i18n="nearbyTraders">Nearby Traders</h3>
-                <p class="nearby-summary" data-i18n="nearbySummary">5 traders within 5km of your location</p>
-                <div class="nearby-list">
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Mama Sarah</span>
-                            <span class="nearby-distance">2km away • Food specialist</span>
-                        </div>
-                    </div>
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Baba John</span>
-                            <span class="nearby-distance">3km away • Livestock</span>
-                        </div>
-                    </div>
-                    <div class="nearby-item">
-                        <span class="nearby-avatar">👤</span>
-                        <div class="nearby-info">
-                            <span class="nearby-name">Tech Wanjiku</span>
-                            <span class="nearby-distance">4km away • Services</span>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-secondary btn-full" type="button" data-i18n="viewAllTraders">
-                    View All Traders
-                </button>
-            </div>
-
-            <div class="glass-card community-card">
-                <h3 data-i18n="trustNetwork">Trust Network</h3>
-                <div class="community-stats">
-                    <div class="stat-item">
-                        <span class="stat-icon">⭐</span>
-                        <span class="stat-number">12</span>
-                        <span class="stat-label" data-i18n="trustedTraders">Trusted Traders</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-icon">🤝</span>
-                        <span class="stat-number">48</span>
-                        <span class="stat-label" data-i18n="successfulTrades">Successful Trades</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-icon">📍</span>
-                        <span class="stat-number">5km</span>
-                        <span class="stat-label" data-i18n="coverageArea">Coverage Area</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Help Section          -->
-    <!-- ===================== -->
-    <section id="help" class="section" aria-labelledby="help-heading">
-        <div class="section-header">
-            <h2 class="section-title" id="help-heading" data-i18n="helpTitle">❓ How It Works</h2>
-            <p class="section-subtitle" data-i18n="helpSubtitle">Get started in 3 simple steps</p>
-        </div>
-
-        <div class="help-grid">
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">1</div>
-                    <span class="step-icon">📱</span>
-                </div>
-                <h3 data-i18n="step1Title">Browse Offline</h3>
-                <p data-i18n="step1Desc">View all items without internet. The marketplace works completely offline using local network.</p>
-                <ul class="feature-list">
-                    <li>✓ No data needed</li>
-                    <li>✓ Instant loading</li>
-                    <li>✓ Works anywhere</li>
-                </ul>
-            </div>
-
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">2</div>
-                    <span class="step-icon">💬</span>
-                </div>
-                <h3 data-i18n="step2Title">Connect Directly</h3>
-                <p data-i18n="step2Desc">Contact sellers via SMS or call. No middleman, no fees. Deal directly with your community.</p>
-                <ul class="feature-list">
-                    <li>✓ Direct contact</li>
-                    <li>✓ No commissions</li>
-                    <li>✓ Local trust</li>
-                </ul>
-            </div>
-
-            <div class="glass-card help-card">
-                <div class="step-header">
-                    <div class="step-number">3</div>
-                    <span class="step-icon">🔄</span>
-                </div>
-                <h3 data-i18n="step3Title">Trade & Barter</h3>
-                <p data-i18n="step3Desc">Buy with cash or barter goods. Flexible trading that works for your community's needs.</p>
-                <ul class="feature-list">
-                    <li>✓ Cash or barter</li>
-                    <li>✓ Flexible prices</li>
-                    <li>✓ Community building</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="help-cta">
-            <div class="glass-card cta-card">
-                <h3 data-i18n="readyToStart">Ready to Start Trading?</h3>
-                <p data-i18n="ctaDesc">Join hundreds of community members already trading on Sinyoro.</p>
-                <button class="btn btn-primary btn-large" id="helpPostItemBtn" type="button" data-i18n="postItemNow">
-                    Post Your First Item
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== -->
-    <!-- Footer               -->
-    <!-- ===================== -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="footer-logo">🌍</span>
-                <div>
-                    <strong>Sinyoro</strong>
-                    <p data-i18n="footerTagline">Community Marketplace</p>
-                </div>
-            </div>
-            <div class="footer-features">
-                <span class="footer-badge">📍 Local</span>
-                <span class="footer-badge">🔒 Secure</span>
-                <span class="footer-badge">🌾 Essential</span>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-i18n="copyright">© 2024 Sinyoro. Built for rural communities.</p>
-        </div>
-    </footer>
-
-    <!-- ===================== -->
-    <!-- Post Item Modal      -->
-    <!-- ===================== -->
-    <div class="modal" id="postItemModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" hidden>
-        <div class="modal-overlay"></div>
-        <div class="glass-card modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title" data-i18n="postItemTitle">Post New Item</h2>
-                <button class="close-btn" aria-label="Close modal" type="button">&times;</button>
-            </div>  <!-- This closes the modal --> 
-            
-            <form class="post-form" id="postItemForm">
-                <div class="form-group">
-                    <label for="itemName" data-i18n="itemTitleLabel">Item Title</label>
-                    <input type="text" id="itemName" name="title" required placeholder="e.g., Fresh Maize - 50kg">
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="itemCategory" data-i18n="itemCategoryLabel">Category</label>
-                        <select id="itemCategory" name="category" required>
-                            <option value="" data-i18n="selectCategory">Select category...</option>
-                            <option value="food" data-i18n="catFood">Food</option>
-                            <option value="livestock" data-i18n="catLivestock">Livestock</option>
-                            <option value="tools" data-i18n="catTools">Tools</option>
-                            <option value="services" data-i18n="catServices">Services</option>
-                            <option value="herbs" data-i18n="catHerbs">Herbs</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="itemPrice" data-i18n="itemPriceLabel">Price / Barter</label>
-                        <input type="text" id="itemPrice" name="price" required placeholder="e.g., $25 or barter">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemLocation" data-i18n="itemLocationLabel">Location</label>
-                    <input type="text" id="itemLocation" name="location" placeholder="e.g., 2km from market">
-                </div>
-                
-                <div class="form-group">
-                    <label for="itemDescription" data-i18n="itemDescriptionLabel">Description</label>
-                    <textarea id="itemDescription" name="description" rows="3" required placeholder="Describe your item..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="itemImage" data-i18n="itemImageLabel">Item Image</label>
-                    <input type="file" id="itemImage" name="image" accept="image/*" class="file-input">
-                    <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
-                        <img id="imagePreview" src="" alt="Preview" class="image-preview">
-                        <button type="button" id="removeImageBtn" class="btn btn-secondary btn-small">Remove</button>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="sellerName" data-i18n="sellerNameLabel">Your Name</label>
-                    <input type="text" id="sellerName" name="seller" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="contactMethod" data-i18n="contactMethodLabel">Contact Method</label>
-                    <select id="contactMethod" name="contactMethod" required>
-                        <option value="phone">Phone/SMS</option>
-                        <option value="whatsapp">WhatsApp</option>
-                        <option value="visit">In-person visit</option>
-                    </select>
-                </div>
-                
-                <div class="form-notice">
-                    <p data-i18n="offlineNotice">ℹ️ This will be saved locally and shared when you connect to the network.</p>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancelPostBtn" data-i18n="cancel">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="submitItemBtn" data-i18n="postItem">Post Item</button>
-                </div>
-            </form>
+<!-- Navbar -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+        <div class="logo-icon">🌍</div>
+        <div class="brand-text">
+            <div class="logo">Sinyoro</div>
+            <div class="brand-name" data-i18n="brandName">Community Marketplace</div>
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+        <span></span><span></span><span></span>
+    </button>
 
-    <!-- JavaScript - FIXED FILE NAME -->
-    <script src="js/translations.js"></script>
-   <script src="js/location-system.js"></script>
-   <script src="js/app.js"></script>
-    <!-- Remove loading class after page loads -->
-    <script>
-        window.addEventListener('load', function() {
-            document.body.classList.remove('loading');
-        });
-    </script>
+    <ul class="nav-menu" role="menubar">
+        <li role="none"><a href="#home" class="nav-link active" role="menuitem" data-i18n="navHome">Home</a></li>
+        <li role="none"><a href="#market" class="nav-link" role="menuitem" data-i18n="navMarket">Market</a></li>
+        <li role="none"><a href="#myitems" class="nav-link" role="menuitem" data-i18n="navMyItems">My Items</a></li>
+        <li role="none"><a href="#community" class="nav-link" role="menuitem" data-i18n="navCommunity">Community</a></li>
+        <li role="none"><a href="#help" class="nav-link" role="menuitem" data-i18n="navHelp">Help</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <!-- Language Selector -->
+        <div class="language-selector" id="langSelector">
+            <button type="button" id="languageBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
+                <span class="lang-icon">🌍</span>
+                <span class="current-lang">English</span>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div id="langDropdown" class="lang-dropdown" role="menu" aria-labelledby="languageBtn">
+                <button type="button" class="lang-option active" data-lang="en" role="menuitem">🇬🇧 English</button>
+                <button type="button" class="lang-option" data-lang="sw" role="menuitem">🇰🇪 Kiswahili</button>
+                <button type="button" class="lang-option" data-lang="zu" role="menuitem">🇿🇦 isiZulu</button>
+                <button type="button" class="lang-option" data-lang="sn" role="menuitem">🇿🇼 ChiShona</button>
+                <button type="button" class="lang-option" data-lang="af" role="menuitem">🇿🇦 Afrikaans</button>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="postItemBtn" type="button">
+            <span class="btn-icon">+</span>
+            <span class="btn-text" data-i18n="postItem">Post Item</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section" aria-labelledby="hero-heading">
+    <div class="hero-content">
+        <div class="glass-card hero-card">
+            <h1 id="hero-heading" data-i18n="heroTitle">Trade Without Internet</h1>
+            <p class="hero-description" data-i18n="heroDescription">
+                Buy, sell, and barter essential goods with your nearby community. Works completely offline.
+            </p>
+            <!-- Features -->
+            <div class="hero-features">
+                <div class="feature-badge"><span class="feature-icon">📍</span><span class="feature-text" data-i18n="featureLocal">Local Only</span></div>
+                <div class="feature-badge"><span class="feature-icon">🔒</span><span class="feature-text" data-i18n="featureSecure">Secure</span></div>
+                <div class="feature-badge"><span class="feature-icon">🌾</span><span class="feature-text" data-i18n="featureEssential">Essential Goods</span></div>
+            </div>
+
+            <!-- Categories -->
+            <div class="hero-categories-section">
+                <h2 class="hero-categories-title" data-i18n="categoriesTitle">Available Categories</h2>
+                <div class="hero-categories-grid">
+                    <div class="hero-category-card" data-category="food"><div class="hero-cat-icon">🌾</div><div class="hero-cat-name" data-i18n="catFood">Food</div><div class="hero-cat-items">Maize, Beans, Vegetables, Rice</div><div class="hero-cat-count">4 items</div></div>
+                    <div class="hero-category-card" data-category="livestock"><div class="hero-cat-icon">🐐</div><div class="hero-cat-name" data-i18n="catLivestock">Livestock</div><div class="hero-cat-items">Goats, Chickens, Dairy Cow</div><div class="hero-cat-count">3 items</div></div>
+                    <div class="hero-category-card" data-category="tools"><div class="hero-cat-icon">🛠️</div><div class="hero-cat-name" data-i18n="catTools">Tools</div><div class="hero-cat-items">Farming Tools, Wheelbarrow, Water Pump</div><div class="hero-cat-count">3 items</div></div>
+                    <div class="hero-category-card" data-category="services"><div class="hero-cat-icon">💼</div><div class="hero-cat-name" data-i18n="catServices">Services</div><div class="hero-cat-items">Ploughing, Transport, Repair, Classes</div><div class="hero-cat-count">4 items</div></div>
+                    <div class="hero-category-card" data-category="herbs"><div class="hero-cat-icon">🌿</div><div class="hero-cat-name" data-i18n="catHerbs">Herbs</div><div class="hero-cat-items">Moringa, Neem, Aloe Vera, Ginger</div><div class="hero-cat-count">4 items</div></div>
+                </div>
+                <div class="hero-total-items"><strong data-i18n="totalItems">Total: 18 items available</strong></div>
+            </div>
+
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-large" id="browseMarketBtn" data-i18n="browseMarket">Browse Market</button>
+                <button class="btn btn-secondary btn-large" id="learnMoreBtn" data-i18n="howItWorks">How It Works</button>
+            </div>
+
+            <!-- Connection Status -->
+            <div class="offline-indicator">
+                <span class="status-dot" id="connectionStatus"></span>
+                <span id="statusText" data-i18n="checkingConnection">Checking connection...</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Market Section -->
+<section id="market" class="section" aria-labelledby="market-heading">
+    <div class="section-header">
+        <h2 class="section-title" id="market-heading" data-i18n="marketTitle">🛒 Local Market</h2>
+        <p class="section-subtitle" data-i18n="marketSubtitle">Essential goods from your community</p>
+    </div>
+    <div class="filter-bar">
+        <button class="filter-btn active" data-category="all" aria-pressed="true" type="button" data-i18n="filterAll">All Items</button>
+        <button class="filter-btn" data-category="food" aria-pressed="false"><span class="filter-icon">🌾</span><span class="filter-text" data-i18n="catFood">Food</span></button>
+        <button class="filter-btn" data-category="livestock" aria-pressed="false"><span class="filter-icon">🐐</span><span class="filter-text" data-i18n="catLivestock">Livestock</span></button>
+        <button class="filter-btn" data-category="tools" aria-pressed="false"><span class="filter-icon">🛠️</span><span class="filter-text" data-i18n="catTools">Tools</span></button>
+        <button class="filter-btn" data-category="services" aria-pressed="false"><span class="filter-icon">💼</span><span class="filter-text" data-i18n="catServices">Services</span></button>
+        <button class="filter-btn" data-category="herbs" aria-pressed="false"><span class="filter-icon">🌿</span><span class="filter-text" data-i18n="catHerbs">Herbs</span></button>
+    </div>
+    <div class="market-grid" id="marketGrid" role="list"></div>
+    <div class="load-more"><button class="btn btn-secondary" id="loadMoreBtn" type="button" data-i18n="loadMore">Load More</button></div>
+</section>
+
+<!-- My Items, Community, Help, Footer, Post Modal ... -->
+<!-- Keep the rest of your HTML as-is, same as your previous version -->
+
+<!-- Toast -->
+<div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+<!-- JS -->
+<script src="js/translations.js"></script>
+<script src="js/location-system.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Remove loading class -->
+<script>
+window.addEventListener('load', () => document.body.classList.remove('loading'));
+</script>
 </body>
 </html>
