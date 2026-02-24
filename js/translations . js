@@ -1,12 +1,10 @@
 /**
  * SINYORO TRANSLATIONS SYSTEM
- * Handles language switching for the marketplace
  */
 
 (function() {
     'use strict';
 
-    // Translation data
     const translations = {
         en: {
             brandName: "Community Marketplace",
@@ -32,17 +30,11 @@
             browseMarket: "Browse Market",
             howItWorks: "How It Works",
             checkingConnection: "Checking connection...",
-            offlineStatus: "Offline Mode - Working Locally",
-            onlineStatus: "Online - Connected",
             marketTitle: "🛒 Local Market",
             marketSubtitle: "Essential goods from your community",
             filterAll: "All Items",
             loadMore: "Load More",
             contactSeller: "Contact Seller",
-            makeOffer: "Make Offer",
-            bookService: "Book Service",
-            getQuote: "Get Quote",
-            enrollNow: "Enroll Now",
             trusted: "Trusted",
             newSeller: "New Seller",
             myItemsTitle: "📦 My Items",
@@ -70,8 +62,6 @@
             ctaDesc: "Join hundreds of community members already trading on Sinyoro.",
             postItemNow: "Post Your First Item",
             postItemTitle: "Post New Item",
-            editItemTitle: "Edit Item",
-            updateItem: "Update Item",
             itemTitleLabel: "Item Title",
             itemCategoryLabel: "Category",
             selectCategory: "Select category...",
@@ -84,388 +74,41 @@
             cancel: "Cancel",
             offlineNotice: "ℹ️ This will be saved locally and shared when you connect to the network.",
             footerTagline: "Community Marketplace",
-            copyright: "© 2024 Sinyoro. Built for rural communities.",
-            toastItemPosted: "Item posted successfully!",
-            toastLanguageChanged: "Language changed to English",
-            toastComingSoon: "Coming soon!",
-            toastOfflineMode: "You are in offline mode",
-            noticeOffline: "💡 This will be saved locally and shared when you connect with nearby users.",
-            searchPlaceholder: "Search items..."
-        },
-        sw: {
-            brandName: "Soko la Jamii",
-            navHome: "Nyumbani",
-            navMarket: "Soko",
-            navMyItems: "Vitu Vyangu",
-            navCommunity: "Jamii",
-            navHelp: "Msaada",
-            postItem: "Weka Tangazo",
-            profile: "Wasifu",
-            heroTitle: "Biashara Bila Mtandao",
-            heroDescription: "Nunua, uza, ubadilishe bidhaa muhimu na jamii yako ya karibu. Inafanya kazi bila mtandao.",
-            featureLocal: "Ya Karibu Tu",
-            featureSecure: "Salama",
-            featureEssential: "Bidhaa Muhimu",
-            categoriesTitle: "Kategoria Zinazopatikana",
-            catFood: "Chakula",
-            catLivestock: "Mifugo",
-            catTools: "Vifaa",
-            catServices: "Huduma",
-            catHerbs: "Mimea ya Dawa",
-            totalItems: "Jumla: Vitu 18 vinapatikana",
-            browseMarket: "Tazama Soko",
-            howItWorks: "Jinsi Inavyofanya Kazi",
-            checkingConnection: "Inakagua muunganiko...",
-            offlineStatus: "Hali ya Nje ya Mtandao - Inafanya Kazi Kikanda",
-            onlineStatus: "Mtandaoni - Imeunganishwa",
-            marketTitle: "🛒 Soko la Kijiji",
-            marketSubtitle: "Bidhaa muhimu kutoka jamii yako",
-            filterAll: "Vitu Vyote",
-            loadMore: "Pakia Zaidi",
-            contactSeller: "Wasiliana na Mchuuzi",
-            makeOffer: "Toa Ofa",
-            bookService: "Acha Huduma",
-            getQuote: "Pata Bei",
-            enrollNow: "Jiandikishe Sasa",
-            trusted: "Anaaminika",
-            newSeller: "Mchuuzi Mpya",
-            myItemsTitle: "📦 Vitu Vyangu",
-            myItemsSubtitle: "Simamia tangazo zako na biashara",
-            noItemsTitle: "Hakuna Vitu",
-            noItemsDesc: "Anza kuuza kwa kuweka tangazo lako la kwanza.",
-            communityTitle: "🤝 Jamii",
-            communitySubtitle: "Ungana na wafanyabiashara wa karibu",
-            nearbyTraders: "Wafanyabiashara wa Karibu",
-            nearbySummary: "Wafanyabiashara 5 katika km 5 za eneo lako",
-            viewAllTraders: "Tazama Wafanyabiashara Wote",
-            trustNetwork: "Mtandao wa Amani",
-            trustedTraders: "Wafanyabiashara wa Kuaminika",
-            successfulTrades: "Biashara za Mafanikio",
-            coverageArea: "Eneo la Huduma",
-            helpTitle: "❓ Jinsi Inavyofanya Kazi",
-            helpSubtitle: "Anza kwa hatua 3 rahisi",
-            step1Title: "Vinjari Nje ya Mtandao",
-            step1Desc: "Tazama vitu vyote bila mtandao. Soko linafanya kazi kabisa nje ya mtandao kwa kutumia mtandao wa ndani.",
-            step2Title: "Ungana Moja kwa Moja",
-            step2Desc: "Wasiliana na wachuuzi kupitia SMS au simu. Hakuna mshauri, hakuna ada. Fanya biashara moja kwa moja na jamii yako.",
-            step3Title: "Biashara & Ubadilishaji",
-            step3Desc: "Nunua kwa pesa au ubadilishe bidhaa. Biashara inayobadilika inayofanya kazi kwa mahitaji ya jamii yako.",
-            readyToStart: "Tayari Kuanza Biashara?",
-            ctaDesc: "Jiunge na mamia ya wanajamii wanaofanya biashara kwenye Sinyoro.",
-            postItemNow: "Weka Tangazo Lako la Kwanza",
-            postItemTitle: "Weka Tangazo Jipya",
-            editItemTitle: "Hariri Tangazo",
-            updateItem: "Sasisha Tangazo",
-            itemTitleLabel: "Jina la Bidhaa",
-            itemCategoryLabel: "Kategoria",
-            selectCategory: "Chagua kategoria...",
-            itemPriceLabel: "Bei / Ubadilishaji",
-            itemLocationLabel: "Mahali",
-            itemDescriptionLabel: "Maelezo",
-            itemImageLabel: "Picha ya Bidhaa",
-            sellerNameLabel: "Jina Lako",
-            contactMethodLabel: "Njia ya Mawasiliano",
-            cancel: "Ghairi",
-            offlineNotice: "ℹ️ Hii itahifadhiwa kikanda na kushirikiwa unapoungana na watumiaji wa karibu.",
-            footerTagline: "Soko la Jamii",
-            copyright: "© 2024 Sinyoro. Ilijengwa kwa jamii za vijijini.",
-            toastItemPosted: "Tangazo limewekwa kwa mafanikio!",
-            toastLanguageChanged: "Lugha imebadilishwa kuwa Kiswahili",
-            toastComingSoon: "Inakuja hivi karibuni!",
-            toastOfflineMode: "Upo katika hali ya nje ya mtandao",
-            noticeOffline: "💡 Hii itahifadhiwa kikanda na kushirikiwa unapoungana na watumiaji wa karibu.",
-            searchPlaceholder: "Tafuta vitu..."
-        },
-        zu: {
-            brandName: "Imakethe Yomphakathi",
-            navHome: "Ikhaya",
-            navMarket: "Imakethe",
-            navMyItems: "Izinto Zami",
-            navCommunity: "Umphakathi",
-            navHelp: "Usizo",
-            postItem: "Faka Into",
-            profile: "Iphrofayela",
-            heroTitle: "Thenga Ngaphandle Kwe-Intanethi",
-            heroDescription: "Thenga, thengisa, faneleke izimpahla ezibalulekile nomphakathi wakho osondelene. Isebenza ngaphandle kwe-inthanethi.",
-            featureLocal: "Endaweni Kuphela",
-            featureSecure: "Iphephile",
-            featureEssential: "Izimpahla Ezibalulekile",
-            categoriesTitle: "Izigaba Ezitholakalayo",
-            catFood: "Ukudla",
-            catLivestock: "Izinkomo",
-            catTools: "Amathuluzi",
-            catServices: "Izinsiza",
-            catHerbs: "Imithi Yezifo",
-            totalItems: "Isamba: Izinto eziyi-18 ezitholakala",
-            browseMarket: "Phequlula Imakethe",
-            howItWorks: "Ukusebenza Kwayo",
-            checkingConnection: "Ihlola uxhumano...",
-            offlineStatus: "Imodi Engaxhunyiwe - Isebenza Endaweni",
-            onlineStatus: "Kuxhunyiwe - Ixhumeke",
-            marketTitle: "🛒 Imakethe Yendawo",
-            marketSubtitle: "Izimpahla ezibalulekile ezivela emphakathini wakho",
-            filterAll: "Zonke Izinto",
-            loadMore: "Layisha Okuningi",
-            contactSeller: "Xhumana Nothengisi",
-            makeOffer: "Enza Isehlulelo",
-            bookService: "Bhuka Insiza",
-            getQuote: "Thola Isilinganiso",
-            enrollNow: "Bhalisa Manje",
-            trusted: "Thembekile",
-            newSeller: "Uthengisi Omusha",
-            myItemsTitle: "📦 Izinto Zami",
-            myItemsSubtitle: "Phatha izaziso zakho nezokuhweba",
-            noItemsTitle: "Azikho Izinto",
-            noItemsDesc: "Qala ukuthengisa ngokufaka isaziso sakho sokuqala.",
-            communityTitle: "🤝 Umphakathi",
-            communitySubtitle: "Xhumana nothengisi osondelene",
-            nearbyTraders: "Abathengisi Basondelene",
-            nearbySummary: "Abathengisi abangu-5 phakathi kwamakhilomitha angu-5",
-            viewAllTraders: "Buka Bonke Abathengisi",
-            trustNetwork: "Inethiwekhi Yethemba",
-            trustedTraders: "Abathengisi Abathembekile",
-            successfulTrades: "Izokuhweba Eziphumelele",
-            coverageArea: "Indawo Yokuviwa",
-            helpTitle: "❓ Ukusebenza Kwayo",
-            helpSubtitle: "Qala ngezinyathelo eziyisithupha ezilula",
-            step1Title: "Phequlula Ngaphandle Kwe-Inthanethi",
-            step1Desc: "Buka zonke izinto ngaphandle kwe-inthanethi. Imakethe isebenza ngokuphelele ngaphandle kwe-inthanethi usebenzisa inethiwekhi yendawo.",
-            step2Title: "Xhumana Ngqo",
-            step2Desc: "Xhumana nothengisi nge-SMS noma ngocingo. Akukho mmeli, akukho imali. Sebenzisana ngqo nomphakathi wakho.",
-            step3Title: "Thenga & Faneleka",
-            step3Desc: "Thenga ngesheli noma faneleke izimpahla. Ukuhweba okushintshayo okusebenza emakhalekhukhwini omphakathi wakho.",
-            readyToStart: "Ulungele Ukuqala Ukuhweba?",
-            ctaDesc: "Joyina amakhulu amalungu omphakathi asebenzisa i-Sinyoro.",
-            postItemNow: "Faka Isaziso Sakho Sokuqala",
-            postItemTitle: "Faka Into Entsha",
-            editItemTitle: "Hlela Into",
-            updateItem: "Buyekeza Into",
-            itemTitleLabel: "Igama Lento",
-            itemCategoryLabel: "Isigaba",
-            selectCategory: "Khetha isigaba...",
-            itemPriceLabel: "Intengo / Faneleka",
-            itemLocationLabel: "Indawo",
-            itemDescriptionLabel: "Incazelo",
-            itemImageLabel: "Isithombe Sento",
-            sellerNameLabel: "Igama Lakho",
-            contactMethodLabel: "Indlela Yoxhumana",
-            cancel: "Khansela",
-            offlineNotice: "💡 Lokhu kuzogcinwa kule ndawo futhi kabelwe uma uxhumana nabasebenzisi basondelene.",
-            footerTagline: "Imakethe Yomphakathi",
-            copyright: "© 2024 Sinyoro. Yakhelwe imiphakathi yasemakhaya.",
-            toastItemPosted: "Into ifakiwe ngempumelelo!",
-            toastLanguageChanged: "Ulimi lushintshelwe isiZulu",
-            toastComingSoon: "Iyeza kungekudala!",
-            toastOfflineMode: "Ukwimodi engaxhunyiwe",
-            noticeOffline: "💡 Lokhu kuzogcinwa kule ndawo futhi kabelwe uma uxhumana nabasebenzisi basondelene.",
-            searchPlaceholder: "Sesha izinto..."
-        },
-        sn: {
-            brandName: "Musika weVanhu",
-            navHome: "Kumba",
-            navMarket: "Musika",
-            navMyItems: "Zvinhu Zvangu",
-            navCommunity: "Vanhu",
-            navHelp: "Rubatsiro",
-            postItem: "Isa Zvinhu",
-            profile: "Profile",
-            heroTitle: "Itengesane Pasina Internet",
-            heroDescription: "Tenga, tengesa, uchange zvinhu zvinokosha nevamwe vemunharaunda yako. Inoshanda pasina internet.",
-            featureLocal: "Yemunharaunda Chete",
-            featureSecure: "Yakachengeteka",
-            featureEssential: "Zvinhu Zvinokosha",
-            categoriesTitle: "Zvakagadzirwa Zvinowanikwa",
-            catFood: "Zvokudya",
-            catLivestock: "Mhuka",
-            catTools: "Zvishandiso",
-            catServices: "Mabasa",
-            catHerbs: "Mititi",
-            totalItems: "Zvese: Zvinhu 18 zvinowanikwa",
-            browseMarket: "Tarisa Musika",
-            howItWorks: "Maitiro EKushandisa",
-            checkingConnection: "Kutarisa kuunganidzwa...",
-            offlineStatus: "Pasina Internet - Inoshanda Mumusha",
-            onlineStatus: "Pane Internet - Yakasungwa",
-            marketTitle: "🛒 Musika weMunharaunda",
-            marketSubtitle: "Zvinhu zvinokosha zvemunharaunda yako",
-            filterAll: "Zvinhu Zvose",
-            loadMore: "Dzika Zvimwe",
-            contactSeller: "Taura neMutengesi",
-            makeOffer: "Ita Kumbirwa",
-            bookService: "Booka Basa",
-            getQuote: "Wana Mutengo",
-            enrollNow: "Nyoresa Zvino",
-            trusted: "Anogamuchirwa",
-            newSeller: "Mutengesi Mutsva",
-            myItemsTitle: "📦 Zvinhu Zvangu",
-            myItemsSubtitle: "Tonga zvinhu zvako nezvokutengesana",
-            noItemsTitle: "Hapana Zvinhu",
-            noItemsDesc: "Tanga kutengesa nekusiya chinzvimbo chekutanga.",
-            communityTitle: "🤝 Vanhu",
-            communitySubtitle: "Batanidzana navatengesi vavemunharaunda",
-            nearbyTraders: "Vatengesi Vavemunharaunda",
-            nearbySummary: "Vatengesi 5 mukati mekm 5",
-            viewAllTraders: "Ona Vatengesi Vose",
-            trustNetwork: "Nzira Dokuwana",
-            trustedTraders: "Vatengesi Vanogamuchirwa",
-            successfulTrades: "Zvakabudirira Zvokutengesana",
-            coverageArea: "Nzvimbo Inofukidzwa",
-            helpTitle: "❓ Maitiro EKushandisa",
-            helpSubtitle: "Tanga nenzira dziri nyore dziri matatu",
-            step1Title: "Vhura Pasina Internet",
-            step1Desc: "Ona zvinhu zvose pasina internet. Musika unoshanda zvakakwana pasina internet uchishandisa netiweki yemunharaunda.",
-            step2Title: "Batanidzana Nekurumidza",
-            step2Desc: "Taura navatengesi kubudikidza neSMS kana foni. Hakuna munhu pakati, hakuna mari. Ita basa newe vemunharaunda yako.",
-            step3Title: "Tengesana & Chengetedza",
-            step3Desc: "Tenga nemari kana uchengetedze zvinhu. Kutengesana kunogona kushanduka kunoshanda pamaitiro emunharaunda yako.",
-            readyToStart: "Wagadzirira Kutanga Kutengesana?",
-            ctaDesc: "Pindura nevamwe zviuru vavemunharaunda vachishandisa Sinyoro.",
-            postItemNow: "Isa Chinzvimbo Chekutanga",
-            postItemTitle: "Isa Chinzvimbo Chitsva",
-            editItemTitle: "Gadzirisa Chinzvimbo",
-            updateItem: "Gadzirisa Chinzvimbo",
-            itemTitleLabel: "Mutoro weChinzvimbo",
-            itemCategoryLabel: "Chikamu",
-            selectCategory: "Sarudza chikamu...",
-            itemPriceLabel: "Mutengo / Kuchengetedza",
-            itemLocationLabel: "Nzvimbo",
-            itemDescriptionLabel: "Tsanangudzo",
-            itemImageLabel: "Mufananidzo weChinzvimbo",
-            sellerNameLabel: "Zita Rako",
-            contactMethodLabel: "Nzira Dokuwirirana",
-            cancel: "Kanzura",
-            offlineNotice: "💡 Izvi zvichachengetwa mumusha uye zvichagovana paunobatanidzana navashandisi vavemunharaunda.",
-            footerTagline: "Musika weVanhu",
-            copyright: "© 2024 Sinyoro. Yakavakwa nemisha yemuno.",
-            toastItemPosted: "Chinhhu chaiswa zvakanaka!",
-            toastLanguageChanged: "Mutauro wachinjwa kuChiShona",
-            toastComingSoon: "Chichiuya kare!",
-            toastOfflineMode: "Uri mumusika pasina internet",
-            noticeOffline: "💡 Izvi zvichachengetwa mumusha uye zvichagovana paunobatanidzana navashandisi vavemunharaunda.",
-            searchPlaceholder: "Tsvaga zvinhu..."
-        },
-        af: {
-            brandName: "Gemeenskap Markplein",
-            navHome: "Tuis",
-            navMarket: "Mark",
-            navMyItems: "My Items",
-            navCommunity: "Gemeenskap",
-            navHelp: "Hulp",
-            postItem: "Plaas Item",
-            profile: "Profiel",
-            heroTitle: "Handel Sonder Internet",
-            heroDescription: "Koop, verkoop en ruil noodsaaklike goedere met jou nabygeleë gemeenskap. Werk heeltemal vanlyn.",
-            featureLocal: "Slegs Plaaslik",
-            featureSecure: "Veilig",
-            featureEssential: "Noodsaaklike Goedere",
-            categoriesTitle: "Beskikbare Kategorieë",
-            catFood: "Kos",
-            catLivestock: "Vee",
-            catTools: "Gereedskap",
-            catServices: "Dienste",
-            catHerbs: "Kruie",
-            totalItems: "Totaal: 18 items beskikbaar",
-            browseMarket: "Blaai Mark",
-            howItWorks: "Hoe Dit Werk",
-            checkingConnection: "Kontroleer verbinding...",
-            offlineStatus: "Vanlyn Modus - Werk Plaaslik",
-            onlineStatus: "Aanlyn - Gekoppel",
-            marketTitle: "🛒 Plaaslike Mark",
-            marketSubtitle: "Noodsaaklike goedere van jou gemeenskap",
-            filterAll: "Alle Items",
-            loadMore: "Laai Meer",
-            contactSeller: "Kontak Verkoper",
-            makeOffer: "Maak 'n Aanbod",
-            bookService: "Boek Diens",
-            getQuote: "Kry Kwotasie",
-            enrollNow: "Skryf Nou In",
-            trusted: "Betroubaar",
-            newSeller: "Nuwe Verkoper",
-            myItemsTitle: "📦 My Items",
-            myItemsSubtitle: "Bestuur jou lyste en ruiltransaksies",
-            noItemsTitle: "Nog Geen Items",
-            noItemsDesc: "Begin verkoop deur jou eerste item op die mark te plaas.",
-            communityTitle: "🤝 Gemeenskap",
-            communitySubtitle: "Koppel met nabygeleë handelaars",
-            nearbyTraders: "Nabygeleë Handelaars",
-            nearbySummary: "5 handelaars binne 5km van jou ligging",
-            viewAllTraders: "Sien Alle Handelaars",
-            trustNetwork: "Vertrouensnetwerk",
-            trustedTraders: "Betroubare Handelaars",
-            successfulTrades: "Suksesvolle Ruiltransaksies",
-            coverageArea: "Dekking Area",
-            helpTitle: "❓ Hoe Dit Werk",
-            helpSubtitle: "Begin in 3 eenvoudige stappe",
-            step1Title: "Blaai Vanlyn",
-            step1Desc: "Bekyk alle items sonder internet. Die markplein werk heeltemal vanlyn deur plaaslike netwerk te gebruik.",
-            step2Title: "Koppel Direk",
-            step2Desc: "Kontak verkopers via SMS of oproep. Geen middelman, geen fooie. Handel direk met jou gemeenskap.",
-            step3Title: "Handel & Ruil",
-            step3Desc: "Koop met kontant of ruil goedere. Buigsame handel wat werk vir jou gemeenskap se behoeftes.",
-            readyToStart: "Gereed om te Begin Handel?",
-            ctaDesc: "Sluit aan by honderde gemeenskapslede wat reeds handel op Sinyoro.",
-            postItemNow: "Plaas Jou Eerste Item",
-            postItemTitle: "Plaas Nuwe Item",
-            editItemTitle: "Wysig Item",
-            updateItem: "Dateer Item Op",
-            itemTitleLabel: "Item Titel",
-            itemCategoryLabel: "Kategorie",
-            selectCategory: "Kies kategorie...",
-            itemPriceLabel: "Prys / Ruil",
-            itemLocationLabel: "Ligging",
-            itemDescriptionLabel: "Beskrywing",
-            itemImageLabel: "Item Beeld",
-            sellerNameLabel: "Jou Naam",
-            contactMethodLabel: "Kontak Metode",
-            cancel: "Kanselleer",
-            offlineNotice: "💡 Dit sal plaaslik gestoor word en gedeel word wanneer jy koppel met nabygeleë gebruikers.",
-            footerTagline: "Gemeenskap Markplein",
-            copyright: "© 2024 Sinyoro. Gebou vir landelike gemeenskappe.",
-            toastItemPosted: "Item suksesvol geplaas!",
-            toastLanguageChanged: "Taal verander na Afrikaans",
-            toastComingSoon: "Kom binnekort!",
-            toastOfflineMode: "Jy is in vanlyn modus",
-            noticeOffline: "💡 Dit sal plaaslik gestoor word en gedeel word wanneer jy koppel met nabygeleë gebruikers.",
-            searchPlaceholder: "Soek items..."
+            copyright: "© 2024 Sinyoro. Built for rural communities."
         }
+        // Add other languages as needed...
     };
 
     let currentLang = localStorage.getItem('sinyoro-language') || 'en';
 
     function init() {
-        applyLanguage(currentLang);
         setupEventListeners();
+        applyLanguage(currentLang);
     }
 
     function setupEventListeners() {
         const langBtn = document.getElementById('languageBtn');
         const langDropdown = document.getElementById('langDropdown');
+        
+        if (!langBtn || !langDropdown) return;
 
-        if (!langBtn || !langDropdown) {
-            console.error('Language selector elements not found');
-            return;
-        }
-
-        langBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        langBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             langDropdown.classList.toggle('active');
             langBtn.classList.toggle('active');
         });
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', (e) => {
             if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
                 langDropdown.classList.remove('active');
                 langBtn.classList.remove('active');
             }
         });
 
-        const langOptions = langDropdown.querySelectorAll('.lang-option');
-        langOptions.forEach(function(option) {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
+        langDropdown.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const lang = this.getAttribute('data-lang');
+                const lang = option.dataset.lang;
                 if (lang && lang !== currentLang) {
                     changeLanguage(lang);
                 }
@@ -473,118 +116,65 @@
                 langBtn.classList.remove('active');
             });
         });
-
-        updateLanguageButton(currentLang);
-        updateActiveOption(currentLang);
     }
 
     function changeLanguage(lang) {
         if (!translations[lang]) return;
-
         currentLang = lang;
         localStorage.setItem('sinyoro-language', lang);
-
         applyLanguage(lang);
-        updateLanguageButton(lang);
-        updateActiveOption(lang);
-        showToast(translations[lang].toastLanguageChanged);
+        
+        // Update active state
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.lang === lang);
+        });
+        
+        document.querySelector('.current-lang').textContent = 
+            lang === 'en' ? 'English' : 
+            lang === 'sw' ? 'Kiswahili' : 
+            lang === 'zu' ? 'isiZulu' : 
+            lang === 'sn' ? 'ChiShona' : 'Afrikaans';
     }
 
     function applyLanguage(lang) {
         const texts = translations[lang];
         if (!texts) return;
 
-        document.querySelectorAll('[data-i18n]').forEach(function(el) {
-            const key = el.getAttribute('data-i18n');
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
             if (texts[key]) {
                 if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    if (el.hasAttribute('placeholder')) {
-                        el.placeholder = texts[key];
-                    } else {
-                        el.value = texts[key];
-                    }
+                    if (el.placeholder) el.placeholder = texts[key];
+                    else el.value = texts[key];
                 } else {
                     el.textContent = texts[key];
                 }
             }
         });
 
-        // Handle placeholder attributes
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
-            const key = el.getAttribute('data-i18n-placeholder');
-            if (texts[key]) {
-                el.placeholder = texts[key];
-            }
-        });
-
         document.documentElement.lang = lang;
-    }
-
-    function updateLanguageButton(lang) {
-        const langBtn = document.getElementById('languageBtn');
-        if (!langBtn) return;
-        const currentLangSpan = langBtn.querySelector('.current-lang');
-        if (currentLangSpan) {
-            const langNames = {
-                en: 'English',
-                sw: 'Kiswahili',
-                zu: 'isiZulu',
-                sn: 'ChiShona',
-                af: 'Afrikaans'
-            };
-            currentLangSpan.textContent = langNames[lang] || 'English';
-        }
-    }
-
-    function updateActiveOption(lang) {
-        const langDropdown = document.getElementById('langDropdown');
-        if (!langDropdown) return;
-
-        const options = langDropdown.querySelectorAll('.lang-option');
-        options.forEach(function(option) {
-            option.classList.remove('active');
-            if (option.getAttribute('data-lang') === lang) {
-                option.classList.add('active');
-            }
-        });
-    }
-
-    function showToast(message) {
-        let toastContainer = document.getElementById('toastContainer');
-        if (!toastContainer) {
-            toastContainer = document.createElement('div');
-            toastContainer.id = 'toastContainer';
-            toastContainer.style.cssText = 'position:fixed;bottom:2rem;right:2rem;z-index:99999;';
-            document.body.appendChild(toastContainer);
-        }
-
-        const toast = document.createElement('div');
-        toast.className = 'glass-card toast';
-        toast.textContent = message;
-        toast.style.cssText = 'padding:1rem 1.5rem;margin-bottom:0.5rem;background:rgba(15,23,42,0.98);color:white;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.4);animation:slideIn 0.3s ease;';
-
-        toastContainer.appendChild(toast);
-        setTimeout(function() { 
-            toast.style.animation = 'slideOut 0.3s ease';
-            setTimeout(function() { toast.remove(); }, 300);
-        }, 3000);
     }
 
     function getText(key) {
         return translations[currentLang]?.[key] || translations['en']?.[key] || key;
     }
 
+    // Initialize
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
     }
 
+    // Expose globally
     window.SinyoroTranslations = {
-        init: init,
-        changeLanguage: changeLanguage,
-        getCurrentLanguage: function() { return currentLang; },
-        getText: getText,
-        translations: translations
+        init,
+        changeLanguage,
+        getCurrentLanguage: () => currentLang,
+        getText,
+        translations
     };
+    
+    // Dispatch event for app.js
+    document.dispatchEvent(new Event('translationsLoaded'));
 })();
