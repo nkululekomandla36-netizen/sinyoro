@@ -11,6 +11,22 @@ let currentUserLocation = null;
 let marketItems = [];
 
 /* -----------------------------
+   CONNECTION STATUS (SAFE OFFLINE)
+----------------------------- */
+function checkConnection() {
+  const statusEl = document.getElementById("connection-status");
+  if (!statusEl) return;
+
+  if (navigator.onLine) {
+    statusEl.textContent = "Online";
+    statusEl.style.color = "green";
+  } else {
+    statusEl.textContent = "Offline mode";
+    statusEl.style.color = "orange";
+  }
+}
+
+/* -----------------------------
    UTILITIES
 ----------------------------- */
 function showToast(message, duration = 3000) {
@@ -81,10 +97,10 @@ function createMarketItem(data) {
    ADD ITEM FLOW
 ----------------------------- */
 function handleAddItem(form) {
-  const title = form.querySelector("#itemTitle").value.trim();
-  const category = form.querySelector("#itemCategory").value;
-  const description = form.querySelector("#itemDescription").value.trim();
-  const price = form.querySelector("#itemPrice").value;
+  const title = form.querySelector("#itemTitle")?.value.trim();
+  const category = form.querySelector("#itemCategory")?.value;
+  const description = form.querySelector("#itemDescription")?.value.trim();
+  const price = form.querySelector("#itemPrice")?.value;
 
   if (!title || !category) {
     showToast("Title and category required");
@@ -121,7 +137,11 @@ function saveItemsOffline() {
 function loadItemsOffline() {
   const saved = localStorage.getItem("sinyoro_market_items");
   if (saved) {
-    marketItems = JSON.parse(saved);
+    try {
+      marketItems = JSON.parse(saved);
+    } catch {
+      marketItems = [];
+    }
   }
 }
 
@@ -174,12 +194,19 @@ function renderMarketItems() {
 }
 
 /* -----------------------------
-   INIT APP
+   INIT APP (SAFE ORDER)
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
+  // Connection status
+  checkConnection();
+  window.addEventListener("online", checkConnection);
+  window.addEventListener("offline", checkConnection);
+
+  // Load data
   loadItemsOffline();
   renderMarketItems();
 
+  // Bind UI
   const locationBtn = document.getElementById("captureLocationBtn");
   if (locationBtn) {
     locationBtn.addEventListener("click", captureLocation);
@@ -193,5 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Language
   setLanguage(currentLanguage);
 });
