@@ -55,20 +55,20 @@
         </ul>
         
         <div class="nav-actions">
-            <!-- Language Selector -->
-            <div class="language-selector">
-                <button type="button" id="languageBtn" class="lang-btn">
+            <!-- Language Selector - FIXED -->
+            <div class="language-selector" id="langSelector">
+                <button type="button" id="languageBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
                     <span class="lang-icon">🌍</span>
                     <span class="current-lang">English</span>
                     <span class="dropdown-arrow">▼</span>
                 </button>
                 
-                <div id="langDropdown" class="lang-dropdown">
-                    <button type="button" class="lang-option active" data-lang="en">🇬🇧 English</button>
-                    <button type="button" class="lang-option" data-lang="sw">🇰🇪 Kiswahili</button>
-                    <button type="button" class="lang-option" data-lang="zu">🇿🇦 isiZulu</button>
-                    <button type="button" class="lang-option" data-lang="sn">🇿🇼 ChiShona</button>
-                    <button type="button" class="lang-option" data-lang="af">🇿🇦 Afrikaans</button>
+                <div id="langDropdown" class="lang-dropdown" role="menu" aria-labelledby="languageBtn">
+                    <button type="button" class="lang-option active" data-lang="en" role="menuitem">🇬🇧 English</button>
+                    <button type="button" class="lang-option" data-lang="sw" role="menuitem">🇰🇪 Kiswahili</button>
+                    <button type="button" class="lang-option" data-lang="zu" role="menuitem">🇿🇦 isiZulu</button>
+                    <button type="button" class="lang-option" data-lang="sn" role="menuitem">🇿🇼 ChiShona</button>
+                    <button type="button" class="lang-option" data-lang="af" role="menuitem">🇿🇦 Afrikaans</button>
                 </div>
             </div>
 
@@ -201,7 +201,7 @@
         </div>
         
         <div class="market-grid" id="marketGrid" role="list">
-            <!-- Market items will be loaded here -->
+            <!-- Market items loaded dynamically -->
         </div>
         
         <div class="load-more">
@@ -465,8 +465,8 @@
     <!-- Toast Container -->
     <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- JavaScript -->
-    <script src="js/translator.js"></script>
+    <!-- JavaScript - FIXED FILE NAME -->
+    <script src="js/translations.js"></script>
     <script src="js/app.js"></script>
     
     <!-- Remove loading class after page loads -->
