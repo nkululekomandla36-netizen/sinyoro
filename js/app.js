@@ -1,4 +1,4 @@
- /* ======================================================
+/* ======================================================
    SINYORO APP.JS
    Main Application Logic (UI + Market + GPS + Language + Connection)
 ====================================================== */
@@ -33,17 +33,18 @@ function showToast(message, duration = 3000) {
 /* -----------------------------
    CONNECTION STATUS
 ----------------------------- */
-function checkConnection() {
-  const statusEl = document.getElementById("connection-status");
-  if (!statusEl) return;
+const statusDot = document.getElementById("connectionStatus");
+const statusText = document.getElementById("statusText");
 
-  if (navigator.onLine) {
-    statusEl.textContent = "Online";
-    statusEl.style.color = "green";
-  } else {
-    statusEl.textContent = "Offline mode";
-    statusEl.style.color = "orange";
-  }
+function checkConnection() {
+    if (!statusDot || !statusText) return;
+    if (navigator.onLine) {
+        statusDot.style.backgroundColor = "green";
+        statusText.textContent = "Online";
+    } else {
+        statusDot.style.backgroundColor = "orange";
+        statusText.textContent = "Offline mode";
+    }
 }
 
 /* -----------------------------
@@ -81,7 +82,7 @@ async function captureLocation() {
 /* -----------------------------
    MARKET ITEM MODEL
 ----------------------------- */
-function createMarketItem(data) {
+function createMarketItem(data, manualLocation = null) {
   return {
     id: Date.now(),
     title: data.title,
@@ -89,7 +90,7 @@ function createMarketItem(data) {
     description: data.description || "",
     price: data.price || null,
     image: data.image || null,
-    location: currentUserLocation,
+    location: currentUserLocation || manualLocation || null,
     createdAt: new Date().toISOString()
   };
 }
@@ -102,22 +103,27 @@ function handleAddItem(form) {
   const category = form.querySelector("#itemCategory")?.value;
   const description = form.querySelector("#itemDescription")?.value.trim();
   const price = form.querySelector("#itemPrice")?.value;
+  const manualLocation = form.querySelector("#itemLocation")?.value.trim();
 
   if (!title || !category) {
     showToast("Title and category required");
     return;
   }
 
-  if (!currentUserLocation) {
-    showToast("Please capture location first");
+  if (!currentUserLocation && !manualLocation) {
+    showToast("Please capture location or enter manually");
     return;
   }
 
-  const item = createMarketItem({ title, category, description, price });
+  const item = createMarketItem({ title, category, description, price }, manualLocation);
   marketItems.push(item);
   saveItemsOffline();
   renderMarketItems();
   form.reset();
+
+  // Hide image preview if visible
+  if (imagePreviewContainer) imagePreviewContainer.style.display = 'none';
+
   showToast("Item posted successfully");
 }
 
@@ -174,6 +180,30 @@ function renderMarketItems() {
     `;
     container.appendChild(card);
   });
+}
+
+/* -----------------------------
+   IMAGE PREVIEW LOGIC
+----------------------------- */
+const itemImageInput = document.getElementById('itemImage');
+const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+const imagePreview = document.getElementById('imagePreview');
+const removeImageBtn = document.getElementById('removeImageBtn');
+
+if (itemImageInput) {
+    itemImageInput.addEventListener('change', () => {
+        const file = itemImageInput.files[0];
+        if (!file) return;
+        imagePreview.src = URL.createObjectURL(file);
+        imagePreviewContainer.style.display = 'block';
+    });
+}
+if (removeImageBtn) {
+    removeImageBtn.addEventListener('click', () => {
+        itemImageInput.value = '';
+        imagePreview.src = '';
+        imagePreviewContainer.style.display = 'none';
+    });
 }
 
 /* -----------------------------
