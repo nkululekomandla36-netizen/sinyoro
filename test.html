@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sinyoro Test</title>
+<style>
+body { font-family: Arial; background: #0f172a; color: white; padding: 50px; }
+.dropdown { position: relative; display: inline-block; }
+.dropbtn { background: #3b82f6; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; }
+.dropdown-content { display: none; position: absolute; background: white; min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; border-radius: 5px; margin-top: 5px; }
+.dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; cursor: pointer; }
+.dropdown-content a:hover { background: #f1f1f1; }
+.show { display: block; }
+</style>
+</head>
+<body>
+
+<h1>Test Dropdown</h1>
+
+<div class="dropdown">
+  <button onclick="toggleDropdown()" class="dropbtn">English ▼</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a onclick="selectLang('English')">🇬🇧 English</a>
+    <a onclick="selectLang('Kiswahili')">🇰🇪 Kiswahili</a>
+    <a onclick="selectLang('isiZulu')">🇿🇦 isiZulu</a>
+  </div>
+</div>
+
+<p id="result">Click the dropdown!</p>
+
+<script>
+function toggleDropdown() {
+  document.getElementById("myDropdown").classList.toggle("show");
+  console.log("Dropdown clicked!");
+}
+
+function selectLang(lang) {
+  document.querySelector(".dropbtn").textContent = lang + " ▼";
+  document.getElementById("myDropdown").classList.remove("show");
+  document.getElementById("result").textContent = "You selected: " + lang;
+  console.log("Selected: " + lang);
+}
+
+// Close when clicking outside
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+</body>
+</html>
