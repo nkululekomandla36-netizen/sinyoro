@@ -1,13 +1,11 @@
 /* ======================================================
-   SINYORO APP.JS
-   Main Application Logic (UI + Market + GPS + Language + Connection)
+   SINYORO APP.JS - FIXED VERSION
+   Main Application Logic (NO LANGUAGE CODE - handled by translations.js)
 ====================================================== */
 
 /* -----------------------------
    GLOBAL STATE
 ----------------------------- */
-let currentLanguage = "en";
-let currentUserLocation = null;
 let marketItems = [];
 
 /* -----------------------------
@@ -16,16 +14,7 @@ let marketItems = [];
 function showToast(message, duration = 3000) {
   const toast = document.createElement("div");
   toast.textContent = message;
-  toast.style.position = "fixed";
-  toast.style.bottom = "20px";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.background = "#333";
-  toast.style.color = "#fff";
-  toast.style.padding = "10px 16px";
-  toast.style.borderRadius = "8px";
-  toast.style.fontSize = "14px";
-  toast.style.zIndex = "9999";
+  toast.style.cssText = "position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:99999;";
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), duration);
 }
@@ -33,230 +22,249 @@ function showToast(message, duration = 3000) {
 /* -----------------------------
    CONNECTION STATUS
 ----------------------------- */
-const statusDot = document.getElementById("connectionStatus");
-const statusText = document.getElementById("statusText");
-
 function checkConnection() {
+    const statusDot = document.getElementById("connectionStatus");
+    const statusText = document.getElementById("statusText");
     if (!statusDot || !statusText) return;
+    
     if (navigator.onLine) {
-        statusDot.style.backgroundColor = "green";
+        statusDot.style.backgroundColor = "#10b981";
         statusText.textContent = "Online";
     } else {
-        statusDot.style.backgroundColor = "orange";
+        statusDot.style.backgroundColor = "#f59e0b";
         statusText.textContent = "Offline mode";
     }
 }
 
 /* -----------------------------
-   LANGUAGE HANDLING
+   MOBILE MENU
 ----------------------------- */
-function setLanguage(lang) {
-  currentLanguage = lang;
-  if (window.TRANSLATIONS && TRANSLATIONS[lang]) {
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (TRANSLATIONS[lang][key]) {
-        el.textContent = TRANSLATIONS[lang][key];
-      }
+function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const menu = document.querySelector('.nav-menu');
+    if (!toggle || !menu) return;
+    
+    toggle.addEventListener('click', () => {
+        const isOpen = menu.classList.toggle('mobile-open');
+        toggle.setAttribute('aria-expanded', isOpen);
     });
-  }
-  const currentLangEl = document.querySelector(".current-lang");
-  if (currentLangEl) currentLangEl.textContent = TRANSLATIONS[lang]?.languageName || lang;
 }
 
 /* -----------------------------
-   GPS & LOCATION
+   MODAL
 ----------------------------- */
-async function captureLocation() {
-  try {
-    showToast("Capturing location...");
-    currentUserLocation = await window.SinyoroLocation.captureGPS();
-    showToast("Location saved");
-  } catch (err) {
-    console.error(err);
-    showToast("Using last known location");
-    currentUserLocation = window.SinyoroLocation.getLastKnownLocation();
-  }
+function initModal() {
+    const modal = document.getElementById('postItemModal');
+    const openBtns = [document.getElementById('postItemBtn'), document.getElementById('postFirstItemBtn'), document.getElementById('helpPostItemBtn')];
+    const closeBtn = modal?.querySelector('.close-btn');
+    const cancelBtn = document.getElementById('cancelPostBtn');
+    const overlay = modal?.querySelector('.modal-overlay');
+    
+    function open() {
+        if (!modal) return;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function close() {
+        if (!modal) return;
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        document.getElementById('postItemForm')?.reset();
+        document.getElementById('imagePreviewContainer').style.display = 'none';
+    }
+    
+    openBtns.forEach(btn => btn?.addEventListener('click', open));
+    closeBtn?.addEventListener('click', close);
+    cancelBtn?.addEventListener('click', close);
+    overlay?.addEventListener('click', close);
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal?.hidden) close();
+    });
 }
 
 /* -----------------------------
-   MARKET ITEM MODEL
+   IMAGE PREVIEW
 ----------------------------- */
-function createMarketItem(data, manualLocation = null) {
-  return {
-    id: Date.now(),
-    title: data.title,
-    category: data.category,
-    description: data.description || "",
-    price: data.price || null,
-    image: data.image || null,
-    location: currentUserLocation || manualLocation || null,
-    createdAt: new Date().toISOString()
-  };
-}
-
-/* -----------------------------
-   ADD ITEM FLOW
------------------------------ */
-function handleAddItem(form) {
-  const title = form.querySelector("#itemTitle")?.value.trim();
-  const category = form.querySelector("#itemCategory")?.value;
-  const description = form.querySelector("#itemDescription")?.value.trim();
-  const price = form.querySelector("#itemPrice")?.value;
-  const manualLocation = form.querySelector("#itemLocation")?.value.trim();
-
-  if (!title || !category) {
-    showToast("Title and category required");
-    return;
-  }
-
-  if (!currentUserLocation && !manualLocation) {
-    showToast("Please capture location or enter manually");
-    return;
-  }
-
-  const item = createMarketItem({ title, category, description, price }, manualLocation);
-  marketItems.push(item);
-  saveItemsOffline();
-  renderMarketItems();
-  form.reset();
-
-  // Hide image preview if visible
-  if (imagePreviewContainer) imagePreviewContainer.style.display = 'none';
-
-  showToast("Item posted successfully");
-}
-
-/* -----------------------------
-   OFFLINE STORAGE
------------------------------ */
-function saveItemsOffline() {
-  localStorage.setItem("sinyoro_market_items", JSON.stringify(marketItems));
-}
-function loadItemsOffline() {
-  const saved = localStorage.getItem("sinyoro_market_items");
-  if (saved) {
-    try { marketItems = JSON.parse(saved); } catch { marketItems = []; }
-  }
-}
-
-/* -----------------------------
-   DISTANCE HELPERS
------------------------------ */
-function calculateDistance(itemLocation) {
-  if (!currentUserLocation || !itemLocation) return null;
-  return window.SinyoroLocation.calculateDistance(
-    currentUserLocation.latitude,
-    currentUserLocation.longitude,
-    itemLocation.latitude,
-    itemLocation.longitude
-  );
-}
-
-/* -----------------------------
-   RENDER MARKET
------------------------------ */
-function renderMarketItems() {
-  const container = document.getElementById("marketGrid");
-  if (!container) return;
-
-  container.innerHTML = "";
-  const sortedItems = [...marketItems].sort((a,b) => {
-    const dA = calculateDistance(a.location) ?? Infinity;
-    const dB = calculateDistance(b.location) ?? Infinity;
-    return dA - dB;
-  });
-
-  sortedItems.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "market-card";
-    const distance = calculateDistance(item.location);
-    const distanceText = distance ? `${distance.toFixed(1)} km away` : "Distance unknown";
-    card.innerHTML = `
-      <h3>${item.title}</h3>
-      <p><strong>Category:</strong> ${item.category}</p>
-      <p>${item.description || ""}</p>
-      <p><strong>${distanceText}</strong></p>
-    `;
-    container.appendChild(card);
-  });
-}
-
-/* -----------------------------
-   IMAGE PREVIEW LOGIC
------------------------------ */
-const itemImageInput = document.getElementById('itemImage');
-const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-const imagePreview = document.getElementById('imagePreview');
-const removeImageBtn = document.getElementById('removeImageBtn');
-
-if (itemImageInput) {
-    itemImageInput.addEventListener('change', () => {
-        const file = itemImageInput.files[0];
+function initImagePreview() {
+    const input = document.getElementById('itemImage');
+    const preview = document.getElementById('imagePreview');
+    const container = document.getElementById('imagePreviewContainer');
+    const removeBtn = document.getElementById('removeImageBtn');
+    
+    if (!input) return;
+    
+    input.addEventListener('change', () => {
+        const file = input.files[0];
         if (!file) return;
-        imagePreview.src = URL.createObjectURL(file);
-        imagePreviewContainer.style.display = 'block';
+        preview.src = URL.createObjectURL(file);
+        container.style.display = 'block';
     });
-}
-if (removeImageBtn) {
-    removeImageBtn.addEventListener('click', () => {
-        itemImageInput.value = '';
-        imagePreview.src = '';
-        imagePreviewContainer.style.display = 'none';
+    
+    removeBtn?.addEventListener('click', () => {
+        input.value = '';
+        preview.src = '';
+        container.style.display = 'none';
     });
 }
 
 /* -----------------------------
-   INIT APP
+   MARKET ITEMS
+----------------------------- */
+function createMarketItem(data) {
+    return {
+        id: Date.now(),
+        title: data.title,
+        category: data.category,
+        description: data.description || "",
+        price: data.price || "",
+        seller: data.seller || "",
+        location: data.location || "",
+        image: data.image || null,
+        createdAt: new Date().toISOString()
+    };
+}
+
+function saveItems() {
+    localStorage.setItem("sinyoro_market_items", JSON.stringify(marketItems));
+}
+
+function loadItems() {
+    const saved = localStorage.getItem("sinyoro_market_items");
+    if (saved) {
+        try { marketItems = JSON.parse(saved); } catch { marketItems = []; }
+    }
+}
+
+function renderMarketItems() {
+    const container = document.getElementById("marketGrid");
+    if (!container) return;
+    
+    container.innerHTML = marketItems.map(item => `
+        <article class="glass-card market-card" data-item-id="${item.id}">
+            <div class="card-header">
+                <div class="item-image">📦</div>
+                <span class="category-tag">${item.category}</span>
+            </div>
+            <div class="card-body">
+                <h3 class="item-title">${item.title}</h3>
+                <p class="item-description">${item.description}</p>
+                <div class="item-meta">
+                    <div class="meta-row">
+                        <span class="price-tag">💰 ${item.price}</span>
+                        <span class="distance-tag">📍 ${item.location || 'Unknown'}</span>
+                    </div>
+                    <div class="seller-row">
+                        <div class="seller-info">👤 ${item.seller}</div>
+                        <span class="trust-badge">⭐ Trusted</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary btn-full">Contact Seller</button>
+            </div>
+        </article>
+    `).join('');
+}
+
+function handleAddItem(form) {
+    const title = document.getElementById('itemName')?.value.trim();
+    const category = document.getElementById('itemCategory')?.value;
+    const description = document.getElementById('itemDescription')?.value.trim();
+    const price = document.getElementById('itemPrice')?.value;
+    const seller = document.getElementById('sellerName')?.value.trim();
+    const location = document.getElementById('itemLocation')?.value.trim();
+    
+    if (!title || !category || !seller) {
+        showToast("Please fill required fields");
+        return;
+    }
+    
+    const item = createMarketItem({ title, category, description, price, seller, location });
+    marketItems.unshift(item);
+    saveItems();
+    renderMarketItems();
+    
+    // Close modal
+    document.getElementById('postItemModal').hidden = true;
+    document.body.style.overflow = '';
+    form.reset();
+    document.getElementById('imagePreviewContainer').style.display = 'none';
+    
+    showToast("Item posted successfully!");
+}
+
+/* -----------------------------
+   FILTERS
+----------------------------- */
+function initFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+            
+            const category = btn.dataset.category;
+            document.querySelectorAll('.market-card').forEach(card => {
+                card.style.display = (category === 'all' || card.dataset.category === category) ? 'flex' : 'none';
+            });
+        });
+    });
+}
+
+/* -----------------------------
+   NAVIGATION
+----------------------------- */
+function initNavigation() {
+    document.getElementById('browseMarketBtn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('market')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.getElementById('learnMoreBtn')?.addEventListener('click', () => {
+        document.getElementById('help')?.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+/* -----------------------------
+   INIT
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  // Connection
-  checkConnection();
-  window.addEventListener("online", checkConnection);
-  window.addEventListener("offline", checkConnection);
-
-  // Load offline items
-  loadItemsOffline();
-  renderMarketItems();
-
-  // Location button
-  const locationBtn = document.getElementById("captureLocationBtn");
-  if (locationBtn) locationBtn.addEventListener("click", captureLocation);
-
-  // Post item form
-  const addItemForm = document.getElementById("postItemForm");
-  if (addItemForm) addItemForm.addEventListener("submit", e => {
-    e.preventDefault();
-    handleAddItem(addItemForm);
-  });
-
-  // Language dropdown
-  const languageBtn = document.getElementById("languageBtn");
-  const langDropdown = document.getElementById("langDropdown");
-  if (languageBtn && langDropdown) {
-    langDropdown.hidden = true; // start hidden
-    languageBtn.addEventListener("click", () => {
-      const expanded = languageBtn.getAttribute("aria-expanded") === "true";
-      languageBtn.setAttribute("aria-expanded", !expanded);
-      langDropdown.hidden = expanded;
+    console.log('Sinyoro app initializing...');
+    
+    checkConnection();
+    window.addEventListener("online", checkConnection);
+    window.addEventListener("offline", checkConnection);
+    
+    initMobileMenu();
+    initModal();
+    initImagePreview();
+    initFilters();
+    initNavigation();
+    
+    loadItems();
+    renderMarketItems();
+    
+    // Form submission
+    document.getElementById("postItemForm")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        handleAddItem(e.target);
     });
-
-    langDropdown.querySelectorAll(".lang-option").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const selectedLang = btn.dataset.lang;
-        setLanguage(selectedLang);
-
-        // update active state
-        langDropdown.querySelectorAll(".lang-option").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-
-        // close dropdown
-        languageBtn.setAttribute("aria-expanded", false);
-        langDropdown.hidden = true;
-      });
-    });
-  }
-
-  // Initial language
-  setLanguage(currentLanguage);
+    
+    console.log('Sinyoro app ready!');
 });
