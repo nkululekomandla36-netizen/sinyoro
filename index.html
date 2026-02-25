@@ -18,10 +18,53 @@ body {
 }
 .loading { opacity: 0; animation: fadeIn 0.5s forwards; }
 @keyframes fadeIn { to { opacity: 1; } }
+
+/* EMERGENCY LANGUAGE FIX */
+#languageBtn {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 9999;
+}
+#langDropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    min-width: 180px;
+    z-index: 10000;
+    padding: 0.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+#langDropdown.active {
+    display: block !important;
+}
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 8px;
+    text-align: left;
+}
+.lang-option:hover {
+    background: rgba(59, 130, 246, 0.3);
+}
+.lang-option.active {
+    background: #3b82f6;
+}
 </style>
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="preload" href="css/style.css" as="style">
 </head>
 <body class="loading">
 
@@ -79,14 +122,13 @@ body {
             <p class="hero-description" data-i18n="heroDescription">
                 Buy, sell, and barter essential goods with your nearby community. Works completely offline.
             </p>
-            <!-- Features -->
+            
             <div class="hero-features">
                 <div class="feature-badge"><span class="feature-icon">📍</span><span class="feature-text" data-i18n="featureLocal">Local Only</span></div>
                 <div class="feature-badge"><span class="feature-icon">🔒</span><span class="feature-text" data-i18n="featureSecure">Secure</span></div>
                 <div class="feature-badge"><span class="feature-icon">🌾</span><span class="feature-text" data-i18n="featureEssential">Essential Goods</span></div>
             </div>
 
-            <!-- Categories -->
             <div class="hero-categories-section">
                 <h2 class="hero-categories-title" data-i18n="categoriesTitle">Available Categories</h2>
                 <div class="hero-categories-grid">
@@ -104,7 +146,6 @@ body {
                 <button class="btn btn-secondary btn-large" id="learnMoreBtn" data-i18n="howItWorks">How It Works</button>
             </div>
 
-            <!-- Connection Status -->
             <div class="offline-indicator">
                 <span class="status-dot" id="connectionStatus"></span>
                 <span id="statusText" data-i18n="checkingConnection">Checking connection...</span>
@@ -131,18 +172,180 @@ body {
     <div class="load-more"><button class="btn btn-secondary" id="loadMoreBtn" type="button" data-i18n="loadMore">Load More</button></div>
 </section>
 
-<!-- My Items, Community, Help, Footer, Post Modal ... -->
-<!-- Keep the rest of your HTML as-is, same as your previous version -->
+<!-- My Items Section -->
+<section id="myitems" class="section" aria-labelledby="myitems-heading">
+    <div class="section-header">
+        <h2 class="section-title" id="myitems-heading" data-i18n="myItemsTitle">📦 My Items</h2>
+        <p class="section-subtitle" data-i18n="myItemsSubtitle">Manage your listings and trades</p>
+    </div>
+    <div class="my-items-list" id="myItemsList">
+        <div class="glass-card empty-state" id="emptyState">
+            <div class="empty-icon">📭</div>
+            <h3 data-i18n="noItemsTitle">No Items Yet</h3>
+            <p data-i18n="noItemsDesc">Start selling by posting your first item to the marketplace.</p>
+            <button class="btn btn-primary" id="postFirstItemBtn" type="button" data-i18n="postItem">Post Item</button>
+        </div>
+    </div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="section" aria-labelledby="community-heading">
+    <div class="section-header">
+        <h2 class="section-title" id="community-heading" data-i18n="communityTitle">🤝 Community</h2>
+        <p class="section-subtitle" data-i18n="communitySubtitle">Connect with nearby traders</p>
+    </div>
+    <div class="community-grid">
+        <div class="glass-card community-card">
+            <h3 data-i18n="nearbyTraders">Nearby Traders</h3>
+            <p class="nearby-summary" data-i18n="nearbySummary">5 traders within 5km of your location</p>
+            <div class="nearby-list">
+                <div class="nearby-item"><span class="nearby-avatar">👤</span><div class="nearby-info"><span class="nearby-name">Mama Sarah</span><span class="nearby-distance">2km away • Food specialist</span></div></div>
+                <div class="nearby-item"><span class="nearby-avatar">👤</span><div class="nearby-info"><span class="nearby-name">Baba John</span><span class="nearby-distance">3km away • Livestock</span></div></div>
+                <div class="nearby-item"><span class="nearby-avatar">👤</span><div class="nearby-info"><span class="nearby-name">Tech Wanjiku</span><span class="nearby-distance">4km away • Services</span></div></div>
+            </div>
+            <button class="btn btn-secondary btn-full" type="button" data-i18n="viewAllTraders">View All Traders</button>
+        </div>
+        <div class="glass-card community-card">
+            <h3 data-i18n="trustNetwork">Trust Network</h3>
+            <div class="community-stats">
+                <div class="stat-item"><span class="stat-icon">⭐</span><span class="stat-number">12</span><span class="stat-label" data-i18n="trustedTraders">Trusted Traders</span></div>
+                <div class="stat-item"><span class="stat-icon">🤝</span><span class="stat-number">48</span><span class="stat-label" data-i18n="successfulTrades">Successful Trades</span></div>
+                <div class="stat-item"><span class="stat-icon">📍</span><span class="stat-number">5km</span><span class="stat-label" data-i18n="coverageArea">Coverage Area</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Help Section -->
+<section id="help" class="section" aria-labelledby="help-heading">
+    <div class="section-header">
+        <h2 class="section-title" id="help-heading" data-i18n="helpTitle">❓ How It Works</h2>
+        <p class="section-subtitle" data-i18n="helpSubtitle">Get started in 3 simple steps</p>
+    </div>
+    <div class="help-grid">
+        <div class="glass-card help-card">
+            <div class="step-header"><div class="step-number">1</div><span class="step-icon">📱</span></div>
+            <h3 data-i18n="step1Title">Browse Offline</h3>
+            <p data-i18n="step1Desc">View all items without internet. The marketplace works completely offline using local network.</p>
+            <ul class="feature-list"><li>✓ No data needed</li><li>✓ Instant loading</li><li>✓ Works anywhere</li></ul>
+        </div>
+        <div class="glass-card help-card">
+            <div class="step-header"><div class="step-number">2</div><span class="step-icon">💬</span></div>
+            <h3 data-i18n="step2Title">Connect Directly</h3>
+            <p data-i18n="step2Desc">Contact sellers via SMS or call. No middleman, no fees. Deal directly with your community.</p>
+            <ul class="feature-list"><li>✓ Direct contact</li><li>✓ No commissions</li><li>✓ Local trust</li></ul>
+        </div>
+        <div class="glass-card help-card">
+            <div class="step-header"><div class="step-number">3</div><span class="step-icon">🔄</span></div>
+            <h3 data-i18n="step3Title">Trade & Barter</h3>
+            <p data-i18n="step3Desc">Buy with cash or barter goods. Flexible trading that works for your community's needs.</p>
+            <ul class="feature-list"><li>✓ Cash or barter</li><li>✓ Flexible prices</li><li>✓ Community building</li></ul>
+        </div>
+    </div>
+    <div class="help-cta">
+        <div class="glass-card cta-card">
+            <h3 data-i18n="readyToStart">Ready to Start Trading?</h3>
+            <p data-i18n="ctaDesc">Join hundreds of community members already trading on Sinyoro.</p>
+            <button class="btn btn-primary btn-large" id="helpPostItemBtn" type="button" data-i18n="postItemNow">Post Your First Item</button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <span class="footer-logo">🌍</span>
+            <div><strong>Sinyoro</strong><p data-i18n="footerTagline">Community Marketplace</p></div>
+        </div>
+        <div class="footer-features">
+            <span class="footer-badge">📍 Local</span>
+            <span class="footer-badge">🔒 Secure</span>
+            <span class="footer-badge">🌾 Essential</span>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p data-i18n="copyright">© 2024 Sinyoro. Built for rural communities.</p>
+    </div>
+</footer>
+
+<!-- Post Item Modal -->
+<div class="modal" id="postItemModal" role="dialog" aria-labelledby="modal-title" aria-hidden="true" hidden>
+    <div class="modal-overlay"></div>
+    <div class="glass-card modal-content">
+        <div class="modal-header">
+            <h2 id="modal-title" data-i18n="postItemTitle">Post New Item</h2>
+            <button class="close-btn" aria-label="Close modal" type="button">&times;</button>
+        </div>
+        <form class="post-form" id="postItemForm">
+            <div class="form-group">
+                <label for="itemName" data-i18n="itemTitleLabel">Item Title</label>
+                <input type="text" id="itemName" name="title" required placeholder="e.g., Fresh Maize - 50kg">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="itemCategory" data-i18n="itemCategoryLabel">Category</label>
+                    <select id="itemCategory" name="category" required>
+                        <option value="" data-i18n="selectCategory">Select category...</option>
+                        <option value="food" data-i18n="catFood">Food</option>
+                        <option value="livestock" data-i18n="catLivestock">Livestock</option>
+                        <option value="tools" data-i18n="catTools">Tools</option>
+                        <option value="services" data-i18n="catServices">Services</option>
+                        <option value="herbs" data-i18n="catHerbs">Herbs</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemPrice" data-i18n="itemPriceLabel">Price / Barter</label>
+                    <input type="text" id="itemPrice" name="price" required placeholder="e.g., $25 or barter">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="itemLocation" data-i18n="itemLocationLabel">Location</label>
+                <input type="text" id="itemLocation" name="location" placeholder="e.g., 2km from market">
+            </div>
+            <div class="form-group">
+                <label for="itemDescription" data-i18n="itemDescriptionLabel">Description</label>
+                <textarea id="itemDescription" name="description" rows="3" required placeholder="Describe your item..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="itemImage" data-i18n="itemImageLabel">Item Image</label>
+                <input type="file" id="itemImage" name="image" accept="image/*" class="file-input">
+                <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                    <img id="imagePreview" src="" alt="Preview" class="image-preview">
+                    <button type="button" id="removeImageBtn" class="btn btn-secondary btn-small">Remove</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sellerName" data-i18n="sellerNameLabel">Your Name</label>
+                <input type="text" id="sellerName" name="seller" required>
+            </div>
+            <div class="form-group">
+                <label for="contactMethod" data-i18n="contactMethodLabel">Contact Method</label>
+                <select id="contactMethod" name="contactMethod" required>
+                    <option value="phone">Phone/SMS</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="visit">In-person visit</option>
+                </select>
+            </div>
+            <div class="form-notice">
+                <p data-i18n="offlineNotice">ℹ️ This will be saved locally and shared when you connect to the network.</p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancelPostBtn" data-i18n="cancel">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="submitItemBtn" data-i18n="postItem">Post Item</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Toast -->
 <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
 
-<!-- JS -->
+<!-- JS - CORRECT ORDER -->
 <script src="js/translations.js"></script>
-<script src="js/location-system.js"></script>
 <script src="js/app.js"></script>
+<script src="js/location-system.js"></script>
 
-<!-- Remove loading class -->
 <script>
 window.addEventListener('load', () => document.body.classList.remove('loading'));
 </script>
