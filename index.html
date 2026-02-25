@@ -348,6 +348,57 @@ body {
 
 <script>
 window.addEventListener('load', () => document.body.classList.remove('loading'));
+</script><!-- EMERGENCY LANGUAGE FIX -->
+<script>
+(function() {
+    function initLang() {
+        var btn = document.getElementById('languageBtn');
+        var dropdown = document.getElementById('langDropdown');
+        
+        if (!btn || !dropdown) {
+            console.log('Language elements not found, retrying...');
+            setTimeout(initLang, 500);
+            return;
+        }
+        
+        console.log('Language dropdown initialized!');
+        
+        btn.onclick = function(e) {
+            e.stopPropagation();
+            var isOpen = dropdown.style.display === 'block';
+            dropdown.style.display = isOpen ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', !isOpen);
+            console.log('Dropdown toggled:', !isOpen);
+        };
+        
+        document.onclick = function(e) {
+            if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        };
+        
+        var options = dropdown.querySelectorAll('.lang-option');
+        options.forEach(function(opt) {
+            opt.onclick = function(e) {
+                e.stopPropagation();
+                var lang = this.dataset.lang;
+                console.log('Selected language:', lang);
+                dropdown.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+                // Reload page with new language
+                localStorage.setItem('sinyoro-language', lang);
+                location.reload();
+            };
+        });
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLang);
+    } else {
+        initLang();
+    }
+})();
 </script>
 </body>
 </html>
