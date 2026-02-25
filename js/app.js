@@ -1,5 +1,7 @@
 /* ======================================================
-   SINYORO APP.JS (FIXED & STABLE)
+   SINYORO APP.JS
+   Fully Fixed Main Application Logic
+   (UI + Market + GPS + Language + Connection)
 ====================================================== */
 
 let currentLanguage = "en";
@@ -16,7 +18,7 @@ function showToast(message, duration = 3000) {
   toast.style.bottom = "20px";
   toast.style.left = "50%";
   toast.style.transform = "translateX(-50%)";
-  toast.style.background = "#111";
+  toast.style.background = "#333";
   toast.style.color = "#fff";
   toast.style.padding = "10px 16px";
   toast.style.borderRadius = "8px";
@@ -27,43 +29,26 @@ function showToast(message, duration = 3000) {
 }
 
 /* -----------------------------
-   CONNECTION STATUS (FIXED)
------------------------------ */
-function checkConnection() {
-  const dot = document.getElementById("connectionStatus");
-  const text = document.getElementById("statusText");
-  if (!dot || !text) return;
-
-  if (navigator.onLine) {
-    dot.style.background = "#22c55e";
-    text.textContent = "Online";
-  } else {
-    dot.style.background = "#f97316";
-    text.textContent = "Offline mode";
-  }
-}
-
-/* -----------------------------
-   LANGUAGE HANDLING (FIXED)
+   LANGUAGE HANDLING
 ----------------------------- */
 function setLanguage(lang) {
   currentLanguage = lang;
-
   if (window.TRANSLATIONS && TRANSLATIONS[lang]) {
     document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.dataset.i18n;
+      const key = el.getAttribute("data-i18n");
       if (TRANSLATIONS[lang][key]) {
         el.textContent = TRANSLATIONS[lang][key];
       }
     });
-
-    const label = document.querySelector(".current-lang");
-    if (label) label.textContent = TRANSLATIONS[lang].languageName || lang;
+  }
+  const currentLangEl = document.querySelector(".current-lang");
+  if (currentLangEl) {
+    currentLangEl.textContent = TRANSLATIONS?.[lang]?.languageName || lang;
   }
 }
 
 /* -----------------------------
-   GPS & LOCATION (HARDENED)
+   GPS & LOCATION (SAFE)
 ----------------------------- */
 async function captureLocation() {
   if (!window.SinyoroLocation) {
@@ -76,26 +61,86 @@ async function captureLocation() {
     currentUserLocation = await window.SinyoroLocation.captureGPS();
     showToast("Location saved");
   } catch (err) {
-    console.warn("GPS failed, using last known");
+    console.warn("GPS failed, using last known location");
     currentUserLocation =
       window.SinyoroLocation.getLastKnownPosition?.() || null;
-    showToast("Using last known location");
+
+    if (currentUserLocation) {
+      showToast("Using last known location");
+    } else {
+      showToast("Location unavailable");
+    }
   }
 }
 
 /* -----------------------------
-   MARKET ITEMS
+   CONNECTION STATUS (SAFE)
 ----------------------------- */
-function createMarketItem(data) {
+function updateConnectionUI() {
+  const statusDot = document.getElementById("connectionStatus");
+  const statusText = document.getElementById("statusText");
+  if (!statusDot || !statusText) return;
+
+  if (navigator.onLine) {
+    statusDot.style.backgroundColor = "green";
+    statusText.textContent = "Online";
+  } else {
+    statusDot.style.backgroundColor = "orange";
+    statusText.textContent = "Offline mode";
+  }
+}
+
+/* -----------------------------
+   MARKET ITEM MODEL
+----------------------------- */
+function createMarketItem(data, manualLocationText = null) {
   return {
     id: Date.now(),
     title: data.title,
     category: data.category,
     description: data.description || "",
     price: data.price || null,
-    location: currentUserLocation,
+    image: null,
+    location:
+      currentUserLocation && typeof currentUserLocation === "object"
+        ? currentUserLocation
+        : manualLocationText
+        ? { notes: manualLocationText }
+        : null,
     createdAt: new Date().toISOString()
   };
+}
+
+/* -----------------------------
+   ADD ITEM FLOW
+----------------------------- */
+function handleAddItem(form) {
+  const title = form.querySelector("#itemTitle")?.value.trim();
+  const category = form.querySelector("#itemCategory")?.value;
+  const description = form.querySelector("#itemDescription")?.value.trim();
+  const price = form.querySelector("#itemPrice")?.value;
+  const manualLocation = form.querySelector("#itemLocation")?.value.trim();
+
+  if (!title || !category) {
+    showToast("Title and category required");
+    return;
+  }
+
+  if (!currentUserLocation && !manualLocation) {
+    showToast("Capture GPS or enter location");
+    return;
+  }
+
+  const item = createMarketItem(
+    { title, category, description, price },
+    manualLocation
+  );
+
+  marketItems.push(item);
+  saveItemsOffline();
+  renderMarketItems();
+  form.reset();
+  showToast("Item posted successfully");
 }
 
 /* -----------------------------
@@ -104,19 +149,29 @@ function createMarketItem(data) {
 function saveItemsOffline() {
   localStorage.setItem("sinyoro_market_items", JSON.stringify(marketItems));
 }
+
 function loadItemsOffline() {
-  try {
-    marketItems = JSON.parse(localStorage.getItem("sinyoro_market_items")) || [];
-  } catch {
-    marketItems = [];
+  const saved = localStorage.getItem("sinyoro_market_items");
+  if (saved) {
+    try {
+      marketItems = JSON.parse(saved);
+    } catch {
+      marketItems = [];
+    }
   }
 }
 
 /* -----------------------------
-   DISTANCE
+   DISTANCE SAFE CALCULATION
 ----------------------------- */
 function calculateDistance(itemLocation) {
-  if (!currentUserLocation || !itemLocation || !window.SinyoroLocation) return null;
+  if (
+    !currentUserLocation ||
+    !itemLocation ||
+    typeof itemLocation !== "object" ||
+    !itemLocation.latitude
+  ) return null;
+
   return window.SinyoroLocation.calculateDistance(
     currentUserLocation.latitude,
     currentUserLocation.longitude,
@@ -134,70 +189,84 @@ function renderMarketItems() {
 
   container.innerHTML = "";
 
-  marketItems.forEach(item => {
+  const sorted = [...marketItems].sort((a, b) => {
+    const da = calculateDistance(a.location) ?? Infinity;
+    const db = calculateDistance(b.location) ?? Infinity;
+    return da - db;
+  });
+
+  sorted.forEach(item => {
     const card = document.createElement("div");
     card.className = "market-card";
 
     const distance = calculateDistance(item.location);
     const distanceText = distance
       ? `${distance.toFixed(1)} km away`
-      : "Distance unknown";
+      : item.location?.notes
+      ? `📍 ${item.location.notes}`
+      : "Location unknown";
 
     card.innerHTML = `
       <h3>${item.title}</h3>
+      <p><strong>Category:</strong> ${item.category}</p>
       <p>${item.description || ""}</p>
-      <strong>${distanceText}</strong>
+      <p><strong>${distanceText}</strong></p>
     `;
     container.appendChild(card);
   });
 }
 
 /* -----------------------------
-   INIT (SAFE & ORDERED)
+   INIT APP (SAFE ORDER)
 ----------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  checkConnection();
-  window.addEventListener("online", checkConnection);
-  window.addEventListener("offline", checkConnection);
+  // Connection
+  updateConnectionUI();
+  window.addEventListener("online", updateConnectionUI);
+  window.addEventListener("offline", updateConnectionUI);
 
+  // Load data
   loadItemsOffline();
   renderMarketItems();
 
-  document
-    .getElementById("captureLocationBtn")
-    ?.addEventListener("click", captureLocation);
+  // GPS button
+  const locationBtn = document.getElementById("captureLocationBtn");
+  if (locationBtn) locationBtn.addEventListener("click", captureLocation);
 
-  const form = document.getElementById("postItemForm");
-  if (form) {
-    form.addEventListener("submit", e => {
+  // Form
+  const addItemForm = document.getElementById("postItemForm");
+  if (addItemForm) {
+    addItemForm.addEventListener("submit", e => {
       e.preventDefault();
-      showToast("Posting disabled in demo");
+      handleAddItem(addItemForm);
     });
   }
 
-  // 🌍 Language dropdown (FIXED)
-  const btn = document.getElementById("languageBtn");
-  const menu = document.getElementById("langDropdown");
+  // Language dropdown (FIXED)
+  const languageBtn = document.getElementById("languageBtn");
+  const langDropdown = document.getElementById("langDropdown");
 
-  if (btn && menu) {
-    menu.classList.remove("open");
+  if (languageBtn && langDropdown) {
+    langDropdown.classList.remove("open");
 
-    btn.addEventListener("click", e => {
+    languageBtn.addEventListener("click", e => {
       e.stopPropagation();
-      menu.classList.toggle("open");
+      langDropdown.classList.toggle("open");
     });
 
-    menu.querySelectorAll(".lang-option").forEach(opt => {
-      opt.addEventListener("click", () => {
-        setLanguage(opt.dataset.lang);
-        menu.classList.remove("open");
+    langDropdown.querySelectorAll(".lang-option").forEach(btn => {
+      btn.addEventListener("click", () => {
+        setLanguage(btn.dataset.lang);
+        langDropdown.classList.remove("open");
       });
     });
 
     document.addEventListener("click", () => {
-      menu.classList.remove("open");
+      langDropdown.classList.remove("open");
     });
   }
 
   setLanguage(currentLanguage);
 });
+
+console.log("✅ Sinyoro app.js fully loaded and stable");
