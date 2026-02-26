@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinyoro - Zulu</title>
+<style>
+body { font-family: Arial, sans-serif; line-height:1.6; margin:20px; background:#fefefe; color:#333; }
+h1,h2 { color:#2c3e50; }
+nav a { margin-right:15px; text-decoration:none; color:#3498db; font-weight:bold; }
+nav a:hover { color:#2980b9; }
+button, .dropdown button { background:#3498db; color:white; border:none; padding:10px 20px; cursor:pointer; border-radius:5px; }
+button:hover, .dropdown button:hover { background:#2980b9; }
+.dropdown { display:inline-block; position:relative; }
+.dropdown-content { display:none; position:absolute; background:#f9f9f9; min-width:120px; box-shadow:0px 8px 16px 0 rgba(0,0,0,0.2); z-index:1; }
+.dropdown-content a { display:block; padding:10px; color:#333; text-decoration:none; }
+.dropdown-content a:hover { background:#ddd; }
+.dropdown:hover .dropdown-content { display:block; }
+</style>
+</head>
+<body>
+
+<nav>
+<a href="index-zu.html">Ikhaya</a>
+<a href="index-zu.html#features">Izici</a>
+<a href="index-zu.html#about">Mayelana</a>
+<a href="index-zu.html#contact">Xhumana</a>
+<a href="index-zu.html#download">Landa</a>
+
+<div class="dropdown">
+  <button>Ulimi ▼</button>
+  <div class="dropdown-content">
+    <a href="index.html">English</a>
+    <a href="index-zu.html">Zulu</a>
+    <a href="index-sn.html">Shona</a>
+    <a href="index-sw.html">Swahili</a>
+  </div>
+</div>
+</nav>
+
+<h1>Uyemukelwa ku-Sinyoro</h1>
+<p>Siyakhuthaza imiphakathi yasemakhaya e-Afrika ukuba ithengise ngaphandle kwe-inthanethi. Thenga, thengisa futhi uxhase izimpahla ezibalulekile ngaphandle kokuxhumeka ku-inthanethi.</p>
+
+<button onclick="window.location.href='#'">Landa Uhlelo 📱</button>
+
+<h2 id="features">Ukuthengisa Okungaxhunyiwe ku-inthanethi</h2>
+<p>Thengisa izimpahla nezinsizakalo ngaphandle kwe-inthanethi. Kufanele izindawo zasemakhaya ezine-inthanethi encane.</p>
+
+<h2>Umphakathi</h2>
+<p>Yakhelwe imiphakathi yase-Afrika, siqonda izidingo nezinkinga zendawo.</p>
+
+<h2>Izimpahla Eziyinhloko</h2>
+<p>Thola izimpahla nezinsizakalo ezibalulekile emphakathini.</p>
+
+<h2>Elula Futhi Ephephile</h2>
+<p>Isikhombimsebenzisi esilula, siphephile, futhi silungele wonke umuntu.</p>
+
+<h2>Indawo Ye-GPS</h2>
+<button onclick="getGPSLocation()" style="background:#28a745;color:white;padding:12px 24px;border:none;border-radius:5px;cursor:pointer;font-size:16px;margin:10px 0;">
+📍 Thola Indawo Yami
+</button>
+
+<div id="gps-result" style="margin-top:15px;padding:15px;background:#e3f2fd;border-radius:5px;display:none;"></div>
+
+<h2 id="about">Mayelana ne-Sinyoro</h2>
+<p>I-Sinyoro ingaphezu kohlelo – iyinqwaba yokuxhuma imiphakathi yasemakhaya amathuba emisebenzi. Siyaqonda ukuthi kwezinye izingxenye ze-Afrika, ukuxhumeka ku-inthanethi akuvamile.</p>
+<p>Ngakho-ke sakha i-Sinyoro ukuthi isebenze ngokuphelele ngaphandle kwe-inthanethi, ivumela abathengisi, abalimi, nemiphakathi ukuqhubeka nemisebenzi yabo.</p>
+<p>Inhloso yethu ukuqinisa imiphakathi yasemakhaya ngokubanika amathuluzi edijithali adingekayo ukuze baphumelele.</p>
+
+<footer>
+<p>
+<a href="#">Inqubomgomo Yobumfihlo</a> |
+<a href="#">Imigomo Yesevisi</a> |
+<a href="#">Ukusekela</a> |
+<a href="#">Xhumana Nathi</a>
+</p>
+<p>© 2026 Sinyoro. Wonke amalungelo agodliwe. | Ukuqinisa i-Afrika Yasemakhaya</p>
+</footer>
+
+<script>
+function getGPSLocation() {
+    const r = document.getElementById('gps-result');
+    if (!navigator.geolocation) { r.innerHTML = '❌ I-Geolocation ayisekelwa kule divayisi.'; r.style.display='block'; return; }
+    r.innerHTML = '⏳ Ukuthola indawo yakho...'; r.style.display='block';
+    navigator.geolocation.getCurrentPosition(
+        function(p){ r.innerHTML='<strong>✅ Indawo Itholakele</strong><br>Ububanzi: '+p.coords.latitude.toFixed(6)+'<br>Ubude: '+p.coords.longitude.toFixed(6); },
+        function(e){ let msg='Iphutha elingaziwa'; if(e.code===1) msg='Ukuphikiswa kwemvume'; if(e.code===2) msg='Indawo ayitholakali'; if(e.code===3) msg='Isikhathi sokucela sifezekile'; r.innerHTML='❌ I-GPS Iphutha: '+msg; }
+    );
+}
+</script>
+
+</body>
+</html>
