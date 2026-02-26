@@ -265,6 +265,52 @@
             margin-right: 0.5rem;
         }
 
+        /* Form Styles */
+        form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        form div {
+            margin-bottom: 1.5rem;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
         /* Buttons */
         .btn {
             display: inline-block;
@@ -434,9 +480,9 @@
             <a href="#home">Home</a>
             <a href="#features">Features</a>
             <a href="#marketplace">Marketplace</a>
+            <a href="#sell">Sell Product</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <a href="#download">Download</a>
             
             <!-- Language Selector -->
             <div class="language-selector">
@@ -508,7 +554,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">🥬</div>
                     <h3>Food & Vegetables</h3>
-                    <div class="item-count">24 Items Available</div>
+                    <div class="item-count" id="count-food">0 Items Available</div>
                     <ul class="items-list">
                         <li>Maize & Grains</li>
                         <li>Fresh Vegetables</li>
@@ -523,7 +569,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">🍊</div>
                     <h3>Fruits</h3>
-                    <div class="item-count">18 Items Available</div>
+                    <div class="item-count" id="count-fruits">0 Items Available</div>
                     <ul class="items-list">
                         <li>Oranges & Citrus</li>
                         <li>Mangoes</li>
@@ -538,7 +584,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">🐐</div>
                     <h3>Livestock</h3>
-                    <div class="item-count">32 Items Available</div>
+                    <div class="item-count" id="count-livestock">0 Items Available</div>
                     <ul class="items-list">
                         <li>Goats</li>
                         <li>Chickens & Poultry</li>
@@ -553,7 +599,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">🛠️</div>
                     <h3>Farming Tools</h3>
-                    <div class="item-count">45 Items Available</div>
+                    <div class="item-count" id="count-tools">0 Items Available</div>
                     <ul class="items-list">
                         <li>Hoes & Spades</li>
                         <li>Ploughs</li>
@@ -568,7 +614,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">💼</div>
                     <h3>Services</h3>
-                    <div class="item-count">28 Items Available</div>
+                    <div class="item-count" id="count-services">0 Items Available</div>
                     <ul class="items-list">
                         <li>Ploughing Services</li>
                         <li>Transport</li>
@@ -583,7 +629,7 @@
                 <div class="marketplace-card">
                     <div class="marketplace-icon">🌿</div>
                     <h3>Herbs & Medicines</h3>
-                    <div class="item-count">36 Items Available</div>
+                    <div class="item-count" id="count-herbs">0 Items Available</div>
                     <ul class="items-list">
                         <li>Moringa</li>
                         <li>Aloe Vera</li>
@@ -594,12 +640,52 @@
                     </ul>
                 </div>
             </div>
+        </section>
 
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn btn-large btn-success">
-                    🛒 Browse All Categories
-                </button>
-            </div>
+        <!-- ADD PRODUCT SECTION -->
+        <section class="about-section" id="sell">
+            <h2>📤 Sell / Add Product</h2>
+            <p>Fill out the form below to upload your product. Works offline too!</p>
+
+            <form id="productForm">
+                <div>
+                    <label for="productName">Product Name *</label>
+                    <input type="text" id="productName" placeholder="e.g., Fresh Tomatoes" required>
+                </div>
+                
+                <div>
+                    <label for="productCategory">Category *</label>
+                    <select id="productCategory" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Food & Vegetables">🥬 Food & Vegetables</option>
+                        <option value="Fruits">🍊 Fruits</option>
+                        <option value="Livestock">🐐 Livestock</option>
+                        <option value="Farming Tools">🛠️ Farming Tools</option>
+                        <option value="Services">💼 Services</option>
+                        <option value="Herbs & Medicines">🌿 Herbs & Medicines</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="productDesc">Description</label>
+                    <textarea id="productDesc" placeholder="Describe your product..."></textarea>
+                </div>
+                
+                <div>
+                    <label for="productQty">Quantity</label>
+                    <input type="number" id="productQty" min="1" value="1">
+                </div>
+                
+                <div>
+                    <label for="productImage">Upload Image</label>
+                    <input type="file" id="productImage" accept="image/*">
+                </div>
+                
+                <button type="submit" class="btn btn-success btn-large">✅ Add Product</button>
+            </form>
+
+            <h3 style="margin-top: 3rem; color: #fbbf24;">Your Uploaded Products</h3>
+            <div id="userProducts" class="marketplace-grid"></div>
         </section>
 
         <!-- GPS Section -->
@@ -655,7 +741,164 @@
     <script>
         console.log('🚀 Sinyoro Loading...');
 
-        // Language Dropdown
+        // =====================================================
+        // INDEXEDDB SETUP
+        // =====================================================
+        let db;
+        const dbRequest = indexedDB.open("SinyoroDB", 1);
+
+        dbRequest.onupgradeneeded = function(event) {
+            db = event.target.result;
+            const objectStore = db.createObjectStore("products", { keyPath: "id", autoIncrement: true });
+            objectStore.createIndex("category", "category", { unique: false });
+            console.log('✅ IndexedDB created');
+        };
+
+        dbRequest.onsuccess = function(event) {
+            db = event.target.result;
+            displayUserProducts();
+            updateCategoryCounts();
+            console.log('✅ IndexedDB Ready');
+        };
+
+        dbRequest.onerror = function(event) {
+            console.error("❌ IndexedDB Error:", event.target.errorCode);
+        };
+
+        // =====================================================
+        // PRODUCT FORM SUBMISSION
+        // =====================================================
+        document.getElementById("productForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("productName").value.trim();
+            const category = document.getElementById("productCategory").value;
+            const desc = document.getElementById("productDesc").value.trim();
+            const qty = document.getElementById("productQty").value || 1;
+            const imgFile = document.getElementById("productImage").files[0];
+
+            if (!name || !category) {
+                showToast("⚠️ Product Name and Category are required!");
+                return;
+            }
+
+            const saveProduct = (imgData) => {
+                const transaction = db.transaction(["products"], "readwrite");
+                const store = transaction.objectStore("products");
+                store.add({
+                    name,
+                    category,
+                    desc,
+                    qty,
+                    imgData,
+                    date: new Date().toISOString()
+                });
+
+                transaction.oncomplete = function() {
+                    showToast(`✅ ${name} added successfully!`);
+                    document.getElementById("productForm").reset();
+                    displayUserProducts();
+                    updateCategoryCounts();
+                };
+
+                transaction.onerror = function(e) {
+                    console.error("❌ Error adding product:", e);
+                    showToast("❌ Failed to add product");
+                };
+            };
+
+            if (imgFile) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    saveProduct(reader.result); // Base64 string
+                };
+                reader.readAsDataURL(imgFile);
+            } else {
+                saveProduct(null); // No image
+            }
+        });
+
+        // =====================================================
+        // DISPLAY USER PRODUCTS
+        // =====================================================
+        function displayUserProducts() {
+            const container = document.getElementById("userProducts");
+            container.innerHTML = "";
+
+            if (!db) return;
+
+            const transaction = db.transaction(["products"], "readonly");
+            const store = transaction.objectStore("products");
+            
+            store.openCursor().onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    const product = cursor.value;
+                    const card = document.createElement("div");
+                    card.className = "marketplace-card";
+
+                    const imgDisplay = product.imgData 
+                        ? `<img src="${product.imgData}" style="width:100px; height:100px; object-fit:cover; border-radius:12px; margin:0 auto;">`
+                        : "📦";
+
+                    card.innerHTML = `
+                        <div class="marketplace-icon">${imgDisplay}</div>
+                        <h3>${product.name}</h3>
+                        <div class="item-count">${product.qty} Item(s)</div>
+                        <ul class="items-list">
+                            <li>Category: ${product.category}</li>
+                            <li>${product.desc || "No description"}</li>
+                            <li>Added: ${new Date(product.date).toLocaleDateString()}</li>
+                        </ul>
+                    `;
+                    container.appendChild(card);
+
+                    cursor.continue();
+                }
+            };
+        }
+
+        // =====================================================
+        // UPDATE CATEGORY COUNTS
+        // =====================================================
+        function updateCategoryCounts() {
+            if (!db) return;
+
+            const counts = {
+                "Food & Vegetables": 0,
+                "Fruits": 0,
+                "Livestock": 0,
+                "Farming Tools": 0,
+                "Services": 0,
+                "Herbs & Medicines": 0
+            };
+
+            const transaction = db.transaction(["products"], "readonly");
+            const store = transaction.objectStore("products");
+            
+            store.openCursor().onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    const category = cursor.value.category;
+                    if (counts.hasOwnProperty(category)) {
+                        counts[category]++;
+                    }
+                    cursor.continue();
+                } else {
+                    // Update UI
+                    document.getElementById("count-food").textContent = `${counts["Food & Vegetables"]} Items Available`;
+                    document.getElementById("count-fruits").textContent = `${counts["Fruits"]} Items Available`;
+                    document.getElementById("count-livestock").textContent = `${counts["Livestock"]} Items Available`;
+                    document.getElementById("count-tools").textContent = `${counts["Farming Tools"]} Items Available`;
+                    document.getElementById("count-services").textContent = `${counts["Services"]} Items Available`;
+                    document.getElementById("count-herbs").textContent = `${counts["Herbs & Medicines"]} Items Available`;
+                }
+            };
+        }
+
+        // =====================================================
+        // LANGUAGE DROPDOWN
+        // =====================================================
         const languageBtn = document.getElementById('languageBtn');
         const langDropdown = document.getElementById('langDropdown');
         const currentLangSpan = document.querySelector('.current-lang');
@@ -694,12 +937,16 @@
             });
         });
 
-        // Download Button
+        // =====================================================
+        // DOWNLOAD BUTTON
+        // =====================================================
         document.getElementById('downloadBtn').addEventListener('click', function() {
             showToast('📱 App coming soon! Check back later.');
         });
 
-        // GPS Functionality
+        // =====================================================
+        // GPS FUNCTIONALITY
+        // =====================================================
         document.getElementById('gpsBtn').addEventListener('click', function() {
             const gpsStatus = document.getElementById('gpsStatus');
             const gpsLat = document.getElementById('gpsLat');
@@ -737,7 +984,9 @@
             );
         });
 
-        // Toast Notification
+        // =====================================================
+        // TOAST NOTIFICATIONS
+        // =====================================================
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -745,39 +994,17 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Marketplace Cards Click
+        // =====================================================
+        // MARKETPLACE CARDS CLICK
+        // =====================================================
         document.querySelectorAll('.marketplace-card').forEach(card => {
             card.addEventListener('click', function() {
                 const category = this.querySelector('h3').textContent;
-                showToast(`📦 ${category} - Coming soon!`);
+                showToast(`📦 ${category} - View products coming soon!`);
             });
         });
 
         console.log('✅ Sinyoro Ready!');
     </script>
-    <!-- Language Auto-Redirect Script -->
-<script>
-(function () {
-  if (sessionStorage.getItem("langRedirected")) return;
-
-  const lang = navigator.language || navigator.userLanguage;
-  let redirectPage = "";
-
-  if (lang.startsWith("zu")) {
-    redirectPage = "index-zu.html";
-  } else if (lang.startsWith("sn")) {
-    redirectPage = "index-sn.html";
-  } else if (lang.startsWith("sw")) {
-    redirectPage = "index-sw.html";
-  } else if (lang.startsWith("af")) {
-    redirectPage = "index-af.html";
-  }
-
-  if (redirectPage) {
-    sessionStorage.setItem("langRedirected", "true");
-    window.location.href = redirectPage;
-  }
-})();
-</script>
 </body>
 </html>
