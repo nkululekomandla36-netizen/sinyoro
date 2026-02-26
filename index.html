@@ -50,6 +50,7 @@
             display: flex;
             gap: 2rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -149,6 +150,21 @@
             margin-right: auto;
         }
 
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 4rem 0 2rem 0;
+            color: #fbbf24;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+        }
+
         /* Glass Cards */
         .features {
             display: grid;
@@ -186,6 +202,69 @@
             color: #cbd5e1;
         }
 
+        /* Marketplace Grid */
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .marketplace-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .marketplace-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #3b82f6;
+        }
+
+        .marketplace-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .marketplace-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: #fbbf24;
+            text-align: center;
+        }
+
+        .marketplace-card .item-count {
+            text-align: center;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .marketplace-card .items-list {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .marketplace-card .items-list li {
+            list-style: none;
+            padding: 0.25rem 0;
+        }
+
+        .marketplace-card .items-list li:before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
         /* Buttons */
         .btn {
             display: inline-block;
@@ -213,6 +292,11 @@
 
         .btn-success:hover {
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-large {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
         }
 
         /* GPS Status Box */
@@ -327,12 +411,16 @@
                 justify-content: center;
             }
 
-            .features {
+            .features, .marketplace-grid {
                 grid-template-columns: 1fr;
             }
 
             .about-section {
                 padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
         }
     </style>
@@ -345,6 +433,7 @@
         <nav>
             <a href="#home">Home</a>
             <a href="#features">Features</a>
+            <a href="#marketplace">Marketplace</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="#download">Download</a>
@@ -371,13 +460,13 @@
     <!-- Hero Section -->
     <div class="container">
         <section class="hero" id="home">
-            <h1 data-i18n="title">Welcome to Sinyoro</h1>
-            <p data-i18n="subtitle">
+            <h1>Welcome to Sinyoro</h1>
+            <p>
                 Empowering rural communities across Africa with offline trading capabilities. 
                 Buy, sell, and trade essential goods without internet connectivity.
             </p>
             
-            <button class="btn" id="downloadBtn" data-i18n="download">
+            <button class="btn btn-large" id="downloadBtn">
                 📱 Download App
             </button>
         </section>
@@ -386,26 +475,130 @@
         <section class="features" id="features">
             <div class="feature-card">
                 <div class="feature-icon">📴</div>
-                <h3 data-i18n="feature1Title">Offline Trading</h3>
-                <p data-i18n="feature1Desc">Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.</p>
+                <h3>Offline Trading</h3>
+                <p>Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🌍</div>
-                <h3 data-i18n="feature2Title">Community Focused</h3>
-                <p data-i18n="feature2Desc">Built specifically for African rural communities, understanding local needs and challenges.</p>
+                <h3>Community Focused</h3>
+                <p>Built specifically for African rural communities, understanding local needs and challenges.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🌾</div>
-                <h3 data-i18n="feature3Title">Essential Goods</h3>
-                <p data-i18n="feature3Desc">Access to essential products and services that matter most to rural communities.</p>
+                <h3>Essential Goods</h3>
+                <p>Access to essential products and services that matter most to rural communities.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🔒</div>
-                <h3 data-i18n="feature4Title">Secure & Simple</h3>
-                <p data-i18n="feature4Desc">Easy-to-use interface with secure transactions, designed for everyone.</p>
+                <h3>Secure & Simple</h3>
+                <p>Easy-to-use interface with secure transactions, designed for everyone.</p>
+            </div>
+        </section>
+
+        <!-- Marketplace Section -->
+        <section id="marketplace">
+            <h2 class="section-title">🛒 Marketplace Categories</h2>
+            <p class="section-subtitle">Browse essential goods from your local community</p>
+
+            <div class="marketplace-grid">
+                <!-- Food & Vegetables -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">🥬</div>
+                    <h3>Food & Vegetables</h3>
+                    <div class="item-count">24 Items Available</div>
+                    <ul class="items-list">
+                        <li>Maize & Grains</li>
+                        <li>Fresh Vegetables</li>
+                        <li>Beans & Legumes</li>
+                        <li>Rice & Wheat</li>
+                        <li>Tomatoes & Onions</li>
+                        <li>Leafy Greens</li>
+                    </ul>
+                </div>
+
+                <!-- Fruits -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">🍊</div>
+                    <h3>Fruits</h3>
+                    <div class="item-count">18 Items Available</div>
+                    <ul class="items-list">
+                        <li>Oranges & Citrus</li>
+                        <li>Mangoes</li>
+                        <li>Bananas</li>
+                        <li>Apples</li>
+                        <li>Avocados</li>
+                        <li>Seasonal Fruits</li>
+                    </ul>
+                </div>
+
+                <!-- Livestock -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">🐐</div>
+                    <h3>Livestock</h3>
+                    <div class="item-count">32 Items Available</div>
+                    <ul class="items-list">
+                        <li>Goats</li>
+                        <li>Chickens & Poultry</li>
+                        <li>Cattle</li>
+                        <li>Pigs</li>
+                        <li>Rabbits</li>
+                        <li>Eggs & Dairy</li>
+                    </ul>
+                </div>
+
+                <!-- Farming Tools -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">🛠️</div>
+                    <h3>Farming Tools</h3>
+                    <div class="item-count">45 Items Available</div>
+                    <ul class="items-list">
+                        <li>Hoes & Spades</li>
+                        <li>Ploughs</li>
+                        <li>Wheelbarrows</li>
+                        <li>Irrigation Equipment</li>
+                        <li>Harvesting Tools</li>
+                        <li>Storage Solutions</li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">💼</div>
+                    <h3>Services</h3>
+                    <div class="item-count">28 Items Available</div>
+                    <ul class="items-list">
+                        <li>Ploughing Services</li>
+                        <li>Transport</li>
+                        <li>Repair & Maintenance</li>
+                        <li>Training & Classes</li>
+                        <li>Veterinary Services</li>
+                        <li>Market Access</li>
+                    </ul>
+                </div>
+
+                <!-- Herbs & Medicines -->
+                <div class="marketplace-card">
+                    <div class="marketplace-icon">🌿</div>
+                    <h3>Herbs & Medicines</h3>
+                    <div class="item-count">36 Items Available</div>
+                    <ul class="items-list">
+                        <li>Moringa</li>
+                        <li>Aloe Vera</li>
+                        <li>Neem</li>
+                        <li>Ginger & Turmeric</li>
+                        <li>Traditional Herbs</li>
+                        <li>Medicinal Plants</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-large btn-success">
+                    🛒 Browse All Categories
+                </button>
             </div>
         </section>
 
@@ -428,16 +621,16 @@
 
         <!-- About Section -->
         <section class="about-section" id="about">
-            <h2 data-i18n="aboutTitle">About Sinyoro</h2>
-            <p data-i18n="aboutText1">
+            <h2>About Sinyoro</h2>
+            <p>
                 Sinyoro is more than just an app – it's a bridge connecting rural communities to economic opportunities. 
                 We understand that in many parts of Africa, internet connectivity is not always reliable or available.
             </p>
-            <p data-i18n="aboutText2">
+            <p>
                 That's why we've built Sinyoro to work completely offline, allowing traders, farmers, and community members 
                 to continue their business activities regardless of connectivity challenges.
             </p>
-            <p data-i18n="aboutText3">
+            <p>
                 Our mission is to empower rural communities by providing them with the digital tools they need to thrive 
                 in the modern economy, while respecting the realities of their environment.
             </p>
@@ -452,7 +645,7 @@
             <a href="#">Support</a> |
             <a href="#">Contact Us</a>
         </p>
-        <p data-i18n="copyright">© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa</p>
+        <p>© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa</p>
     </footer>
 
     <!-- Toast Notification -->
@@ -461,48 +654,6 @@
     <!-- JavaScript -->
     <script>
         console.log('🚀 Sinyoro Loading...');
-
-        // Translations
-        const translations = {
-            en: {
-                title: 'Welcome to Sinyoro',
-                subtitle: 'Empowering rural communities across Africa with offline trading capabilities. Buy, sell, and trade essential goods without internet connectivity.',
-                download: '📱 Download App',
-                feature1Title: 'Offline Trading',
-                feature1Desc: 'Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.',
-                feature2Title: 'Community Focused',
-                feature2Desc: 'Built specifically for African rural communities, understanding local needs and challenges.',
-                feature3Title: 'Essential Goods',
-                feature3Desc: 'Access to essential products and services that matter most to rural communities.',
-                feature4Title: 'Secure & Simple',
-                feature4Desc: 'Easy-to-use interface with secure transactions, designed for everyone.',
-                aboutTitle: 'About Sinyoro',
-                aboutText1: 'Sinyoro is more than just an app – it\'s a bridge connecting rural communities to economic opportunities.',
-                aboutText2: 'That\'s why we\'ve built Sinyoro to work completely offline.',
-                aboutText3: 'Our mission is to empower rural communities.',
-                copyright: '© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa'
-            },
-            zu: {
-                title: 'Siyakwamukela eSinyoro',
-                subtitle: 'Ukukhulisa imiphakathi yasemakhaya e-Afrika ngamandla okuhweba ngaphandle kwe-inthanethi.',
-                download: '📱 Dawuniloda Uhlelo',
-                feature1Title: 'Ukuhweba Ngaphandle Kwe-inthanethi',
-                feature1Desc: 'Hwebana izimpahla nezinsizakalo ngaphandle koxhumano lwe-intanethi.',
-                feature2Title: 'Kugxilwe Emphakathini',
-                feature2Desc: 'Yakhelwe imiphakathi yasemakhaya yase-Afrika.',
-                feature3Title: 'Imikhiqizo Ebalulekile',
-                feature3Desc: 'Ukufinyelela kumikhiqizo nezinsizakalo ezibaluleke kakhulu.',
-                feature4Title: 'Kuphephile Futhi Kulula',
-                feature4Desc: 'Isikhwebu esiphephile nokuhweba okuphephile.',
-                aboutTitle: 'Mayelana NeSinyoro',
-                aboutText1: 'I-Sinyoro ingaphezu nje kohlelo – iyibhuloho elihlanganisa imiphakathi yasemakhaya namathuba ezomnotho.',
-                aboutText2: 'Yingakho sakhe i-Sinyoro ukuthi isebenze ngaphandle kwe-inthanethi.',
-                aboutText3: 'Inhloso yethu ukukhulisa imiphakathi yasemakhaya.',
-                copyright: '© 2026 Sinyoro. Wonke amalungelo agodliwe. | Ukukhulisa Emakhaya e-Afrika.'
-            }
-        };
-
-        let currentLang = 'en';
 
         // Language Dropdown
         const languageBtn = document.getElementById('languageBtn');
@@ -525,7 +676,6 @@
             option.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const lang = this.getAttribute('data-lang');
-                currentLang = lang;
                 
                 const langNames = {
                     en: 'English',
@@ -539,21 +689,10 @@
                 langOptions.forEach(opt => opt.classList.remove('active'));
                 this.classList.add('active');
                 
-                applyTranslations(lang);
                 langDropdown.classList.remove('active');
                 showToast(`Language changed to ${langNames[lang]}`);
             });
         });
-
-        function applyTranslations(lang) {
-            const texts = translations[lang] || translations['en'];
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (texts[key]) {
-                    el.textContent = texts[key];
-                }
-            });
-        }
 
         // Download Button
         document.getElementById('downloadBtn').addEventListener('click', function() {
@@ -605,6 +744,14 @@
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
+
+        // Marketplace Cards Click
+        document.querySelectorAll('.marketplace-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const category = this.querySelector('h3').textContent;
+                showToast(`📦 ${category} - Coming soon!`);
+            });
+        });
 
         console.log('✅ Sinyoro Ready!');
     </script>
