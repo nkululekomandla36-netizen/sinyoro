@@ -1,37 +1,154 @@
-S Sinyoro Home Features About Contact Download Welcome to Sinyoro Empowering rural communities across Africa with offline trading capabilities. Buy, sell, and trade essential goods without internet connectivity. Download App 📱 Offline Trading Trade goods and services without internet connection. Perfect for rural areas with limited connectivity. 🌍 Community Focused Built specifically for African rural communities, understanding local needs and challenges. 💼 Essential Goods Access to essential products and services that matter most to rural communities. 🔒 Secure & Simple Easy-to-use interface with secure transactions, designed for everyone. About Sinyoro Sinyoro is more than just an app – it's a bridge connecting rural communities to economic opportunities. We understand that in many parts of Africa, internet connectivity is not always reliable or available. That's why we've built Sinyoro to work completely offline, allowing traders, farmers, and community members to continue their business activities regardless of connectivity challenges. Our mission is to empower rural communities by providing them with the digital tools they need to thrive in the modern economy, while respecting the realities of their environment. Privacy Policy Terms of Service Support Contact Us © 2026 Sinyoro. All rights reserved. | Empowering Rural Africa. now l m textedit ,theres empty to edit below this
-Home Features About Contact Download  Language ▼
-Welcome to Sinyoro
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinyoro</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #fefefe;
+    color: #333;
+}
+h1, h2 {
+    color: #2c3e50;
+}
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+}
+nav a:hover {
+    color: #2980b9;
+}
+button, .dropdown button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover, .dropdown button:hover {
+    background-color: #2980b9;
+}
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+</head>
+<body>
 
-Empowering rural communities across Africa with offline trading capabilities. Buy, sell, and trade essential goods without internet connectivity.
+<nav>
+<a href="#">Home</a>
+<a href="#">Features</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+<a href="#">Download</a>
 
-Download App 📱
-Offline Trading
+<div class="dropdown">
+  <button>Language ▼</button>
+  <div class="dropdown-content">
+    <a href="#">English</a>
+    <a href="#">Zulu</a>
+    <a href="#">Shona</a>
+  </div>
+</div>
+</nav>
 
-Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.
+<h1>Welcome to Sinyoro</h1>
+<p>Empowering rural communities across Africa with offline trading capabilities. Buy, sell, and trade essential goods without internet connectivity.</p>
 
-Community Focused
+<button onclick="window.location.href='#'">Download App 📱</button>
 
-Built specifically for African rural communities, understanding local needs and challenges.
+<h2>Offline Trading</h2>
+<p>Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.</p>
 
-Essential Goods
+<h2>Community Focused</h2>
+<p>Built specifically for African rural communities, understanding local needs and challenges.</p>
 
-Access to essential products and services that matter most to rural communities.
+<h2>Essential Goods</h2>
+<p>Access to essential products and services that matter most to rural communities.</p>
 
-Secure & Simple
+<h2>Secure & Simple</h2>
+<p>Easy-to-use interface with secure transactions, designed for everyone.</p>
 
-Easy-to-use interface with secure transactions, designed for everyone.
+<h2>Offline GPS</h2>
 
-Offline GPS
-
+<button onclick="getGPSLocation()" style="background:#28a745;color:white;padding:12px 24px;border:none;border-radius:5px;cursor:pointer;font-size:16px;margin:10px 0;">
 📍 Get My Location
-About Sinyoro
+</button>
 
-Sinyoro is more than just an app – it's a bridge connecting rural communities to economic opportunities. We understand that in many parts of Africa, internet connectivity is not always reliable or available.
+<div id="gps-result" style="margin-top:15px;padding:15px;background:#e3f2fd;border-radius:5px;display:none;"></div>
 
-That's why we've built Sinyoro to work completely offline, allowing traders, farmers, and community members to continue their business activities regardless of connectivity challenges.
+<h2>About Sinyoro</h2>
+<p>Sinyoro is more than just an app – it's a bridge connecting rural communities to economic opportunities. We understand that in many parts of Africa, internet connectivity is not always reliable or available.</p>
+<p>That's why we've built Sinyoro to work completely offline, allowing traders, farmers, and community members to continue their business activities regardless of connectivity challenges.</p>
+<p>Our mission is to empower rural communities by providing them with the digital tools they need to thrive in the modern economy, while respecting the realities of their environment.</p>
 
-Our mission is to empower rural communities by providing them with the digital tools they need to thrive in the modern economy, while respecting the realities of their environment.
+<footer>
+<p>
+<a href="#">Privacy Policy</a> |
+<a href="#">Terms of Service</a> |
+<a href="#">Support</a> |
+<a href="#">Contact Us</a>
+</p>
+<p>© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa</p>
+</footer>
+<script>
+function getGPSLocation() {
+    const r = document.getElementById('gps-result');
 
-Privacy Policy | Terms of Service | Support | Contact Us
+    if (!navigator.geolocation) {
+        r.innerHTML = '❌ Geolocation is not supported on this device.';
+        r.style.display = 'block';
+        return;
+    }
 
-© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa
+    r.innerHTML = '⏳ Getting your location...';
+    r.style.display = 'block';
+
+    navigator.geolocation.getCurrentPosition(
+        function (p) {
+            r.innerHTML =
+                '<strong>✅ Location Found</strong><br>' +
+                'Latitude: ' + p.coords.latitude.toFixed(6) + '<br>' +
+                'Longitude: ' + p.coords.longitude.toFixed(6);
+        },
+        function (e) {
+            let msg = 'Unknown error';
+            if (e.code === 1) msg = 'Permission denied';
+            if (e.code === 2) msg = 'Position unavailable';
+            if (e.code === 3) msg = 'Request timed out';
+            r.innerHTML = '❌ GPS Error: ' + msg;
+        }
+    );
+}
+</script>
+
+</body>
+</html>
