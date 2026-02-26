@@ -15,6 +15,9 @@ body {
 h1, h2 {
     color: #2c3e50;
 }
+nav {
+    margin-bottom: 20px;
+}
 nav a {
     margin-right: 15px;
     text-decoration: none;
@@ -59,6 +62,21 @@ button:hover, .dropdown button:hover {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+section {
+    margin-bottom: 25px;
+}
+footer {
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
+#gps-result {
+    margin-top: 15px;
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 5px;
+    display: none;
+}
 </style>
 </head>
 <body>
@@ -76,39 +94,52 @@ button:hover, .dropdown button:hover {
     <a href="#">English</a>
     <a href="#">Zulu</a>
     <a href="#">Shona</a>
+    <a href="#">Swahili</a>
   </div>
 </div>
 </nav>
 
+<section>
 <h1>Welcome to Sinyoro</h1>
 <p>Empowering rural communities across Africa with offline trading capabilities. Buy, sell, and trade essential goods without internet connectivity.</p>
 
 <button onclick="window.location.href='#'">Download App 📱</button>
+</section>
 
+<section>
 <h2>Offline Trading</h2>
 <p>Trade goods and services without internet connection. Perfect for rural areas with limited connectivity.</p>
+</section>
 
+<section>
 <h2>Community Focused</h2>
 <p>Built specifically for African rural communities, understanding local needs and challenges.</p>
+</section>
 
+<section>
 <h2>Essential Goods</h2>
 <p>Access to essential products and services that matter most to rural communities.</p>
+</section>
 
+<section>
 <h2>Secure & Simple</h2>
 <p>Easy-to-use interface with secure transactions, designed for everyone.</p>
+</section>
 
+<section>
 <h2>Offline GPS</h2>
-
 <button onclick="getGPSLocation()" style="background:#28a745;color:white;padding:12px 24px;border:none;border-radius:5px;cursor:pointer;font-size:16px;margin:10px 0;">
 📍 Get My Location
 </button>
+<div id="gps-result"></div>
+</section>
 
-<div id="gps-result" style="margin-top:15px;padding:15px;background:#e3f2fd;border-radius:5px;display:none;"></div>
-
+<section>
 <h2>About Sinyoro</h2>
 <p>Sinyoro is more than just an app – it's a bridge connecting rural communities to economic opportunities. We understand that in many parts of Africa, internet connectivity is not always reliable or available.</p>
 <p>That's why we've built Sinyoro to work completely offline, allowing traders, farmers, and community members to continue their business activities regardless of connectivity challenges.</p>
 <p>Our mission is to empower rural communities by providing them with the digital tools they need to thrive in the modern economy, while respecting the realities of their environment.</p>
+</section>
 
 <footer>
 <p>
@@ -119,6 +150,7 @@ button:hover, .dropdown button:hover {
 </p>
 <p>© 2026 Sinyoro. All rights reserved. | Empowering Rural Africa</p>
 </footer>
+
 <script>
 function getGPSLocation() {
     const r = document.getElementById('gps-result');
