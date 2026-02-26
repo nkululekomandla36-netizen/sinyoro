@@ -755,5 +755,29 @@
 
         console.log('✅ Sinyoro Ready!');
     </script>
+    <!-- Language Auto-Redirect Script -->
+<script>
+(function () {
+  if (sessionStorage.getItem("langRedirected")) return;
+
+  const lang = navigator.language || navigator.userLanguage;
+  let redirectPage = "";
+
+  if (lang.startsWith("zu")) {
+    redirectPage = "index-zu.html";
+  } else if (lang.startsWith("sn")) {
+    redirectPage = "index-sn.html";
+  } else if (lang.startsWith("sw")) {
+    redirectPage = "index-sw.html";
+  } else if (lang.startsWith("af")) {
+    redirectPage = "index-af.html";
+  }
+
+  if (redirectPage) {
+    sessionStorage.setItem("langRedirected", "true");
+    window.location.href = redirectPage;
+  }
+})();
+</script>
 </body>
 </html>
