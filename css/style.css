@@ -84,12 +84,13 @@ body {
 }
 
 .logo-img {
-    width: 60px;           /* Adjust the size as needed */
-    height: 60px;          /* Keep it square for circle effect */
-    object-fit: cover;     /* Ensures image scales properly */
-    border-radius: 50%;    /* Makes it circular */
-    border: 2px solid #ffffff; /* Optional: white border around logo */
+    width: 60px;           /* Size of the logo */
+    height: 60px;          /* Keep it square so circle works */
+    object-fit: cover;     /* Scales image nicely */
+    border-radius: 50%;    /* Makes it perfectly circular */
+    border: 2px solid #ffffff; /* Optional: white border */
     display: block;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4); /* Optional shadow like IG */
 }
 
 .brand-name {
