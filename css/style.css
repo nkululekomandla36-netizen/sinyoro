@@ -83,12 +83,13 @@ body {
     flex-direction: column;
 }
 
-.logo img {
-    height: 60px;
-    width: 60px;
-    object-fit: cover;
-    border-radius: 18px; /* rounded like Instagram */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+.logo-img {
+    width: 60px;           /* Adjust the size as needed */
+    height: 60px;          /* Keep it square for circle effect */
+    object-fit: cover;     /* Ensures image scales properly */
+    border-radius: 50%;    /* Makes it circular */
+    border: 2px solid #ffffff; /* Optional: white border around logo */
+    display: block;
 }
 
 .brand-name {
