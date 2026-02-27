@@ -40,10 +40,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #3b82f6;
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            display: block;
         }
 
         nav {
@@ -475,8 +478,8 @@
     <!-- Header -->
     <header>
         <div class="logo">
-    <img src="assets/sinyoro_logo.jpeg" alt="Sinyoro Logo" class="logo-img">
-</div>
+            <img src="assets/sinyo_logo.jpeg" alt="Sinyoro Logo" class="logo-img">
+        </div>
         
         <nav>
             <a href="#home">Home</a>
@@ -812,11 +815,11 @@
             if (imgFile) {
                 const reader = new FileReader();
                 reader.onload = function() {
-                    saveProduct(reader.result); // Base64 string
+                    saveProduct(reader.result);
                 };
                 reader.readAsDataURL(imgFile);
             } else {
-                saveProduct(null); // No image
+                saveProduct(null);
             }
         });
 
@@ -854,7 +857,6 @@
                         </ul>
                     `;
                     container.appendChild(card);
-
                     cursor.continue();
                 }
             };
@@ -887,7 +889,6 @@
                     }
                     cursor.continue();
                 } else {
-                    // Update UI
                     document.getElementById("count-food").textContent = `${counts["Food & Vegetables"]} Items Available`;
                     document.getElementById("count-fruits").textContent = `${counts["Fruits"]} Items Available`;
                     document.getElementById("count-livestock").textContent = `${counts["Livestock"]} Items Available`;
