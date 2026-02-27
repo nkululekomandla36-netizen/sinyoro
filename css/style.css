@@ -87,8 +87,8 @@ body {
     height: 60px;
     width: 60px;
     object-fit: cover;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    border-radius: 18px; /* rounded like Instagram */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 .brand-name {
