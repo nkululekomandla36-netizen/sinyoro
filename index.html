@@ -40,13 +40,10 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid #3b82f6;
-            display: block;
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
         }
 
         nav {
@@ -478,7 +475,7 @@
     <!-- Header -->
     <header>
         <div class="logo">
-            <img src="assets/sinyo_logo.jpeg" alt="Sinyoro Logo" class="logo-img">
+            <img src="assets/sinyoro_logo.jpeg" alt="Sinyoro Logo" class="logo-img" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid #3b82f6; display: block;">
         </div>
         
         <nav>
@@ -815,11 +812,11 @@
             if (imgFile) {
                 const reader = new FileReader();
                 reader.onload = function() {
-                    saveProduct(reader.result);
+                    saveProduct(reader.result); // Base64 string
                 };
                 reader.readAsDataURL(imgFile);
             } else {
-                saveProduct(null);
+                saveProduct(null); // No image
             }
         });
 
@@ -857,6 +854,7 @@
                         </ul>
                     `;
                     container.appendChild(card);
+
                     cursor.continue();
                 }
             };
@@ -889,6 +887,7 @@
                     }
                     cursor.continue();
                 } else {
+                    // Update UI
                     document.getElementById("count-food").textContent = `${counts["Food & Vegetables"]} Items Available`;
                     document.getElementById("count-fruits").textContent = `${counts["Fruits"]} Items Available`;
                     document.getElementById("count-livestock").textContent = `${counts["Livestock"]} Items Available`;
