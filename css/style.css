@@ -28,8 +28,14 @@ html {
 }
 
 body {
+    body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #ff0000 0%, #800080 50%, #ff0000 100%);
+    background: 
+        /* African pattern overlay */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b6b' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+        /* Deep red gradient */
+        linear-gradient(135deg, #8B0000 0%, #DC143C 25%, #B22222 50%, #DC143C 75%, #8B0000 100%);
+    background-attachment: fixed;
     color: white;
     line-height: 1.6;
     min-height: 100vh;
@@ -1522,6 +1528,342 @@ body {
         font-size: 0.875rem;
         padding: 0.75rem;
     }
+   /* African Symbol Decorations */
+.african-pattern-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(
+        90deg,
+        #FFD700 0px,
+        #FFD700 20px,
+        #DC143C 20px,
+        #DC143C 40px,
+        #000 40px,
+        #000 60px,
+        #228B22 60px,
+        #228B22 80px
+    );
+    z-index: 1000;
+}
+
+/* Decorative African symbols using pseudo-elements */
+.hero::before {
+    content: "⚡";
+    position: absolute;
+    top: 100px;
+    left: 5%;
+    font-size: 4rem;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+    color: #FFD700;
+}
+
+.hero::after {
+    content: "🌟";
+    position: absolute;
+    top: 150px;
+    right: 5%;
+    font-size: 3rem;
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite reverse;
+    color: #FFD700;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* African-inspired card borders */
+.feature-card, .marketplace-card, .about-section {
+    border: 2px solid transparent;
+    background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+                      linear-gradient(135deg, #FFD700, #DC143C, #228B22);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add corner decorations to cards */
+.feature-card::before,
+.marketplace-card::before {
+    content: "◆";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #FFD700;
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+/* Section dividers with African patterns */
+.section-title {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "❧";
+    color: #FFD700;
+    font-size: 2rem;
+    margin: 0 1rem;
+    vertical-align: middle;
+}
+
+/* Update buttons to match red theme */
+.btn {
+    background: linear-gradient(135deg, #DC143C, #8B0000);
+    border: 2px solid #FFD700;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #228B22, #006400);
+    border-color: #FFD700;
+}
+
+/* Header update */
+header {
+    background: rgba(139, 0, 0, 0.95);
+    border-bottom: 3px solid #FFD700;
+}
+
+.logo {
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Update accent colors */
+.feature-card h3 {
+    color: #FFD700;
+}
+
+.section-title {
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* African-inspired footer */
+footer {
+    background: rgba(139, 0, 0, 0.9);
+    border-top: 3px solid #FFD700;
+    position: relative;
+}
+
+footer::before {
+    content: "≋≋≋";
+    display: block;
+    color: #FFD700;
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Toast notification update */
+.toast {
+    background: rgba(139, 0, 0, 0.98);
+    border: 2px solid #FFD700;
+}
+
+/* GPS status update */
+.gps-status {
+    background: rgba(34, 139, 34, 0.2);
+    border-color: #FFD700;
+}
+
+.gps-status h4 {
+    color: #FFD700;
+}
+   /* African Symbol Decorations */
+.african-pattern-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(
+        90deg,
+        #FFD700 0px,
+        #FFD700 20px,
+        #DC143C 20px,
+        #DC143C 40px,
+        #000 40px,
+        #000 60px,
+        #228B22 60px,
+        #228B22 80px
+    );
+    z-index: 1000;
+}
+
+/* Decorative African symbols using pseudo-elements */
+.hero::before {
+    content: "⚡";
+    position: absolute;
+    top: 100px;
+    left: 5%;
+    font-size: 4rem;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+    color: #FFD700;
+}
+
+.hero::after {
+    content: "🌟";
+    position: absolute;
+    top: 150px;
+    right: 5%;
+    font-size: 3rem;
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite reverse;
+    color: #FFD700;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* African-inspired card borders */
+.feature-card, .marketplace-card, .about-section {
+    border: 2px solid transparent;
+    background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+                      linear-gradient(135deg, #FFD700, #DC143C, #228B22);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add corner decorations to cards */
+.feature-card::before,
+.marketplace-card::before {
+    content: "◆";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #FFD700;
+    font-size: 1.5rem;
+    opacity: 0.6;
+}
+
+/* Section dividers with African patterns */
+.section-title {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "❧";
+    color: #FFD700;
+    font-size: 2rem;
+    margin: 0 1rem;
+    vertical-align: middle;
+}
+
+/* Update buttons to match red theme */
+.btn {
+    background: linear-gradient(135deg, #DC143C, #8B0000);
+    border: 2px solid #FFD700;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #228B22, #006400);
+    border-color: #FFD700;
+}
+
+/* Header update */
+header {
+    background: rgba(139, 0, 0, 0.95);
+    border-bottom: 3px solid #FFD700;
+}
+
+.logo {
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Update accent colors */
+.feature-card h3 {
+    color: #FFD700;
+}
+
+.section-title {
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* African-inspired footer */
+footer {
+    background: rgba(139, 0, 0, 0.9);
+    border-top: 3px solid #FFD700;
+    position: relative;
+}
+
+footer::before {
+    content: "≋≋≋";
+    display: block;
+    color: #FFD700;
+    font-size: 1.5rem;
+    letter-spacing: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Toast notification update */
+.toast {
+    background: rgba(139, 0, 0, 0.98);
+    border: 2px solid #FFD700;
+}
+
+/* GPS status update */
+.gps-status {
+    background: rgba(34, 139, 34, 0.2);
+    border-color: #FFD700;
+}
+
+.gps-status h4 {
+    color: #FFD700;
+}
     
     .gps-result,
     .gps-status {
