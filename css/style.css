@@ -31,15 +31,86 @@ body {
     body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: 
-        /* African pattern overlay */
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff6b6b' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-        /* Deep red gradient */
-        linear-gradient(135deg, #8B0000 0%, #DC143C 25%, #B22222 50%, #DC143C 75%, #8B0000 100%);
+        /* Top-left white mandala pattern */
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 25%),
+        /* Top-right gold Adinkra glow */
+        radial-gradient(circle at 100% 0%, rgba(255,215,0,0.2) 0%, transparent 20%),
+        /* Bottom curved tribal pattern effect */
+        radial-gradient(ellipse at 50% 100%, rgba(255,215,0,0.1) 0%, transparent 40%),
+        /* Center warm glow */
+        radial-gradient(ellipse at 50% 50%, rgba(255,59,63,0.8) 0%, transparent 70%),
+        /* Deep red gradient base */
+        linear-gradient(180deg, #8B0000 0%, #FF3B3F 40%, #FF3B3F 60%, #6A0000 100%);
     background-attachment: fixed;
     color: white;
     line-height: 1.6;
     min-height: 100vh;
+    position: relative;
 }
+
+/* African geometric pattern overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        /* Subtle Adinkra-inspired geometric pattern */
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFD700' fill-opacity='0.03'%3E%3Cpath d='M20,20 L30,10 L40,20 L30,30 Z M60,60 L70,50 L80,60 L70,70 Z M10,70 L20,60 L30,70 L20,80 Z M70,10 L80,0 L90,10 L80,20 Z'/%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Top decorative bar with African colors */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: 
+        /* Top-left white mandala pattern */
+        radial-gradient(circle at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 25%),
+        /* Top-right gold Adinkra glow */
+        radial-gradient(circle at 100% 0%, rgba(255,215,0,0.2) 0%, transparent 20%),
+        /* Bottom curved tribal pattern effect */
+        radial-gradient(ellipse at 50% 100%, rgba(255,215,0,0.1) 0%, transparent 40%),
+        /* Center warm glow */
+        radial-gradient(ellipse at 50% 50%, rgba(255,59,63,0.8) 0%, transparent 70%),
+        /* Deep red gradient base */
+        linear-gradient(180deg, #8B0000 0%, #FF3B3F 40%, #FF3B3F 60%, #6A0000 100%);
+    background-attachment: fixed;
+    color: white;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* African geometric pattern overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        /* Subtle Adinkra-inspired geometric pattern */
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFD700' fill-opacity='0.03'%3E%3Cpath d='M20,20 L30,10 L40,20 L30,30 Z M60,60 L70,50 L80,60 L70,70 Z M10,70 L20,60 L30,70 L20,80 Z M70,10 L80,0 L90,10 L80,20 Z'/%3E%3Ccircle cx='50' cy='50' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Top decorative bar with African colors */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #FFD700 0%, #FFD700 25%, #8B0000 25%, #8B0000 50%, #228B22 50%, #228B22 75%, #FFD700 75%);
+    z-index: 1000;
+}
+    
 /* Glass Card Effect */
 .glass-card {
     background: rgba(255, 255, 255, 0.1);
@@ -1863,6 +1934,374 @@ footer::before {
 
 .gps-status h4 {
     color: #FFD700;
+}
+   /* ============================================
+   AFRICAN VISUAL IDENTITY - SINYORO THEME
+   ============================================ */
+
+/* Hero section - Clean center area for text */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: transparent;
+    /* Ensure clean reading area in center */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* White mandala decoration - Top Left */
+.hero::before {
+    content: "☥";
+    position: absolute;
+    top: -20px;
+    left: -10%;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.1);
+    transform: rotate(-15deg);
+    pointer-events: none;
+    font-family: serif;
+}
+
+/* Gold Adinkra symbol - Top Right */
+.hero::after {
+    content: "𓋹";
+    position: absolute;
+    top: 0;
+    right: -5%;
+    font-size: 6rem;
+    color: rgba(255,215,0,0.3);
+    pointer-events: none;
+}
+
+/* Bottom curved tribal pattern */
+.container::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: 
+        radial-gradient(ellipse at 20% 100%, rgba(255,215,0,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ============================================
+   TYPOGRAPHY - WHITE TEXT FOR RED BACKGROUND
+   ============================================ */
+
+/* Main Headline - Pure White */
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 700;
+    background: none;
+    -webkit-text-fill-color: #FFFFFF;
+}
+
+/* Subtext - Soft White */
+.hero p {
+    font-size: 1.25rem;
+    color: #F5F5F5;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Section titles - White with gold accents */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 4rem 0 2rem 0;
+    color: #FFFFFF;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* Gold decorative elements around titles */
+.section-title::before,
+.section-title::after {
+    content: "◆";
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    vertical-align: middle;
+    opacity: 0.8;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #F5F5F5;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   BUTTONS - GOLD PRIMARY / WHITE SECONDARY
+   ============================================ */
+
+/* Primary Button - Gold background, white text */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+    background: linear-gradient(135deg, #FFC107, #FFB300);
+}
+
+/* Shine effect on hover */
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Secondary Button - White background, red text */
+.btn-success {
+    background: linear-gradient(135deg, #FFFFFF, #F5F5F5);
+    color: #8B0000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #FF3B3F, #DC143C);
+    color: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(255,59,63,0.3);
+}
+
+/* Large button variant */
+.btn-large {
+    padding: 1.25rem 3rem;
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   CARDS - Glass effect with gold borders
+   ============================================ */
+
+.feature-card, .marketplace-card, .about-section {
+    background: rgba(139, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,215,0,0.3);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before,
+.marketplace-card::before {
+    content: "❋";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #FFD700;
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.feature-card h3 {
+    color: #FFD700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: #F5F5F5;
+}
+
+/* ============================================
+   HEADER - Dark red with gold accents
+   ============================================ */
+
+header {
+    background: rgba(106, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #FFD700;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: #FFD700;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+nav a {
+    color: #F5F5F5;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #FFD700;
+    opacity: 1;
+}
+
+/* Language button */
+.lang-btn {
+    background: rgba(255,215,0,0.2);
+    border: 1px solid #FFD700;
+    color: #FFFFFF;
+}
+
+.lang-btn:hover {
+    background: rgba(255,215,0,0.3);
+}
+
+/* ============================================
+   FOOTER - Dark with gold top border
+   ============================================ */
+
+footer {
+    background: rgba(106, 0, 0, 0.95);
+    border-top: 3px solid #FFD700;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    position: relative;
+}
+
+footer::before {
+    content: "≋ ≋ ≋";
+    display: block;
+    color: #FFD700;
+    font-size: 1.5rem;
+    letter-spacing: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+footer a {
+    color: #FFD700;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: 500;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #FFFFFF;
+}
+
+footer p {
+    color: #F5F5F5;
+    margin: 0.5rem 0;
+}
+
+/* ============================================
+   UTILITY ELEMENTS
+   ============================================ */
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(139, 0, 0, 0.98);
+    color: #FFFFFF;
+    border: 2px solid #FFD700;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 10000;
+}
+
+/* GPS Status */
+.gps-status {
+    background: rgba(255,215,0,0.1);
+    border: 1px solid #FFD700;
+    border-radius: 12px;
+}
+
+.gps-status h4 {
+    color: #FFD700;
+}
+
+.gps-status p {
+    color: #F5F5F5;
+}
+
+/* Form elements */
+form {
+    background: rgba(139, 0, 0, 0.3);
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+form label {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+form input,
+form select,
+form textarea {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,215,0,0.3);
+    color: #FFFFFF;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #FFD700;
+    background: rgba(255,255,255,0.15);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .hero::before,
+    .hero::after {
+        display: none; /* Hide decorative symbols on mobile for cleaner look */
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .btn {
+        width: 90%;
+        margin: 0.5rem auto;
+        display: block;
+    }
 }
     
     .gps-result,
